@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MainRootFlux from './app/fluxes/MainRootFlux';
-export default class App extends React.Component {
+
+export default class RegisterView extends React.Component {
   render() {
     return (
-      <MainRootFlux />
+      <View style={styles.container}>
+        <Text>WELCOME TO REGISTER VIEW</Text>
+      </View>
     );
   }
 }
