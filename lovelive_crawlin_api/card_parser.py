@@ -1,6 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
+import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lovelive_crawlin_api.settings")
+
+import django
+django.setup()
+
 NO_IDX = 0
 RANK_IDX = 1
 ICON_IDX = 2
@@ -159,7 +166,7 @@ def parse_card_info():
 
         else :
             return []
-            
+
     else : 
         return []
 
