@@ -8,6 +8,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lovelive_crawlin_api.settings")
 import django
 django.setup()
 
+from lovelive_api.models import CardInfo
+
 NO_IDX = 0
 RANK_IDX = 1
 ICON_IDX = 2
@@ -19,7 +21,7 @@ PURE_IDX = 7
 COOL_IDX = 8
 ACTIVE_SKILL_IDX = 9
 
-class CardInfo :
+class CardInfoModel :
     def __init__(self, no=0, rank='', icon_url_1='', icon_url_2='', card_title='', character_name='', japanese_name='', property='', center_effect='', smile=0, pure=0, cool=0, active_condition='', active_skill='') :
         self.no = no
         self.rank = rank
@@ -94,7 +96,7 @@ def parse_card_info():
             card_infos = []
 
             for card_tr in tmp_table.find_all('tr') : 
-                card_info = CardInfo()
+                card_info = CardInfoModel()
                 
                 for idx, card_td in enumerate(card_tr.find_all('td')) :
                     if idx == NO_IDX :
@@ -170,5 +172,26 @@ def parse_card_info():
     else : 
         return []
 
-for card in parse_card_info() :
-    print(card)
+if __name__ == '__main__' :
+    if CardInfo.objects.count() > 0 :
+        CardInfo.objects.all().delete()
+    
+    card_info_models = parse_card_info()
+    
+    for card_info in card_info_models :
+        CardInfo(
+            no = card_info.no,
+            rank = card_info.rank,
+            icon_url_1 = card_info.icon_url_1,
+            icon_url_2 = card_info.icon_url_2,
+            card_title = card_info.card_title,
+            character_name = card_info.character_name,
+            japanese_name = card_info.japanese_name,
+            property = card_info.property,
+            center_effect = card_info.center_effect,
+            smile = card_info.smile,
+            pure = card_info.pure,
+            cool = card_info.cool,
+            active_condition = card_info.active_condition,
+            active_skill = card_info.active_skill
+        ).save()
