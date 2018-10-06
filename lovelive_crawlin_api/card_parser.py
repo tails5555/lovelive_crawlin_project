@@ -179,19 +179,20 @@ if __name__ == '__main__' :
     card_info_models = parse_card_info()
     
     for card_info in card_info_models :
-        CardInfo(
-            no = card_info.no,
-            rank = card_info.rank,
-            icon_url_1 = card_info.icon_url_1,
-            icon_url_2 = card_info.icon_url_2,
-            card_title = card_info.card_title,
-            character_name = card_info.character_name,
-            japanese_name = card_info.japanese_name,
-            property = card_info.property,
-            center_effect = card_info.center_effect,
-            smile = card_info.smile,
-            pure = card_info.pure,
-            cool = card_info.cool,
-            active_condition = card_info.active_condition,
-            active_skill = card_info.active_skill
-        ).save()
+        if card_info.no != 0 :
+            CardInfo(
+                no = card_info.no,
+                rank = card_info.rank,
+                icon_url_1 = card_info.icon_url_1,
+                icon_url_2 = card_info.icon_url_2,
+                card_title = card_info.card_title,
+                character_name = card_info.character_name,
+                japanese_name = card_info.japanese_name,
+                property = card_info.property,
+                center_effect = card_info.center_effect,
+                smile = card_info.smile,
+                pure = card_info.pure,
+                cool = card_info.cool,
+                active_condition = card_info.active_condition,
+                active_skill = card_info.active_skill
+            ).save()
