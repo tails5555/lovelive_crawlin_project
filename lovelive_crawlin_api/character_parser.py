@@ -9,6 +9,10 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lovelive_crawlin_api.settings")
 import django
 django.setup()
 
+import re
+
+from lovelive_api.models import CharacterMainInfo
+
 NAME_IDX = 0
 VOICE_ACTOR_IDX = 1
 GRADE_IDX = 2
@@ -95,29 +99,83 @@ def parse_character_info(card_no) :
         soup = BeautifulSoup(html, 'html.parser')
         character_intro_div = soup.find('div', {'class': 'characterData'})
         character_table = character_intro_div.find('table')
-        characterInfo = CharacterMainInfoModel()
+        character_info = CharacterMainInfoModel()
 
         for idx, card_td in enumerate(character_table.find_all('td')) :
             if idx == NAME_IDX :
-                print(card_td.find(text=True))
+                hangul_reg = re.compile('[ ㄱ-ㅣ가-힣]+')
+                hanja_reg = re.compile('[^ ㄱ-ㅣ가-힣()]+')
+
+                name_value = card_td.find(text=True)
+                kor_name = hangul_reg.findall(name_value)
+                jap_name = hanja_reg.findall(name_value)
+                
+                if len(kor_name) == 1 :
+                    character_info.set_kor_name(kor_name[0].strip())
+                
+                if len(jap_name) == 1 :
+                    character_info.set_jap_name(jap_name[0].strip())
+
             elif idx == VOICE_ACTOR_IDX :
-                print(card_td.find(text=True))
+                voice_actor_value = card_td.find(text=True)
+                character_info.set_voice_actor(voice_actor_value)
+
             elif idx == GRADE_IDX :
-                print(card_td.find(text=True))
+                num_reg = re.compile('[0-9]+')
+                grade_value = num_reg.findall(card_td.find(text=True))
+
+                if len(grade_value) == 1 :
+                    character_info.set_grade(grade_value[0])
+                else :
+                    character_info.set_grade(0)
+
             elif idx == BIRTHDAY_IDX :
-                print(card_td.find(text=True))
+                birthday_value = card_td.find(text=True)
+                character_info.set_birthday(birthday_value)
+
             elif idx == HEIGHT_IDX :
-                print(card_td.find(text=True))
+                num_reg = re.compile('[0-9]+')
+                height_value = num_reg.findall(card_td.find(text=True))
+
+                if len(height_value) == 1 :
+                    character_info.set_height(height_value[0])
+                else :
+                    character_info.set_height(0)
+
             elif idx == THREE_SIZE_IDX :
-                print(card_td.find(text=True))
+                three_size_value = card_td.find(text=True)
+                character_info.set_three_size(three_size_value)
+
             elif idx == BLOOD_TYPE_IDX :
-                print(card_td.find(text=True))
+                blood_type_value = card_td.find(text=True)
+                character_info.set_blood_type(blood_type_value)
+
             elif idx == HOBBIES_IDX :
-                print(card_td.find(text=True))
+                hobbies_value = card_td.find(text=True)
+                character_info.set_hobbies(hobbies_value)
+
+        if character_info.kor_name.strip() != '' :
+            character_query_result = CharacterMainInfo.objects.filter(kor_name=character_info.kor_name).first()
+            if character_query_result == None :
+                CharacterMainInfo(
+                    kor_name = character_info.kor_name,
+                    jap_name = character_info.jap_name,
+                    voice_actor = character_info.voice_actor,
+                    grade = character_info.grade,
+                    birthday = character_info.birthday,
+                    height = character_info.height,
+                    three_size = character_info.three_size,
+                    blood_type = character_info.blood_type,
+                    hobbies = character_info.hobbies
+                ).save()
+                
+            else :
+                character_query_result.hobbies = character_info.hobbies
+                character_query_result.save()
 
 if __name__ == '__main__' :
-    
-    ## pool = Pool(processes=4)
-    ## print(pool.map(parse_character_info, parse_card_id_list()))
+    if CharacterMainInfo.objects.count() > 0 :
+        CharacterMainInfo.objects.all().delete()
 
-    parse_character_info(1535)
+    pool = Pool(processes=6)
+    site_character_list = pool.map(parse_character_info, parse_card_id_list())   

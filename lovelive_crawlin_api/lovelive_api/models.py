@@ -17,3 +17,14 @@ class CardInfo(models.Model) :
     cool = models.PositiveIntegerField()
     active_condition = models.CharField(max_length=10)
     active_skill = models.CharField(max_length=15, null=True)
+
+class CharacterMainInfo(models.Model) :
+    kor_name = models.CharField(max_length=20, unique=True, db_index=True)
+    jap_name = models.CharField(max_length=20)
+    voice_actor = models.CharField(max_length=30, null=True)
+    grade = models.IntegerField()
+    birthday = models.CharField(max_length=10)
+    height = models.IntegerField()
+    three_size = models.CharField(max_length=15)
+    blood_type = models.CharField(max_length=10)
+    hobbies = models.CharField(max_length=30, null=True)
