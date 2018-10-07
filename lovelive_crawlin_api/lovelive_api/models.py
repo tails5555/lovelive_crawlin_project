@@ -19,7 +19,8 @@ class CardInfo(models.Model) :
     active_skill = models.CharField(max_length=15, null=True)
 
 class CharacterMainInfo(models.Model) :
-    kor_name = models.CharField(max_length=20, unique=True, db_index=True)
+    id = models.AutoField(primary_key=True)
+    kor_name = models.CharField(max_length=20, unique=True)
     jap_name = models.CharField(max_length=20)
     voice_actor = models.CharField(max_length=30, null=True)
     grade = models.IntegerField()

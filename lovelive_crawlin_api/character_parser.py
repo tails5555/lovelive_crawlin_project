@@ -12,6 +12,7 @@ django.setup()
 import re
 
 from lovelive_api.models import CharacterMainInfo
+from common_functions import parse_card_id_list
 
 NAME_IDX = 0
 VOICE_ACTOR_IDX = 1
@@ -63,32 +64,6 @@ class CharacterMainInfoModel :
 
     def __str__(self) :
         return 'korName/{} japName/{} voiceActor/{}\ngrade/{} birthday/{} height/{}\nthreeSize/{} bloodType/{} hobbies/{}\n'.format(self.kor_name, self.jap_name, self.voice_actor, self.grade, self.birthday, self.height, self.three_size, self.blood_type, self.hobbies)
-
-def parse_card_id_list() :
-    req = requests.get('http://lovelive.inven.co.kr/dataninfo/card/')
-    html = req.text
-    if req.status_code == 200 : 
-        soup = BeautifulSoup(html, 'html.parser')
-        card_list_div = soup.find(id='listTable')
-        card_table = card_list_div.find_all('table')
-
-        if len(card_table) == 1 : 
-            tmp_table = card_table[0]
-            search_card_nos = []
-
-            for card_tr in tmp_table.find_all('tr') : 
-                idx_td = card_tr.find('td', {'class': 'ucode'})
-                idx = idx_td.find(text=True) if idx_td != None else ''
-                if idx.strip() != '' :
-                    search_card_nos.append(int(idx))
-
-            return search_card_nos
-
-        else :
-            return []
-
-    else : 
-        return []
 
 def parse_character_info(card_no) :
     url = 'http://lovelive.inven.co.kr/dataninfo/card/detail.php?d=2&c={0}'.format(card_no)

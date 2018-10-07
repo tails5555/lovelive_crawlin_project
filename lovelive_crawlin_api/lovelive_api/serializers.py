@@ -9,4 +9,4 @@ class CardInfoSerializer(serializers.ModelSerializer) :
 class CharacterMainInfoSerializer(serializers.ModelSerializer) :
     class Meta :
         model = CharacterMainInfo
-        fields = ('kor_name', 'jap_name', 'voice_actor', 'grade', 'birthday', 'height', 'three_size', 'blood_type', 'hobbies')
+        fields = ('id', 'kor_name', 'jap_name', 'voice_actor', 'grade', 'birthday', 'height', 'three_size', 'blood_type', 'hobbies')
