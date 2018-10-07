@@ -172,16 +172,37 @@ def parse_each_card_detail_info(card_no) :
                         table_texts = cur_td.find_all(text=True)
 
                         for idx, cur_text in enumerate(table_texts) :
-                            
                             if idx == BASIC_SMILE_IDX :
                                 card_detail_model.set_property_shape(cur_text)
                             elif idx == BASIC_PURE_IDX :
                                 card_detail_model.set_main_effect(cur_text)
                             elif idx == BASIC_COOL_IDX :
                                 card_detail_model.set_plus_effect(cur_text)
-
-    print(card_detail_model)
+            
+            CardDetail(
+                info = card_detail_model.info,
+                basic_smile = card_detail_model.basic_smile,
+                basic_pure = card_detail_model.basic_pure,
+                basic_cool = card_detail_model.basic_cool,
+                basic_hp = card_detail_model.basic_hp,
+                full_smile = card_detail_model.full_smile,
+                full_pure = card_detail_model.full_pure,
+                full_cool = card_detail_model.full_cool,
+                full_hp = card_detail_model.full_hp,
+                wake_up_smile = card_detail_model.wake_up_smile,
+                wake_up_pure = card_detail_model.wake_up_pure,
+                wake_up_cool = card_detail_model.wake_up_cool,
+                wake_up_hp = card_detail_model.wake_up_hp,
+                img_url_1 = card_detail_model.img_url_1,
+                img_url_2 = card_detail_model.img_url_2,
+                property_shape = card_detail_model.property_shape,
+                main_effect = card_detail_model.main_effect,
+                plus_effect = card_detail_model.plus_effect
+            ).save()
 
 if __name__ == '__main__' :
+    if CardDetail.objects.count() > 0 :
+        CardDetail.objects.all().delete()
+
     pool = Pool(processes=6)
-    site_character_list = pool.map(parse_each_card_detail_info, parse_card_id_list())   
+    pool.map(parse_each_card_detail_info, parse_card_id_list())   

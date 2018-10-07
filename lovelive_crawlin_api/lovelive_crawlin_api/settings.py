@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'lovelive_api.apps.LoveliveApiConfig'
+    'lovelive_api.apps.LoveliveApiConfig',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
