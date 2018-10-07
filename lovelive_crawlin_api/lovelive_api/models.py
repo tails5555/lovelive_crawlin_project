@@ -17,6 +17,27 @@ class CardInfo(models.Model) :
     cool = models.PositiveIntegerField()
     active_condition = models.CharField(max_length=10)
     active_skill = models.CharField(max_length=15, null=True)
+    
+class CardDetail(models.Model) :
+    id = models.AutoField(primary_key=True)
+    info = models.OneToOneField(CardInfo, on_delete=models.CASCADE)
+    basic_smile = models.PositiveIntegerField()
+    basic_pure = models.PositiveIntegerField()
+    basic_cool = models.PositiveIntegerField()
+    basic_hp = models.PositiveIntegerField()
+    full_smile = models.PositiveIntegerField()
+    full_pure = models.PositiveIntegerField()
+    full_cool = models.PositiveIntegerField()
+    full_hp = models.PositiveIntegerField()
+    wake_up_smile = models.PositiveIntegerField()
+    wake_up_pure = models.PositiveIntegerField()
+    wake_up_cool = models.PositiveIntegerField()
+    wake_up_hp = models.PositiveIntegerField()
+    img_url_1 = models.URLField()
+    img_url_2 = models.URLField()
+    property_shape = models.CharField(max_length=15, null=True)
+    main_effect = models.CharField(max_length=40, null=True)
+    plus_effect = models.CharField(max_length=40, null=True)
 
 class CharacterMainInfo(models.Model) :
     id = models.AutoField(primary_key=True)

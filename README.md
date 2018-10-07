@@ -1,5 +1,4 @@
-# Love Live(ラブライブ) Inven Crawlin' App
-# <small>With Python django, React Native</small>
+# Love Live(ラブライブ) Inven Crawlin' App<br/><small>With  django REST Framework, React Native</small>
 
 React Native App 을 실질적으로 학습하는 목적을 위해 크롤링 데이터를 가져와 Hybrid Application 을 만들어 보는 연습을 진행합니다. 참고로 이번 REST API 는 Spring Boot 가 아닌 django 를 이용해서 구축하겠습니다.
 

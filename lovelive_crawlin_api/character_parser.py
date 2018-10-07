@@ -69,8 +69,8 @@ def parse_character_info(card_no) :
     url = 'http://lovelive.inven.co.kr/dataninfo/card/detail.php?d=2&c={0}'.format(card_no)
     req = requests.get(url)
     html = req.text
+    
     if req.status_code == 200 : 
-        
         soup = BeautifulSoup(html, 'html.parser')
         character_intro_div = soup.find('div', {'class': 'characterData'})
         character_table = character_intro_div.find('table')
@@ -122,8 +122,11 @@ def parse_character_info(card_no) :
                 character_info.set_three_size(three_size_value)
 
             elif idx == BLOOD_TYPE_IDX :
-                blood_type_value = card_td.find(text=True)
-                character_info.set_blood_type(blood_type_value)
+                alphabet_reg = re.compile('[^ ㄱ-ㅣ가-힣]+')
+                blood_type_value = alphabet_reg.findall(card_td.find(text=True))
+                
+                if len(blood_type_value) == 1 :
+                    character_info.set_blood_type(blood_type_value[0])
 
             elif idx == HOBBIES_IDX :
                 hobbies_value = card_td.find(text=True)
