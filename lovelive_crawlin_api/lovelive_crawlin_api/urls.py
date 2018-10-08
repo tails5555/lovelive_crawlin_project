@@ -18,11 +18,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from lovelive_api.views import CardInfoViewSet, CardDetailViewSet, CharacterMainInfoViewSet
+from lovelive_api.views import CardInfoViewSet, CardDetailViewSet, CardLevelEffectViewSet, CharacterMainInfoViewSet
 
 router = routers.DefaultRouter()
 router.register('card_infos', CardInfoViewSet)
 router.register('card_details', CardDetailViewSet)
+router.register('card_level_effects', CardLevelEffectViewSet)
 router.register('character_main_infos', CharacterMainInfoViewSet)
 
 urlpatterns = [

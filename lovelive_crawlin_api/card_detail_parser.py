@@ -172,11 +172,11 @@ def parse_each_card_detail_info(card_no) :
                         table_texts = cur_td.find_all(text=True)
 
                         for idx, cur_text in enumerate(table_texts) :
-                            if idx == BASIC_SMILE_IDX :
+                            if idx == PROPERTY_SHAPE_IDX :
                                 card_detail_model.set_property_shape(cur_text)
-                            elif idx == BASIC_PURE_IDX :
+                            elif idx == MAIN_EFFECT_IDX :
                                 card_detail_model.set_main_effect(cur_text)
-                            elif idx == BASIC_COOL_IDX :
+                            elif idx == PLUS_EFFECT_IDX :
                                 card_detail_model.set_plus_effect(cur_text)
             
             CardDetail(
