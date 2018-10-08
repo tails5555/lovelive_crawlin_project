@@ -156,4 +156,4 @@ if __name__ == '__main__' :
         CharacterMainInfo.objects.all().delete()
 
     pool = Pool(processes=6)
-    site_character_list = pool.map(parse_character_info, parse_card_id_list())   
+    pool.map(parse_character_info, parse_card_id_list())   
