@@ -60,6 +60,12 @@ class CardMessage(models.Model) :
     type = models.CharField(max_length=8, choices=MESSAGE_CHOICE, default='ETC')
     context = models.CharField(max_length=250)
 
+class CardPair(models.Model) :
+    id = models.AutoField(primary_key=True)
+    info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)
+    img_url_1 = models.URLField()
+    img_url_2 = models.URLField()
+
 class CharacterMainInfo(models.Model) :
     id = models.AutoField(primary_key=True)
     kor_name = models.CharField(max_length=20, unique=True)

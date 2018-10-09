@@ -1,5 +1,5 @@
-from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CharacterMainInfoSerializer
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CharacterMainInfo
+from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CharacterMainInfoSerializer
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CharacterMainInfo
 from .utils import ScrollPagination
 
 from rest_framework import viewsets
@@ -39,6 +39,15 @@ class CardMessageViewSet(viewsets.ModelViewSet) :
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filter_fields = ('info', 'type')
     search_fields = ('info', 'type')
+    ordering_fields = ('info',)
+    ordering = ('info',)
+
+class CardPairViewSet(viewsets.ModelViewSet) :
+    queryset = CardPair.objects.all()
+    serializer_class = CardPairSerializer
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_fields = ('info',)
+    search_fields = ('info',)
     ordering_fields = ('info',)
     ordering = ('info',)
 

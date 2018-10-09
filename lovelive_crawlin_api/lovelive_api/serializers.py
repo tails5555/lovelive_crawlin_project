@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CharacterMainInfo
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CharacterMainInfo
 
 class CardInfoSerializer(serializers.ModelSerializer) :
     class Meta :
@@ -21,6 +21,11 @@ class CardMessageSerializer(serializers.ModelSerializer) :
         model = CardMessage
         fields = ('id', 'info', 'type', 'context')
 
+class CardPairSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = CardPair
+        fields = ('id', 'info', 'img_url_1', 'img_url_2')
+        
 class CharacterMainInfoSerializer(serializers.ModelSerializer) :
     class Meta :
         model = CharacterMainInfo
