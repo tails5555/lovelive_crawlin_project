@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from multiprocessing import Pool 
-
+from multiprocessing import Pool
 import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lovelive_crawlin_api.settings")
@@ -73,6 +72,7 @@ def parse_each_message_details(card_no) :
                 message_kr_datas = message_data[message_kr]
                 message_jp_type = type(message_data[message_jp])
                 message_kr_type = type(message_data[message_kr])
+                
                 time_list = None
                 period_list = None
 
@@ -105,7 +105,11 @@ def parse_each_message_details(card_no) :
                             tmp_context += '\n' + message_kr_datas[message_key]
 
                         card_message_model.set_context(tmp_context)
-                        print(card_message_model)
+                        CardMessage(
+                            info = card_message_model.info,
+                            type = card_message_model.type,
+                            context = card_message_model.context
+                        ).save()
 
                 elif message_jp_type is str :
                     card_message_model = CardMessageModel()
@@ -119,7 +123,15 @@ def parse_each_message_details(card_no) :
                         tmp_context += '\n' + message_kr_datas
 
                     card_message_model.set_context(tmp_context)
-                    print(card_message_model)
+                    CardMessage(
+                        info = card_message_model.info,
+                        type = card_message_model.type,
+                        context = card_message_model.context
+                    ).save()
 
 if __name__ == '__main__' :
-    parse_each_message_details(1709)
+    if CardMessage.objects.count() > 0 :
+        CardMessage.objects.all().delete()
+
+    pool = Pool(processes=4)
+    pool.map(parse_each_message_details, parse_card_id_list())   
