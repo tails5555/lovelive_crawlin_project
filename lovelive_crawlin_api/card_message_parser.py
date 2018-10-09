@@ -16,8 +16,39 @@ import re
 import json
 
 message_id_list = [
-    'skill_voice', 'function_voice', 'random_voice', 'touch_voice', 'time_voice', 'period_voice'
+    'skill', 'function', 'random', 'touch', 'time', 'period'
 ]
+
+class CardMessageModel :
+    def __init__(self, info=None, type='ETC', context='') :
+        self.info = info
+        self.type = type
+        self.context = context
+
+    def set_info(self, info) :
+        self.info = info
+
+    def set_type(self, type) :
+        if type == 'skill' :
+            self.type = 'SKILL'
+        elif type == 'function' :
+            self.type = 'MENU'
+        elif type == 'random' :
+            self.type = 'RANDOM'
+        elif type == 'touch' :
+            self.type = 'TOUCH'
+        elif type == 'time' :
+            self.type = 'SPECTIME'
+        elif type == 'period' :
+            self.type = 'SPECDATE'
+        else :
+            self.type = 'ETC'
+    
+    def set_context(self, context) :
+        self.context = context
+
+    def __str__(self) :
+        return '{}\n{}\n'.format(self.type, self.context)
 
 def parse_each_message_details(card_no) :
     card_info = CardInfo.objects.filter(no=card_no).first()
@@ -34,7 +65,61 @@ def parse_each_message_details(card_no) :
             first_json_parse = json_text.replace('\nvoicedata = ', '')
             second_json_parse = first_json_parse.replace(';\n', '')
             message_data = json.loads(second_json_parse)
-            print(message_data)
-                
+
+            for message_id in message_id_list :
+                message_jp = '{}_jp'.format(message_id)
+                message_kr = '{}_kr'.format(message_id)
+                message_jp_datas = message_data[message_jp]
+                message_kr_datas = message_data[message_kr]
+                message_jp_type = type(message_data[message_jp])
+                message_kr_type = type(message_data[message_kr])
+                time_list = None
+                period_list = None
+
+                if message_id == 'time' :
+                    time_list = message_data['time_time']
+                elif message_id == 'period' :
+                    period_list = message_data['period_date']
+
+                if message_jp_type is dict :
+                    
+                    for message_key in message_jp_datas.keys() :
+                        tmp_context = ''
+                        card_message_model = CardMessageModel()
+                        card_message_model.set_info(card_info)
+                        card_message_model.set_type(message_id)
+
+                        if type(time_list) is dict :
+                            start_time = time_list[message_key]['start']
+                            end_time = time_list[message_key]['end']
+                            tmp_context = '{}시 ~ {}시\n'.format(start_time, end_time)
+
+                        elif type(period_list) is dict :
+                            start_date = period_list[message_key]['start']
+                            end_date = period_list[message_key]['end']
+                            tmp_context = '{} ~ {}\n'.format(start_date, end_date)
+
+                        tmp_context += message_jp_datas[message_key]
+
+                        if message_key in message_kr_datas :
+                            tmp_context += '\n' + message_kr_datas[message_key]
+
+                        card_message_model.set_context(tmp_context)
+                        print(card_message_model)
+
+                elif message_jp_type is str :
+                    card_message_model = CardMessageModel()
+                    card_message_model.set_info(card_info)
+                    card_message_model.set_type(message_id)
+
+                    tmp_context = ''
+                    tmp_context += message_jp_datas
+                    
+                    if message_kr_type is str :
+                        tmp_context += '\n' + message_kr_datas
+
+                    card_message_model.set_context(tmp_context)
+                    print(card_message_model)
+
 if __name__ == '__main__' :
     parse_each_message_details(1709)
