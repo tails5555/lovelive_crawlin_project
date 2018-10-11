@@ -1,10 +1,10 @@
 import React from 'react';
 import {Route, Redirect, BrowserRouter as Router} from 'react-router-dom';
-import CardTableContainer from '../container/CardTableContainer';
+import CardPageListContainer from '../container/CardPageListContainer';
 
 const ApplicationRouter = () => (
     <Router>
-        <Route exact path="/" render={() => <CardTableContainer />} />
+        <Route exact path="/card/list" component={CardPageListContainer} />
     </Router>
 );
 
