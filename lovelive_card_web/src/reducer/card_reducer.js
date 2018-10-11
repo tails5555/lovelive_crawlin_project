@@ -9,7 +9,6 @@ const INITIAL_STATE = {
 }
 
 export default function(state = INITIAL_STATE, action){
-    let error;
     switch(action.type) {
         case FETCH_CARD_INFOS_BY_PAGE :
             return { ...state, cardList : { count : 0, next : null, previous : null, results : [] }};
