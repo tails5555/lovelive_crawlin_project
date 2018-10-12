@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action){
     switch(action.type) {
         case FETCH_CARD_INFOS_BY_PAGE :
-            return { ...state, cardList : { count : 0, next : null, previous : null, results : [] }};
+            return { ...state, cardList : { count : 0, next : null, previous : null, results : [], error : null }};
         case FETCH_CARD_INFOS_BY_PAGE_SUCCESS :
             const { count, next, previous, results } = action.payload;
             return { ...state, cardList : { count : count, next : next, previous : previous, results : results, error : null }};

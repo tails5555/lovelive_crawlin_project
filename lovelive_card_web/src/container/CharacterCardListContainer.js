@@ -2,33 +2,33 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom'; 
 import queryString from 'query-string';
 import {connect} from 'react-redux';
-import {CardTable} from '../component';
+import {CharacterCardList} from '../component';
 import {
-    fetchCardInfosByPage, fetchCardInfosByPageSuccess, fetchCardInfosByPageFailure, resetFetchCardInfosByPage
-} from '../action/action_card';
+    fetchCharacterListByPage, fetchCharacterListByPageSuccess, fetchCharacterListByPageFailure, resetFetchCharacterListByPage
+} from '../action/action_character';
 import CardPagination from '../component/CardPagination';
 
 const mapStateToProps = (state) => {
     return {
-        cardList : state.card.cardList
+        characterList : state.character.characterList
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCardList : (pageNo) =>  dispatch(fetchCardInfosByPage(pageNo)).then(response => {
+        fetchCharacterList : (pageNo) =>  dispatch(fetchCharacterListByPage(pageNo)).then(response => {
             if(!response.error)
-                dispatch(fetchCardInfosByPageSuccess(response.payload));
+                dispatch(fetchCharacterListByPageSuccess(response.payload));
             }).catch(error => {
                 const { status, data } = error.response;
                 if(status !== 200)
-                    dispatch(fetchCardInfosByPageFailure(data));
+                    dispatch(fetchCharacterListByPageFailure(data));
             }),
-        resetFetchCardList : () => dispatch(resetFetchCardInfosByPage())
+        resetFetchCharacterList : () => dispatch(resetFetchCharacterListByPage())
     }
 }
 
-class CardPageListContainer extends Component {
+class CharacterCardListContainer extends Component {
     constructor(props){
         super(props);
         this.state = { page : 1 };
@@ -47,22 +47,23 @@ class CardPageListContainer extends Component {
 
     componentDidMount(){
         const { page } = this.state;
-        this.props.fetchCardList(page);
+        this.props.fetchCharacterList(page);
     }
 
     componentWillUnmount(){
-        this.props.resetFetchCardList();
+        this.props.resetFetchCharacterList();
     }
 
     render(){
-        const { results, count } = this.props.cardList;
+        const { results, count } = this.props.characterList;
+        console.log(results);
         return(
             <div className="container">
-                <div id="card_brief_list">
-                    <CardTable infos={results} />
+                <div id="character_small_card_list">
+                    <CharacterCardList characters={results} />
                 </div>
-                <div id="card_brief_pagination">
-                    <CardPagination count={count} pageBase={20} />
+                <div id="character_small_card_pagination">
+                    <CardPagination count={count} pageBase={8} />
                 </div>
             </div>
         )
@@ -71,4 +72,4 @@ class CardPageListContainer extends Component {
 
 export default connect(
     mapStateToProps, mapDispatchToProps
-)(withRouter(CardPageListContainer));
+)(withRouter(CharacterCardListContainer));

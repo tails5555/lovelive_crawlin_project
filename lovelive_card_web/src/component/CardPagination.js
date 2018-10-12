@@ -6,14 +6,15 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 class CardPagination extends React.Component {
     constructor(props){
         super(props);
-        this.state = { count : 0 };
+        this.state = { count : 0, pageBase : 0 };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        const { count } = nextProps;
-        if(count !== prevState.count){
+        const { count, pageBase } = nextProps;
+        if(count !== prevState.count || pageBase !== prevState.pageBase){
             return {
-                count : count
+                count : count,
+                pageBase : pageBase
             };
         }
         return null;
@@ -22,12 +23,12 @@ class CardPagination extends React.Component {
     render(){
         let pageItem = null;
 
-        const { count } = this.state;
+        const { count, pageBase } = this.state;
         const { search } = this.props.history.location;
         const query = queryString.parse(search);
         const pageNums = [];
         const barCount = 10;
-        const pageCount = Math.ceil(count / 20);
+        const pageCount = Math.ceil(count / pageBase);
         const base = Math.floor((query.pg - 1) / 10) * 10;
 
         if(base > 0)
