@@ -8,13 +8,10 @@ export const FETCH_CARD_DETAIL_BY_INFO_NO_FAILURE = 'FETCH_CARD_DETAIL_BY_INFO_N
 export const RESET_FETCH_CARD_DETAIL_BY_INFO_NO = 'RESET_FETCH_CARD_DETAIL_BY_INFO_NO';
 
 export function fetchCardDetailByInfoNo(cardNo){
-    const request = axios.get(`${CARD_DETAIL_URL}?info=${cardNo}`,
-        {   
-            proxy: {
-                host: `http://lovelive.inven.co.kr/dataninfo/card/detail.php?d=2&c=${cardNo}`
-            }
-        }
-    );
+    const request = axios({
+        url : `${CARD_DETAIL_URL}?info=${cardNo}`,
+        method : 'get'
+    });
     return {
         type : FETCH_CARD_DETAIL_BY_INFO_NO,
         payload : request

@@ -1,7 +1,8 @@
 .popupLayer {
 	background-color: #ffffff;
-	border: solid 2px #d0d0d0;
-	width: 350px;
-	height: 400px;
-	padding: 10px;
+	border: solid 2px deeppink;
+	width: 400px;
+	height: 580px;
+	padding: 8px;
+	z-index: 2;
 }
