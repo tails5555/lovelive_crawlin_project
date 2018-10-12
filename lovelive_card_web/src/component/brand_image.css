@@ -1,0 +1,21 @@
+.navState {
+    height : 60px
+}
+
+.brandImage {
+    border-radius : 5px;
+    background-color : white;
+    padding : 2px;
+}
+
+.brandImage img {
+    width: 140px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.brandImage img:hover {
+    width: 150px;
+}

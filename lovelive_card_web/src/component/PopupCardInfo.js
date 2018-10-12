@@ -115,12 +115,12 @@ class PopupCardInfo extends React.Component {
                     <Alert color={property_color}>
                         #{cardNo}. {character}
                     </Alert>
-                    <div id="mini_card_imgs" style={{ marginBottom : '15px' }}>
+                    <div id="mini_card_imgs" className="fade-in" style={{ marginBottom : '15px' }}>
                         {
                             imageResult.map((image, idx) => <img key={`card_img_${image.info}_${idx}`}src={image.img_file} style={{ width : '185px' }} />)
                         }
                     </div>
-                    <Table size="sm" bordered>
+                    <Table className="fade-in" size="sm" bordered>
                         <tbody style={{ 
                             textAlign : 'center',
                             verticalAlign : 'center' 

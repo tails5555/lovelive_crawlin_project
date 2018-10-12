@@ -1,0 +1,64 @@
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import BrandImage from '../resource/image/lovelive_brand.png';
+import './brand_image.css';
+
+class MenuNavBar extends React.Component { 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        };
+    }
+
+    toggle() {
+        const { isOpen } = this.state;
+        this.setState({
+            isOpen: !isOpen
+        });
+    }
+
+    render(){
+        const { isOpen } = this.state;
+        const { location } = this.props.history;
+        const { pathname } = location;
+        const activeStyle = {
+            backgroundColor : 'deepskyblue',
+            color : 'black',
+            borderRadius : '5px',
+            border : '2px solid lightskyblue'
+        }
+        return(
+            <Navbar color="primary" dark expand="md">
+                <NavbarBrand tag={Link} to="/">
+                    <div className="brandImage">
+                        <img src={BrandImage} />
+                    </div>
+                </NavbarBrand>
+                <NavbarToggler onClick={() => this.toggle()} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLink style={ pathname === '/card/list' ? activeStyle : null } tag={Link} to="/card/list?pg=1">카드 목록 조회</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink style={ pathname === '/character/list' ? activeStyle : null } tag={Link} to="/character/list?pg=1">캐릭터 목록 조회</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink style={ pathname === '/album/list' ? activeStyle : null } tag={Link} to="/album/list?pg=1">앨범 목록 조회</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info">개발 정보 안내</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="http://lovelive.inven.co.kr/">Inven Lovelive 이동</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Navbar>
+        )
+    }
+}
+
+export default withRouter(MenuNavBar);
