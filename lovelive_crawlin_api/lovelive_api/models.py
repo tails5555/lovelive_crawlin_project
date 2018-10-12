@@ -1,4 +1,10 @@
 from django.db import models
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+from django.core.files import File
+
+import urllib.request
+import os.path
 
 # Create your models here.
 
@@ -59,6 +65,12 @@ class CardMessage(models.Model) :
     info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)
     type = models.CharField(max_length=8, choices=MESSAGE_CHOICE, default='ETC')
     context = models.CharField(max_length=250)
+
+class CardImage(models.Model) :
+    id = models.AutoField(primary_key=True)
+    info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)
+    img_url = models.URLField(null=True)
+    img_file = models.ImageField(upload_to='card/main', blank=True, default='card/main/default_image.jpg')
 
 class CardPair(models.Model) :
     id = models.AutoField(primary_key=True)

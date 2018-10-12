@@ -1,42 +1,58 @@
 import requests
-from os.path  import basename
+import urllib.request
 from bs4 import BeautifulSoup
 from multiprocessing import Pool 
 
 import os
+from os.path import basename
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lovelive_crawlin_api.settings")
 
 import django
+from django.core.files import File
+from django.conf import settings
+
 django.setup()
 
+from lovelive_api.models import CardInfo, CardImage
+from common_functions import parse_card_id_list
+
 def parse_each_image_files(card_no) :
-    url = 'http://lovelive.inven.co.kr/dataninfo/card/detail.php?d=2&c={0}'.format(card_no)
-    req = requests.get(url)
-    html = req.text
+    card_info = CardInfo.objects.filter(no=card_no).first()
+    if card_info != None :
+        url = 'http://lovelive.inven.co.kr/dataninfo/card/detail.php?d=2&c={0}'.format(card_no)
+        req = requests.get(url)
+        html = req.text
 
-    if req.status_code == 200 : 
-        soup = BeautifulSoup(html, 'html.parser')
-        card_image_div = soup.find('div', {'class': 'image1'})
-        card_detail_div = soup.find('div', {'class': 'rightPart'})
-        
-        if card_image_div != None :
-            card_imgs = card_image_div.find_all('img')
+        if req.status_code == 200 : 
+            soup = BeautifulSoup(html, 'html.parser')
+            card_image_div = soup.find('div', {'class': 'image1'})
+            card_detail_div = soup.find('div', {'class': 'rightPart'})
             
-            if len(card_imgs) == 2 :
-                first_image_link = card_imgs[0]['src']
-                with open(basename(first_image_link), "wb") as f:
-                    f.write(requests.get(first_image_link).content)
+            if card_image_div != None :
+                card_imgs = card_image_div.find_all('img')
+                
+                for img in card_imgs : 
+                    link = img['src']
+                    img_req = requests.get(link)
+                    file_name = os.path.basename(link)
 
-                second_image_link = card_imgs[1]['src']
-                with open(basename(second_image_link), "wb") as f:
-                    f.write(requests.get(second_image_link).content)
-            
-            else :
-                first_image_link = card_imgs[0]['src']
-                with open(basename(first_image_link), "wb") as f:
-                    f.write(requests.get(first_image_link).content)
+                    if img_req.status_code == 200 :
+                        with open(file_name, "wb") as f:
+                            f.write(img_req.content)
+
+                        with open(file_name, "rb") as f:
+                            CardImage(
+                                info = card_info,
+                                img_url = link,
+                                img_file = File(f)
+                            ).save()
+                        
+                        os.remove(file_name)
         
 if __name__ == '__main__' :
     pool = Pool(processes=6)
-    parse_each_image_files(1) 
+    if CardImage.objects.count() > 0 :
+        CardImage.objects.all().delete()
+    pool = Pool(processes=6)
+    pool.map(parse_each_image_files, parse_card_id_list())   
