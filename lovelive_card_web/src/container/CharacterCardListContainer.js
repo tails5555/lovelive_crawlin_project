@@ -56,14 +56,13 @@ class CharacterCardListContainer extends Component {
 
     render(){
         const { results, count } = this.props.characterList;
-        console.log(results);
         return(
             <div className="container">
                 <div id="character_small_card_list">
                     <CharacterCardList characters={results} />
                 </div>
                 <div id="character_small_card_pagination">
-                    <CardPagination count={count} pageBase={8} />
+                    <CardPagination count={count} pageBase={9} />
                 </div>
             </div>
         )

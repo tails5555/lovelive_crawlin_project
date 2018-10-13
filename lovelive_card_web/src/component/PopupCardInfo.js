@@ -7,7 +7,9 @@ import {
 import {
     fetchCardImagesByInfoNo, fetchCardImagesByInfoNoSuccess, fetchCardImagesByInfoNoFailure, resetFetchCardImagesByInfoNo
 } from '../action/action_image';
-import './popup_card.css';
+
+import './style/image_animate.css';
+import './style/popup_card.css';
 
 function mapStateToProps(state){
     return {
