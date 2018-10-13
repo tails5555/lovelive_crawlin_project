@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom'; 
-import queryString from 'query-string';
 import {connect} from 'react-redux';
 import {CharacterCardList} from '../component';
 import {
-    fetchCharacterListByPage, fetchCharacterListByPageSuccess, fetchCharacterListByPageFailure, resetFetchCharacterListByPage
+    fetchCharacterListByQuery, fetchCharacterListByQuerySuccess, fetchCharacterListByQueryFailure, resetFetchCharacterListByQuery
 } from '../action/action_character';
 import CardPagination from '../component/CardPagination';
+import CharacterSearchForm from '../component/CharacterSearchForm';
 
 const mapStateToProps = (state) => {
     return {
@@ -16,38 +16,37 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCharacterList : (pageNo) =>  dispatch(fetchCharacterListByPage(pageNo)).then(response => {
+        fetchCharacterList : (pageNo) =>  dispatch(fetchCharacterListByQuery(pageNo)).then(response => {
             if(!response.error)
-                dispatch(fetchCharacterListByPageSuccess(response.payload));
+                dispatch(fetchCharacterListByQuerySuccess(response.payload));
             }).catch(error => {
                 const { status, data } = error.response;
                 if(status !== 200)
-                    dispatch(fetchCharacterListByPageFailure(data));
+                    dispatch(fetchCharacterListByQueryFailure(data));
             }),
-        resetFetchCharacterList : () => dispatch(resetFetchCharacterListByPage())
+        resetFetchCharacterList : () => dispatch(resetFetchCharacterListByQuery())
     }
 }
 
 class CharacterCardListContainer extends Component {
     constructor(props){
         super(props);
-        this.state = { page : 1 };
+        this.state = { query : '' };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { search } = nextProps.history.location;
-        const query = queryString.parse(search);
-        if(query && (query.pg || 1) !== prevState.page){
+        if(search !== prevState.query){
             return {
-                page : query.pg
+                query : search
             };
         }
         return null;
     }
 
     componentDidMount(){
-        const { page } = this.state;
-        this.props.fetchCharacterList(page);
+        const { query } = this.state;
+        this.props.fetchCharacterList(query);
     }
 
     componentWillUnmount(){
@@ -58,6 +57,9 @@ class CharacterCardListContainer extends Component {
         const { results, count } = this.props.characterList;
         return(
             <div className="container">
+                <div id="character_search_form">
+                    <CharacterSearchForm />
+                </div>
                 <div id="character_small_card_list">
                     <CharacterCardList characters={results} />
                 </div>

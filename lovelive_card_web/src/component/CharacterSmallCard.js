@@ -1,10 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, CardImg, CardText, CardBody, CardLink, CardTitle, CardSubtitle } from 'reactstrap';
-import {
-    fetchCardImagesByCharacter, fetchCardImagesByCharacterSuccess, fetchCardImagesByCharacterFailure, resetFetchCardImagesByCharacter
-} from '../action/action_image';
+import { Card, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import './style/image_animate.css';
+import { Link, withRouter } from 'react-router-dom';
 
 const IMAGE_URL = 'http://127.0.0.1:8000/media';
 const CARD_IMAGE_URL = 'http://127.0.0.1:8000/card_images/';
@@ -70,12 +68,12 @@ class CharacterSmallCard extends React.Component {
 
     render(){
         const { character, imageResult, imageError, randomURL } = this.state;
-        
+        const { search } = this.props.history.location;
         return(
             <Card>
                 <CardBody>
                     <CardTitle>{character && character.kor_name}</CardTitle>
-                    <CardSubtitle>{character && character.jap_name}</CardSubtitle>
+                    <CardSubtitle>{character && character.jap_name} / {character && character.grade !== 0 ? `${character.grade} 학년` : '기타 캐릭터'}</CardSubtitle>
                 </CardBody>
                 <div onMouseOver={() => this.handleMouseOver()}>
                     {
@@ -83,10 +81,10 @@ class CharacterSmallCard extends React.Component {
                     }
                 </div>
                 <CardBody>
-                    <CardLink href="#">캐릭터 정보 조회하러 가기</CardLink>
+                    <Button tag={Link} to={`info?id=${character.id}&${search.replace('?', '')}`} color="info" block>캐릭터 정보 조회하러 가기</Button>
                 </CardBody>
             </Card>
         )
     }
 }
-export default CharacterSmallCard;
+export default withRouter(CharacterSmallCard);
