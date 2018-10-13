@@ -1,12 +1,17 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
-const CHARACTER_INFO_URL = 'http://127.0.0.1:8000/character_main_infos/';
+const CHARACTER_INFO_URL = 'http://127.0.0.1:8000/character_main_infos';
 
 export const FETCH_CHARACTER_LIST_BY_QUERY = 'FETCH_CHARACTER_LIST_BY_QUERY';
 export const FETCH_CHARACTER_LIST_BY_QUERY_SUCCESS = 'FETCH_CHARACTER_LIST_BY_QUERY_SUCCESS';
 export const FETCH_CHARACTER_LIST_BY_QUERY_FAILURE = 'FETCH_CHARACTER_LIST_BY_QUERY_FAILURE';
 export const RESET_FETCH_CHARACTER_LIST_BY_QUERY = 'RESET_FETCH_CHARACTER_LIST_BY_QUERY';
+
+export const FETCH_CHARACTER_INFO_BY_ID = 'FETCH_CHARACTER_INFO_BY_ID';
+export const FETCH_CHARACTER_INFO_BY_ID_SUCCESS = 'FETCH_CHARACTER_INFO_BY_ID_SUCCESS';
+export const FETCH_CHARACTER_INFO_BY_ID_FAILURE = 'FETCH_CHARACTER_INFO_BY_ID_FAILURE';
+export const RESET_FETCH_CHARACTER_INFO_BY_ID = 'RESET_FETCH_CHARACTER_INFO_BY_ID'; 
 
 export function fetchCharacterListByQuery(qs){
     const queryModel = queryString.parse(qs);
@@ -15,9 +20,7 @@ export function fetchCharacterListByQuery(qs){
         search : queryModel && queryModel.st,
         grade : queryModel && queryModel.gr
     };
-
     const serverQS = queryString.stringify(serverQuery);
-
     const request = axios({
         url : `${CHARACTER_INFO_URL}?${serverQS}`,
         method : 'get'
@@ -45,5 +48,36 @@ export function fetchCharacterListByQueryFailure(error){
 export function resetFetchCharacterListByQuery(){
     return {
         type : RESET_FETCH_CHARACTER_LIST_BY_QUERY
+    }
+}
+
+export function fetchCharacterInfoById(id){
+    const request = axios({
+        url : `${CHARACTER_INFO_URL}/${id}`,
+        method : 'get'
+    });
+    return {
+        type : FETCH_CHARACTER_INFO_BY_ID,
+        payload : request
+    }
+}
+
+export function fetchCharacterInfoByIdSuccess(request){
+    return {
+        type : FETCH_CHARACTER_INFO_BY_ID_SUCCESS,
+        payload : request.data
+    }
+}
+
+export function fetchCharacterInfoByIdFailure(error){
+    return {
+        type : FETCH_CHARACTER_INFO_BY_ID_FAILURE,
+        payload : error
+    }
+}
+
+export function resetFetchCharacterInfoById(){
+    return {
+        type : RESET_FETCH_CHARACTER_INFO_BY_ID
     }
 }
