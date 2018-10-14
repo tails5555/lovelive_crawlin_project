@@ -77,7 +77,7 @@ class CharacterSmallCard extends React.Component {
                 </CardBody>
                 <div onMouseOver={() => this.handleMouseOver()}>
                     {
-                        randomURL ? <img width="100%" className="change-img" src={`${IMAGE_URL}/${randomURL}`} /> : null
+                        randomURL ? <img style={{ width : "100%" }} className="change-img" src={`${IMAGE_URL}/${randomURL}`} /> : null
                     }
                 </div>
                 <CardBody>

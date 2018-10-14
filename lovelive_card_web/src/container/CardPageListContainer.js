@@ -58,10 +58,10 @@ class CardPageListContainer extends Component {
         const { results, count } = this.props.cardList;
         return(
             <div className="container">
-                <div id="card_brief_list">
+                <div id="card_brief_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardTable infos={results} />
                 </div>
-                <div id="card_brief_pagination">
+                <div id="card_brief_pagination" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardPagination count={count} pageBase={20} />
                 </div>
             </div>

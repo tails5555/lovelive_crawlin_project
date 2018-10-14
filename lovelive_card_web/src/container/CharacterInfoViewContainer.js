@@ -6,6 +6,7 @@ import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
 import { CharacterProfile } from '../component';
+import CharacterGallery from '../component/CharacterGallery';
 
 const mapStateToProps = (state) => {
     return {
@@ -56,8 +57,11 @@ class CharacterInfoViewContainer extends React.Component {
     render(){
         const { result, error } = this.props.characterInfo;
         return(
-            <div className="container">
-                <div id="character_profile">
+            <div className="container" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                <div id="character_gallery">
+                    <CharacterGallery character={ Array.isArray(result) ? null : result.kor_name } />
+                </div>
+                <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterProfile character={ result } />
                 </div>
             </div>

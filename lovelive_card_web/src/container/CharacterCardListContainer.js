@@ -57,13 +57,13 @@ class CharacterCardListContainer extends Component {
         const { results, count } = this.props.characterList;
         return(
             <div className="container">
-                <div id="character_search_form">
+                <div id="character_search_form" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterSearchForm />
                 </div>
-                <div id="character_small_card_list">
+                <div id="character_small_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterCardList characters={results} />
                 </div>
-                <div id="character_small_card_pagination">
+                <div id="character_small_card_pagination" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardPagination count={count} pageBase={9} />
                 </div>
             </div>

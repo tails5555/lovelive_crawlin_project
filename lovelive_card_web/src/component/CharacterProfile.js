@@ -54,7 +54,7 @@ class CharacterProfile extends React.Component {
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>혈액형</th>
-                        <td>{character && character.blood_type} 형</td>
+                        <td>{character && character.blood_type === '？' ? '미상' : `${character.blood_type} 형`}</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>취미</th>

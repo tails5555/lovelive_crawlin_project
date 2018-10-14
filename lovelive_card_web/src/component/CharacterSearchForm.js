@@ -29,7 +29,7 @@ class CharacterSearchForm extends React.Component {
     render(){
         const { handleSubmit } = this.props;
         return(
-            <Form style={{ marginTop : '5px', marginBottom : '5px' }} onSubmit={handleSubmit(validateAndSearch)}>
+            <Form onSubmit={handleSubmit(validateAndSearch)}>
                 <Field type="text" name="character" component={TextFormRender} placeholder="캐릭터 이름을 입력하세요." label="캐릭터 검색" />
                 <Field name="grade" component={SelectFormRender} label="학년 검색" children={ [1, 2, 3, 0].map(grade => <option key={`select_${grade}`} value={grade}>{grade === 0 ? '기타 캐릭터' : `${grade} 학년`}</option>)}/>
                 <div className="text-center">
