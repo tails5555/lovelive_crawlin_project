@@ -61,11 +61,11 @@ class CardBriefInfo extends React.Component {
                     <div className="d-flex justify-content-around" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
                         {   
                             info && info.icon_url_1 ?
-                                <img src={info.icon_url_1} className="rounded img-responsive" /> : null
+                                <img src={info.icon_url_1} alt={"info_icon_1"} className="rounded img-responsive" /> : null
                         }
                         {
                             info && info.icon_url_2 ?
-                                <img src={info.icon_url_2} className="rounded img-responsive" /> : null
+                                <img src={info.icon_url_2} alt={"info_icon_2"} className="rounded img-responsive" /> : null
                         }
                     </div>
                 </td>

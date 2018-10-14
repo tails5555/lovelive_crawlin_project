@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Card, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import './style/image_animate.css';
+import './style/card_animate.css';
 import { Link, withRouter } from 'react-router-dom';
 
 const IMAGE_URL = 'http://127.0.0.1:8000/media';
@@ -70,14 +71,14 @@ class CharacterSmallCard extends React.Component {
         const { character, imageResult, imageError, randomURL } = this.state;
         const { search } = this.props.history.location;
         return(
-            <Card>
+            <Card className="animationCard">
                 <CardBody>
                     <CardTitle>{character && character.kor_name}</CardTitle>
                     <CardSubtitle>{character && character.jap_name} / {character && character.grade !== 0 ? `${character.grade} 학년` : '기타 캐릭터'}</CardSubtitle>
                 </CardBody>
                 <div onMouseOver={() => this.handleMouseOver()}>
                     {
-                        randomURL ? <img style={{ width : "100%" }} className="change-img" src={`${IMAGE_URL}/${randomURL}`} /> : null
+                        randomURL ? <img style={{ width : "100%" }} alt={`card_random_image`} className="change-img" src={`${IMAGE_URL}/${randomURL}`} /> : null
                     }
                 </div>
                 <CardBody>

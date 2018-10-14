@@ -33,17 +33,17 @@ class MenuNavBar extends React.Component {
             <Navbar color="primary" dark expand="md">
                 <NavbarBrand tag={Link} to="/">
                     <div className="brandImage">
-                        <img src={BrandImage} />
+                        <img src={BrandImage} alt={'brand_image'}/>
                     </div>
                 </NavbarBrand>
                 <NavbarToggler onClick={() => this.toggle()} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink style={ pathname === '/card/list' ? activeStyle : null } tag={Link} to="/card/list?pg=1">카드 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1">카드 목록 조회</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname === '/character/list' ? activeStyle : null } tag={Link} to="/character/list?pg=1">캐릭터 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1">캐릭터 목록 조회</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink style={ pathname === '/album/list' ? activeStyle : null } tag={Link} to="/album/list?pg=1">앨범 목록 조회</NavLink>

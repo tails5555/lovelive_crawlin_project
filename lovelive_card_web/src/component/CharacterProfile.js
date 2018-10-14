@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
 import './style/image_animate.css';
 
 class CharacterProfile extends React.Component {
@@ -23,7 +22,7 @@ class CharacterProfile extends React.Component {
     render(){
         const { character } = this.state;
         return(
-            <Table bordered className="fade-in">
+            <Table bordered size="sm" className="fade-in">
                 <tbody style={{ 
                     textAlign : 'center',
                     verticalAlign : 'center' 
@@ -38,7 +37,7 @@ class CharacterProfile extends React.Component {
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>생일</th>
-                        <td>{character && character.birthday}</td>
+                        <td>{character && character.birthday && character.birthday.includes('？') ? '미상' : character.birthday }</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>학년</th>
@@ -46,7 +45,7 @@ class CharacterProfile extends React.Component {
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>쓰리 사이즈</th>
-                        <td>{character && character.three_size}</td>
+                        <td>{character && character.three_size === '' ? '미상' : character.three_size }</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>신장</th>
@@ -58,11 +57,11 @@ class CharacterProfile extends React.Component {
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>취미</th>
-                        <td>{character && character.hobbies}</td>
+                        <td>{character && character.hobbies && character.hobbies.includes('？') ? '미상' : character.hobbies }</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>성우</th>
-                        <td>{character && character.voice_actor}</td>
+                        <td>{character && character.voice_actor && character.voice_actor.includes('？') ? '미상' : character.voice_actor }</td>
                     </tr>
                 </tbody>
             </Table>

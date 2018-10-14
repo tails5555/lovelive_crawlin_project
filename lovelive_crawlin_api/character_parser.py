@@ -119,7 +119,10 @@ def parse_character_info(card_no) :
 
             elif idx == THREE_SIZE_IDX :
                 three_size_value = card_td.find(text=True)
-                character_info.set_three_size(three_size_value)
+                if '？' not in three_size_value :
+                    character_info.set_three_size(three_size_value)
+                else :
+                    character_info.set_three_size('')
 
             elif idx == BLOOD_TYPE_IDX :
                 alphabet_reg = re.compile('[^ ㄱ-ㅣ가-힣]+')
@@ -148,7 +151,12 @@ def parse_character_info(card_no) :
                 ).save()
                 
             else :
-                character_query_result.hobbies = character_info.hobbies
+                if character_info.three_size != '' :
+                    character_query_result.three_size = character_info.three_size
+                if character_info.hobbies != '' :
+                    hangul_reg = re.compile('[ ㄱ-ㅣ가-힣]+')
+                    if len(hangul_reg.findall(character_info.hobbies)) > 1 :
+                        character_query_result.hobbies = character_info.hobbies
                 character_query_result.save()
 
 if __name__ == '__main__' :

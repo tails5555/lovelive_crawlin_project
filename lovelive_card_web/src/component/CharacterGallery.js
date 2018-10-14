@@ -83,7 +83,7 @@ class CharacterGallery extends React.Component {
         const resultImages = imageResult.length > 0 ? 
             imageResult.map(image => (
                 <div key={`character_img_${image.id}`}>
-                    <img className="img-fluid" src={`${MEDIA_URL}/${image.fields.img_file}`} />
+                    <img className="img-fluid" alt={`character_card_img_${image.id}`} src={`${MEDIA_URL}/${image.fields && image.fields.img_file}`} />
                 </div>
             )) : null;
 
@@ -91,7 +91,6 @@ class CharacterGallery extends React.Component {
             dots: false,
             infinite: true,
             slidesToShow: 2,
-            slidesToScroll: 1,
             autoplay: true,
             pauseOnHover: true,
             speed: 2000,
@@ -100,7 +99,7 @@ class CharacterGallery extends React.Component {
         };
 
         return(
-            <div className="image_slide">
+            <div id="image_view" className="image_slide">
                 <Slider { ...settings }>
                     {resultImages}
                 </Slider>

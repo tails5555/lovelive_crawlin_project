@@ -2,3 +2,12 @@
 .slick-next:before {
     color: deeppink;
 }
+
+.productSlider {
+    width: 100%;
+    margin: 0 auto;    
+}
+
+.slick-slide {
+    padding: 0px 5px;
+}

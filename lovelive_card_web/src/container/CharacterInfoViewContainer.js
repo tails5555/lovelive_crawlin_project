@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
-import { CharacterProfile } from '../component';
-import CharacterGallery from '../component/CharacterGallery';
+import { CharacterProfile, CharacterGallery } from '../component';
 
 const mapStateToProps = (state) => {
     return {
