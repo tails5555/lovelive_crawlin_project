@@ -15,3 +15,7 @@
 .animationCard {
     animation: bounceIn 1.5s;
 }
+
+.smallCard {
+    animation: bounceIn 1s;
+}
