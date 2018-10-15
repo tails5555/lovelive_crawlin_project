@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
-import { CharacterProfile, CharacterGallery } from '../component';
+import { CharacterProfile, CharacterGallery, CharacterGridAlbum } from '../component';
 
 const mapStateToProps = (state) => {
     return {
@@ -62,6 +62,9 @@ class CharacterInfoViewContainer extends React.Component {
                 </div>
                 <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterProfile character={ result } />
+                </div>
+                <div id="character_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    <CharacterGridAlbum />
                 </div>
             </div>
         )

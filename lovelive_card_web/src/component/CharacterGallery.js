@@ -82,8 +82,8 @@ class CharacterGallery extends React.Component {
 
         const resultImages = imageResult.length > 0 ? 
             imageResult.map(image => (
-                <div key={`character_img_${image.id}`}>
-                    <img className="img-fluid" alt={`character_card_img_${image.id}`} src={`${MEDIA_URL}/${image.fields && image.fields.img_file}`} />
+                <div key={`character_img_${image.pk}`}>
+                    <img className="img-fluid" alt={`character_card_img_${image.pk}`} src={`${MEDIA_URL}/${image.fields && image.fields.img_file}`} />
                 </div>
             )) : null;
 
