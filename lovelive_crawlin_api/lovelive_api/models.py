@@ -66,6 +66,12 @@ class CardMessage(models.Model) :
     type = models.CharField(max_length=8, choices=MESSAGE_CHOICE, default='ETC')
     context = models.CharField(max_length=250)
 
+class CardIcon(models.Model) :
+    id = models.AutoField(primary_key=True)
+    info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)
+    img_url = models.URLField(null=True)
+    img_file = models.ImageField(upload_to='card/icon', blank=True, default='card/icon/default_image.jpg')
+
 class CardImage(models.Model) :
     id = models.AutoField(primary_key=True)
     info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)

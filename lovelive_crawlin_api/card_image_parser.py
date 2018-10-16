@@ -54,5 +54,4 @@ if __name__ == '__main__' :
     pool = Pool(processes=6)
     if CardImage.objects.count() > 0 :
         CardImage.objects.all().delete()
-    pool = Pool(processes=6)
     pool.map(parse_each_image_files, parse_card_id_list())   

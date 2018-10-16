@@ -7,6 +7,15 @@ React Native App 을 실질적으로 학습하는 목적을 위해 크롤링 데
 - Python Beautiful Soup 를 이용해 한 웹 사이트의 HTML 문서를 파싱하여 데이터베이스에 구축합니다.
 - React Native 를 이용하여 REST API 와 Redux 를 연동 시킵니다.
 
+## Development Environments
+
+모든 개발의 IDE는 Visual Studio Code 를 이용하였습니다.
+
+- Server - Python, django, Beautiful Soup
+- Web - React.js, Redux
+- App - React Native
+
+
 ## Thanks To
 - [django REST API 구축 방법](http://jamanbbo.tistory.com/43)
 - [Lovelive 인벤](http://lovelive.inven.co.kr/)

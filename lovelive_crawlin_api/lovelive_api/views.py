@@ -1,5 +1,5 @@
-from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CardImageSerializer, CharacterMainInfoSerializer
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardImage, CharacterMainInfo
+from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CardIconSerializer, CardImageSerializer, CharacterMainInfoSerializer
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo
 from .utils import ListPagination, CardPagination
 
 from rest_framework import viewsets
@@ -50,6 +50,15 @@ class CardMessageViewSet(viewsets.ModelViewSet) :
 class CardPairViewSet(viewsets.ModelViewSet) :
     queryset = CardPair.objects.all()
     serializer_class = CardPairSerializer
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_fields = ('info',)
+    search_fields = ('info',)
+    ordering_fields = ('info',)
+    ordering = ('info',)
+
+class CardIconViewSet(viewsets.ModelViewSet) :
+    queryset = CardImage.objects.all()
+    serializer_class = CardIconSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filter_fields = ('info',)
     search_fields = ('info',)

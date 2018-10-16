@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from lovelive_api.views import CardInfoViewSet, CardDetailViewSet, CardLevelEffectViewSet, CardMessageViewSet, CardPairViewSet, CardImageViewSet, CharacterMainInfoViewSet
+from lovelive_api.views import CardInfoViewSet, CardDetailViewSet, CardLevelEffectViewSet, CardMessageViewSet, CardPairViewSet, CardIconViewSet, CardImageViewSet, CharacterMainInfoViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,6 +28,7 @@ router.register('card_details', CardDetailViewSet)
 router.register('card_level_effects', CardLevelEffectViewSet)
 router.register('card_messages', CardMessageViewSet)
 router.register('card_pairs', CardPairViewSet)
+router.register('card_icons', CardIconViewSet)
 router.register('card_images', CardImageViewSet)
 router.register('character_main_infos', CharacterMainInfoViewSet)
 
