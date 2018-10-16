@@ -97,17 +97,17 @@ class CharacterGridAlbum extends React.Component {
                     {cardView}
                 </Row>
                 <div id="card_list_pg_button" className="text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <Button onClick={() => this.handleClickPrevious()} color={ pageNo * 1 === 1 ? 'info' : 'warning' } style={{ marginLeft : '10px', marginRight : '10px' }}>
-                        { pageNo * 1 === 1 ? '마지막' : '이전' }
+                    <Button onClick={() => this.handleClickPrevious()} color={ pageNo * 1 === 1 ? 'info' : 'warning' } style={{ marginLeft : '5px', marginRight : '5px' }}>
+                        <i className={ pageNo * 1 === 1 ? "fas fa-step-backward" : "fas fa-angle-left"} /> { pageNo * 1 === 1 ? '마지막' : '이전' }
                     </Button>
-                    <span style={{ marginRight : '10px' }}>
-                        <select value={pageNo} style={{ marginLeft : '10px', marginRight : '10px' }} onChange={this.handleClickChange.bind(this)}>
+                    <span style={{ marginRight : '5px' }}>
+                        <select value={pageNo} style={{ marginLeft : '5px', marginRight : '5px' }} onChange={this.handleClickChange.bind(this)}>
                             { numberRange(pageLength).map(no => <option key={`select_pg_${no}`} value={no}>{no}</option>) }
                         </select>
                          / {pageLength}
                     </span>
-                    <Button onClick={() => this.handleClickNext()} color={ pageNo * 1 === pageLength ? 'danger' : 'primary' } style={{ marginLeft : '10px', marginRight : '10px' }}>
-                        { pageNo * 1 === pageLength ? '처음' : '다음' }
+                    <Button onClick={() => this.handleClickNext()} color={ pageNo * 1 === pageLength ? 'danger' : 'primary' } style={{ marginLeft : '5px', marginRight : '5px' }}>
+                        { pageNo * 1 === pageLength ? '처음' : '다음' } <i className={ pageNo * 1 === pageLength ? "fas fa-step-forward" : "fas fa-angle-right"} />
                     </Button>
                 </div>
                 <div id="show_card_modal">

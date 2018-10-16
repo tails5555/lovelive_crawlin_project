@@ -24,8 +24,7 @@ class CharacterProfile extends React.Component {
         return(
             <Table bordered size="sm" className="fade-in">
                 <tbody style={{ 
-                    textAlign : 'center',
-                    verticalAlign : 'center' 
+                    textAlign : 'center'
                 }}>
                     <tr>
                         <th style={{ width : '120px', backgroundColor : 'skyblue' }}>한국 이름</th>

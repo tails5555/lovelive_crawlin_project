@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchImagesByCharacter : (character) => dispatch(fetchCardImagesByCharacter(character)).then(response => {
             if(response.payload.status === 204) {
                 dispatch(fetchCardImagesByCharacterFailure({
-                    info : "선택하신 캐릭터의 카드 이미지가 존재하지 않습니다."
+                    info : ["선택하신 캐릭터의 카드 이미지가 존재하지 않습니다."]
                 }));
             } else if(!response.error) {
                 dispatch(fetchCardImagesByCharacterSuccess(response.payload));
@@ -28,7 +28,9 @@ const mapDispatchToProps = (dispatch) => {
         }).catch(error => {
             const { status, data } = error.response;
             if(status !== 200)
-                dispatch(fetchCardImagesByCharacterFailure(data));
+                dispatch(fetchCardImagesByCharacterFailure({
+                    info : ["이미지를 불러오는 도중 예기치 않은 오류가 발생했습니다."]
+                }));
         }),
         resetFetchImagesByCharacter : () => dispatch(resetFetchCardImagesByCharacter())
     }
