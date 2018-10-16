@@ -36,7 +36,7 @@ def parse_each_image_files(card_no) :
                     link = img['src']
                     img_req = requests.get(link)
                     file_name = os.path.basename(link)
-
+                    
                     if img_req.status_code == 200 :
                         with open(file_name, "wb") as f:
                             f.write(img_req.content)

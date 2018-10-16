@@ -57,7 +57,7 @@ class CardPairViewSet(viewsets.ModelViewSet) :
     ordering = ('info',)
 
 class CardIconViewSet(viewsets.ModelViewSet) :
-    queryset = CardImage.objects.all()
+    queryset = CardIcon.objects.all()
     serializer_class = CardIconSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filter_fields = ('info',)
