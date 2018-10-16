@@ -1,10 +1,17 @@
 import React from 'react';
+import axios from 'axios';
+import queryString from 'query-string';
+import { withRouter } from 'react-router-dom';
 import PopupCardInfo from './PopupCardInfo';
+
+import './style/card_table.css';
+
+const IMAGE_ICON_URL = `http://localhost:8000/card_icons/`
 
 class CardBriefInfo extends React.Component {
     constructor(props){
         super(props);
-        this.state = { info : props.info, mouseNo : 0, mouseX : 0, mouseY : 0 };
+        this.state = { info : props.info, icons : [], mouseNo : 0, mouseX : 0, mouseY : 0 };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -15,6 +22,23 @@ class CardBriefInfo extends React.Component {
             };
         }
         return null;
+    }
+
+    componentDidMount(){
+        const {info} = this.state;
+        const infoNo = info && (info.no || 0);
+        if(infoNo !== 0)
+            axios({
+                url : `${IMAGE_ICON_URL}?info=${infoNo}`,
+                method : 'get'
+            }).then(response => {
+                const { data } = response;
+                const images = data.map(d => d.img_file);
+                this.setState({
+                    icons : images
+                });
+            });
+            
     }
 
     handleMouseEnter = (no) => {
@@ -36,14 +60,21 @@ class CardBriefInfo extends React.Component {
         });
     }
 
+    handleClickPushing = (infoNo) => {
+        const { location } = this.props.history;
+        const clientQueryModel = queryString.parse(location.search);
+        clientQueryModel['id'] = infoNo
+        this.props.history.push(`/card/info?${queryString.stringify(clientQueryModel)}`)
+    }
+
     render(){
-        const { info, mouseNo, mouseX, mouseY } = this.state;
+        const { info, icons, mouseNo, mouseX, mouseY } = this.state;
         let smallCardInfo = null;
         const property_color = 
             info && info.property === '스마일' ? 'deeppink' :
                 info.property === '퓨어' ? 'limegreen' : 
                     info.property === '쿨' ? 'slateblue' : 'black';
-        
+
         if(mouseNo !== 0) {
             smallCardInfo = <PopupCardInfo property={info && info.property} character={`${(info && info.character_name)} ${(info && info.japanese_name)}`} no={mouseNo} mouseX={mouseX} mouseY={mouseY} />;    
         }
@@ -59,18 +90,22 @@ class CardBriefInfo extends React.Component {
                         smallCardInfo
                     }
                     <div className="d-flex justify-content-around" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
-                        {   
-                            info && info.icon_url_1 ?
-                                <img src={info.icon_url_1} alt={"info_icon_1"} className="rounded img-responsive" /> : null
-                        }
                         {
-                            info && info.icon_url_2 ?
-                                <img src={info.icon_url_2} alt={"info_icon_2"} className="rounded img-responsive" /> : null
+                            icons.map((icon, idx) => 
+                                <img 
+                                    key={`icon_${info && (info.no || 0)}_${idx+1}`} 
+                                    src={icon} 
+                                    style={{ cursor : 'pointer' }} 
+                                    alt={`info_icon_${info && (info.no || 0)}_${idx+1}`} 
+                                    className="rounded img-responsive" 
+                                    onClick={() => this.handleClickPushing(info.no)}
+                                />
+                            )
                         }
                     </div>
                 </td>
                 <td className="align-middle">
-                    <div className="d-flex flex-column bd-highlight" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
+                    <div id="info_box" className="d-flex flex-column bd-highlight" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)} onClick={() => this.handleClickPushing(info.no)}>
                         {
                             info && info.card_title ? <span style={{ wordBreak : 'keep-all' }}><b>{info && (info.card_title || '')}</b></span> : null
                         }
@@ -105,4 +140,4 @@ class CardBriefInfo extends React.Component {
     
 }
 
-export default CardBriefInfo;
+export default withRouter(CardBriefInfo);

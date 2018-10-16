@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(fetchCardImagesByCharacterSuccess(response.payload));
             }
         }).catch(error => {
-            const { status, data } = error.response;
+            const { status } = error.response;
             if(status !== 200)
                 dispatch(fetchCardImagesByCharacterFailure({
                     info : ["이미지를 불러오는 도중 예기치 않은 오류가 발생했습니다."]
