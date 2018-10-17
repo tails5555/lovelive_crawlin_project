@@ -5,6 +5,7 @@ import CardPageListContainer from '../container/CardPageListContainer';
 import CharacterCardListContainer from '../container/CharacterCardListContainer';
 import CharacterInfoViewContainer from '../container/CharacterInfoViewContainer';
 import CardInfoViewContainer from '../container/CardInfoViewContainer';
+import NotFoundContainer from '../container/NotFoundContainer';
 
 class ApplicationRouter extends React.Component {
     constructor(props){
@@ -34,6 +35,7 @@ class ApplicationRouter extends React.Component {
                     <Route exact path="/card/info" component={CardInfoViewContainer} />
                     <Route exact path="/character/list" component={CharacterCardListContainer} />
                     <Route exact path="/character/info" component={CharacterInfoViewContainer} />
+                    <Route component={NotFoundContainer} />
                 </Switch>
             );
         }

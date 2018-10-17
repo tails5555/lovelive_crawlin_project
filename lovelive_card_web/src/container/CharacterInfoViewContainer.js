@@ -2,6 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Container, Button } from 'reactstrap';
 import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
@@ -53,20 +54,30 @@ class CharacterInfoViewContainer extends React.Component {
         this.props.resetFetchCharacterInfo();
     }
 
+    handleClickPushToList(){
+        const { search } = this.props.history.location;
+        let clientQueryModel = queryString.parse(search);
+        clientQueryModel['id'] = undefined;
+        this.props.history.push(`/character/list?${queryString.stringify(clientQueryModel)}`);
+    }
+
     render(){
         const { result, error } = this.props.characterInfo;
         return(
-            <div className="container" style={{ marginTop : '10px', marginBottom : '10px' }}>
+            <Container style={{ marginTop : '10px', marginBottom : '10px' }}>
                 <div id="character_gallery">
                     <CharacterGallery character={ Array.isArray(result) ? null : result.kor_name } />
                 </div>
                 <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterProfile character={ result } />
                 </div>
+                <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 캐릭터 목록으로</Button>
+                </div>
                 <div id="character_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterGridAlbum />
                 </div>
-            </div>
+            </Container>
         )
     }
 }
