@@ -6,6 +6,7 @@ import CharacterCardListContainer from '../container/CharacterCardListContainer'
 import CharacterInfoViewContainer from '../container/CharacterInfoViewContainer';
 import CardInfoViewContainer from '../container/CardInfoViewContainer';
 import NotFoundContainer from '../container/NotFoundContainer';
+import ServiceCheckingContainer from '../container/ServiceCheckingContainer';
 
 class ApplicationRouter extends React.Component {
     constructor(props){
@@ -27,7 +28,7 @@ class ApplicationRouter extends React.Component {
         
         let router = null;
         if(hour >= 1 && hour < 3){
-            router = <Route path="*" render={ () => <p>{currentTime.toLocaleTimeString()} Crawling 서버 점검 시간 입니다.</p> } />;
+            router = <Route component={ServiceCheckingContainer} />;
         } else {
             router = (
                 <Switch>

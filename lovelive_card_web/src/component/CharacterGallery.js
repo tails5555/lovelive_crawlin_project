@@ -61,7 +61,8 @@ class CharacterGallery extends React.Component {
 
     componentDidMount(){
         const { character } = this.state;
-        this.getCharacterImagesByName(character);
+        if(character)
+            this.getCharacterImagesByName(character);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

@@ -87,7 +87,7 @@ class CardBriefInfo extends React.Component {
                 <td className="align-middle">{info && (info.rank || '')}</td>
                 <td className="align-middle">
                     {
-                        smallCardInfo
+                        smallCardInfo !== null ? smallCardInfo : null
                     }
                     <div className="d-flex justify-content-around" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
                         {

@@ -23,7 +23,8 @@ class CardTable extends Component {
         const { infos } = this.state;
         if(infos.length > 0)
             cardTr = infos.map(info => <CardBriefInfo info={info} key={`brief_${info.no}`} />);
-
+        else cardTr = null;
+        
         return(
             <Table>
                 <thead style={{ textAlign : 'center' }}>

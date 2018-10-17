@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFoundInfo from '../component/NotFoundInfo';
+import {NotFoundInfo} from '../component';
 
 const NotFoundContainer = () => (
     <div className="d-flex justify-content-center" style={{ height : window.innerHeight }}>

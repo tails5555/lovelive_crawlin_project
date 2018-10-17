@@ -77,13 +77,18 @@ class PopupCardInfo extends React.Component {
 
     componentDidMount(){
         const { cardNo } = this.state;
-        this.props.fetchDetailByCardNo(cardNo);
-        this.props.fetchImagesByCardNo(cardNo);
+        if(cardNo){
+            this.props.fetchDetailByCardNo(cardNo);
+            this.props.fetchImagesByCardNo(cardNo);
+        }
     }
 
     componentWillUnmount(){
-        this.props.resetFetchDetailByCardNo();
-        this.props.resetFetchImagesByCardNo();
+        const { cardNo } = this.state;
+        if(cardNo){
+            this.props.resetFetchDetailByCardNo();
+            this.props.resetFetchImagesByCardNo();
+        }
     }
 
     render(){
