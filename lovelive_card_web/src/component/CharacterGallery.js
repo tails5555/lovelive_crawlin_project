@@ -76,7 +76,7 @@ class CharacterGallery extends React.Component {
     }
 
     getCharacterImagesByName = (character) => {
-        if(character)
+        if(character !== undefined)
             this.props.fetchImagesByCharacter(character);
     }
 

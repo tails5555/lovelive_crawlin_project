@@ -60,7 +60,7 @@ class CardBriefInfo extends React.Component {
         });
     }
 
-    handleClickPushing = (infoNo) => {
+    handleClickPushingOrTouching = (infoNo) => {
         const { location } = this.props.history;
         const clientQueryModel = queryString.parse(location.search);
         clientQueryModel['id'] = infoNo
@@ -89,7 +89,7 @@ class CardBriefInfo extends React.Component {
                     {
                         smallCardInfo !== null ? smallCardInfo : null
                     }
-                    <div className="d-flex justify-content-around" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
+                    <div className="d-flex justify-content-around" onClick={() => this.handleClickPushingOrTouching(info.no)} onTouchStart={() => this.handleClickPushingOrTouching(info.no)} onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
                         {
                             icons.map((icon, idx) => 
                                 <img 
@@ -97,15 +97,14 @@ class CardBriefInfo extends React.Component {
                                     src={icon} 
                                     style={{ cursor : 'pointer' }} 
                                     alt={`info_icon_${info && (info.no || 0)}_${idx+1}`} 
-                                    className="rounded img-responsive" 
-                                    onClick={() => this.handleClickPushing(info.no)}
+                                    className="rounded img-responsive"
                                 />
                             )
                         }
                     </div>
                 </td>
                 <td className="align-middle">
-                    <div id="info_box" className="d-flex flex-column bd-highlight" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)} onClick={() => this.handleClickPushing(info.no)}>
+                    <div id="info_box" className="d-flex flex-column bd-highlight" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)} onClick={() => this.handleClickPushingOrTouching(info.no)} onTouchStart={() => this.handleClickPushingOrTouching(info.no)}>
                         {
                             info && info.card_title ? <span style={{ wordBreak : 'keep-all' }}><b>{info && (info.card_title || '')}</b></span> : null
                         }

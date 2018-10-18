@@ -3,7 +3,7 @@ import { Table } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import './style/image_animate.css';
 
-class CharacterProfile extends React.Component {
+class CharacterProfileTable extends React.Component {
     constructor(props){
         super(props);
         this.state = { character : props.character };
@@ -36,31 +36,31 @@ class CharacterProfile extends React.Component {
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>생일</th>
-                        <td>{character && character.birthday && character.birthday.includes('？') ? '미상' : character.birthday }</td>
+                        <td>{character && character.birthday ? (character.birthday.includes('？') ? '미상' : character.birthday) : '미상' }</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>학년</th>
-                        <td>{character && character.grade === 0 ? '해당 없음' : `${character.grade} 학년`}</td>
+                        <td>{character && character.grade ? (character.grade === 0 ? '해당 없음' : `${character.grade} 학년`) : '미상'}</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>쓰리 사이즈</th>
-                        <td>{character && character.three_size === '' ? '미상' : character.three_size }</td>
+                        <td>{character && character.three_size ? (character.three_size === '' ? '미상' : character.three_size) : '미상'}</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>신장</th>
-                        <td>{character && character.height === 0 ? '미상' : `${character.height} cm`}</td>
+                        <td>{character && character.height ? (character.height === 0 ? '미상' : `${character.height} cm`) : '미상'}</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>혈액형</th>
-                        <td>{character && character.blood_type === '？' ? '미상' : `${character.blood_type} 형`}</td>
+                        <td>{character && character.blood_type ? (character.blood_type === '？' ? '미상' : `${character.blood_type} 형`) : '미상'}</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>취미</th>
-                        <td>{character && character.hobbies && character.hobbies.includes('？') ? '미상' : character.hobbies }</td>
+                        <td>{character && character.hobbies ? (character.hobbies.includes('？') ? '미상' : character.hobbies) : '미상' }</td>
                     </tr>
                     <tr>
                         <th style={{ backgroundColor : 'skyblue' }}>성우</th>
-                        <td>{character && character.voice_actor && character.voice_actor.includes('？') ? '미상' : character.voice_actor }</td>
+                        <td>{character && character.voice_actor ? (character.voice_actor.includes('？') ? '미상' : character.voice_actor) : '미상'}</td>
                     </tr>
                 </tbody>
             </Table>
@@ -68,4 +68,4 @@ class CharacterProfile extends React.Component {
     }
 }
 
-export default withRouter(CharacterProfile);
+export default withRouter(CharacterProfileTable);

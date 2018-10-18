@@ -43,6 +43,10 @@ class CharacterSmallCard extends React.Component {
             this.selectRandomURL();
     }
 
+    handleTouchStart = () => {
+        this.selectRandomURL();
+    }
+
     handleMouseOver = () => {
         this.selectRandomURL();
     }
@@ -76,7 +80,7 @@ class CharacterSmallCard extends React.Component {
                     <CardTitle>{character && character.kor_name}</CardTitle>
                     <CardSubtitle>{character && character.jap_name} / {character && character.grade !== 0 ? `${character.grade} 학년` : '기타 캐릭터'}</CardSubtitle>
                 </CardBody>
-                <div onMouseOver={() => this.handleMouseOver()}>
+                <div onTouchStart={() => this.handleTouchStart()} onMouseOver={() => this.handleMouseOver()}>
                     {
                         randomURL ? <img style={{ width : "100%" }} alt={`card_random_image`} className="change-img" src={`${IMAGE_URL}/${randomURL}`} /> : null
                     }

@@ -6,7 +6,7 @@ import { Container, Button } from 'reactstrap';
 import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
-import { CharacterProfile, CharacterGallery, CharacterGridAlbum } from '../component';
+import { CharacterProfileTable, CharacterGallery, CharacterGridAlbum } from '../component';
 
 const mapStateToProps = (state) => {
     return {
@@ -66,10 +66,10 @@ class CharacterInfoViewContainer extends React.Component {
         return(
             <Container style={{ marginTop : '10px', marginBottom : '10px' }}>
                 <div id="character_gallery" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterGallery character={ Array.isArray(result) ? null : result.kor_name } />
+                    <CharacterGallery character={ result && result.kor_name } />
                 </div>
                 <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterProfile character={ result } />
+                    <CharacterProfileTable character={ result } />
                 </div>
                 <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 캐릭터 목록으로</Button>

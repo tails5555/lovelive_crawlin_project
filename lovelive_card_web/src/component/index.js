@@ -12,7 +12,7 @@ export {default as CharacterCardList} from './CharacterCardList';
 
 // Character Detail Info
 export {default as CharacterGallery} from './CharacterGallery';
-export {default as CharacterProfile} from './CharacterProfile';
+export {default as CharacterProfileTable} from './CharacterProfileTable';
 export {default as CharacterGridAlbum} from './CharacterGridAlbum';
 
 // Common Using
