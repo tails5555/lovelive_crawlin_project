@@ -2,7 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom'; 
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
+import { Container, Button } from 'reactstrap';
 import { 
     fetchCardInfoByNo, fetchCardInfoByNoSuccess, fetchCardInfoByNoFailure, resetFetchCardInfoByNo 
 } from '../action/action_card';
@@ -10,7 +10,7 @@ import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
 } from '../action/action_detail';
 import {
-    CardImageGallery, CardDetailInfo, CardPropertyBar
+    CardImageGallery, CardPropertyBar, CardInfoDetailView
 } from '../component';
 
 const mapStateToProps = (state) => {
@@ -61,6 +61,13 @@ class CardInfoViewContainer extends React.Component {
         return null;
     }
 
+    handleClickPushToList(){
+        const { search } = this.props.history.location;
+        let clientQueryModel = queryString.parse(search);
+        clientQueryModel['id'] = undefined;
+        this.props.history.push(`/card/list?${queryString.stringify(clientQueryModel)}`);
+    }
+
     componentDidMount(){
         const { cardNo } = this.state;
         if(cardNo !== 0){
@@ -86,7 +93,10 @@ class CardInfoViewContainer extends React.Component {
                     <CardPropertyBar infoResult={cardInfo.result} infoError={cardInfo.error} />
                 </div>
                 <div id="card_detail_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardDetailInfo infoResult={cardInfo.result} infoError={cardInfo.error} detailResult={detailElement.result.length > 0 ? detailElement.result[0] : null} detailError={detailElement.error} />
+                    <CardInfoDetailView infoResult={cardInfo.result} infoError={cardInfo.error} detailResult={detailElement.result.length > 0 ? detailElement.result[0] : null} detailError={detailElement.error} />
+                </div>
+                <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 카드 목록으로</Button>
                 </div>
                 <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     카드 효과 정보 출력

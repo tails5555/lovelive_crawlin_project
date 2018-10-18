@@ -76,7 +76,7 @@ class CardPagination extends React.Component {
                     </PaginationItem>
         ));
         return(
-            <Pagination className="pagination justify-content-center">
+            <Pagination className="pagination justify-content-center" size={ window.innerWidth < 768 ? 'sm' : 'md'}>
                 {pageItem}
             </Pagination>
         )

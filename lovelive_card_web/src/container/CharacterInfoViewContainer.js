@@ -65,7 +65,7 @@ class CharacterInfoViewContainer extends React.Component {
         const { result, error } = this.props.characterInfo;
         return(
             <Container style={{ marginTop : '10px', marginBottom : '10px' }}>
-                <div id="character_gallery">
+                <div id="character_gallery" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterGallery character={ Array.isArray(result) ? null : result.kor_name } />
                 </div>
                 <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>

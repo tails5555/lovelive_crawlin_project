@@ -30,7 +30,7 @@ class MenuNavBar extends React.Component {
             border : '2px solid lightskyblue'
         }
         return(
-            <Navbar color="primary" dark expand="md">
+            <Navbar color="primary" dark expand="md" className="sticky-top">
                 <NavbarBrand tag={Link} to="/">
                     <div className="brandImage">
                         <img src={BrandImage} alt={'brand_image'}/>

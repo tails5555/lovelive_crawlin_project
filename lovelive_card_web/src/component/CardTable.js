@@ -26,7 +26,7 @@ class CardTable extends Component {
         else cardTr = null;
         
         return(
-            <Table>
+            <Table responsive>
                 <thead style={{ textAlign : 'center' }}>
                 <tr>
                     <th className="align-middle" style={{ width : '5%' }}>#</th>

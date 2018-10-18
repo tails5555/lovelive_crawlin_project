@@ -5,7 +5,7 @@ export {default as PopupCardInfo} from './PopupCardInfo';
 // Card Detail Info
 export {default as CardImageGallery} from './CardImageGallery';
 export {default as CardPropertyBar} from './CardPropertyBar';
-export {default as CardDetailInfo} from './CardDetailInfo';
+export {default as CardInfoDetailView} from './CardInfoDetailView';
 
 // Character Brief Info
 export {default as CharacterCardList} from './CharacterCardList';

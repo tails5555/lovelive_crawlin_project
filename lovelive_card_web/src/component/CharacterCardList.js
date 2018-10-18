@@ -22,7 +22,7 @@ class CharacterCardList extends React.Component {
         let characterCards = null;
         if(characters.length > 0){
             characterCards = characters.map(character => (
-                <Col sm="4" key={`character_card_${character.id}`} style={{ marginTop : '10px', marginBottom : '10px' }}>
+                <Col sm={6} md={4} key={`character_card_${character.id}`} style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CharacterSmallCard character={character} />
                 </Col>
             ))

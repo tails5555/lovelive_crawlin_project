@@ -82,7 +82,7 @@ class CharacterSmallCard extends React.Component {
                     }
                 </div>
                 <CardBody>
-                    <Button tag={Link} to={`info?id=${character.id}&${search.replace('?', '')}`} color="info" block>캐릭터 정보 조회하러 가기</Button>
+                    <Button tag={Link} to={`info?id=${character.id}&${search.replace('?', '')}`} color="info" block><i className="fas fa-user-circle"></i> 캐릭터 정보 조회하러 가기</Button>
                 </CardBody>
             </Card>
         )
