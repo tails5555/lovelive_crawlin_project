@@ -72,8 +72,8 @@ class CardBriefInfo extends React.Component {
         let smallCardInfo = null;
         const property_color = 
             info && info.property === '스마일' ? 'deeppink' :
-                info.property === '퓨어' ? 'limegreen' : 
-                    info.property === '쿨' ? 'slateblue' : 'black';
+                info && info.property === '퓨어' ? 'limegreen' : 
+                    info && info.property === '쿨' ? 'slateblue' : 'black';
 
         if(mouseNo !== 0) {
             smallCardInfo = <PopupCardInfo property={info && info.property} character={`${(info && info.character_name)} ${(info && info.japanese_name)}`} no={mouseNo} mouseX={mouseX} mouseY={mouseY} />;    

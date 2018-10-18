@@ -10,7 +10,7 @@ import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
 } from '../action/action_detail';
 import {
-    CardImageGallery
+    CardImageGallery, CardDetailInfo, CardPropertyBar
 } from '../component';
 
 const mapStateToProps = (state) => {
@@ -76,13 +76,17 @@ class CardInfoViewContainer extends React.Component {
 
     render(){
         const { cardNo } = this.state;
+        const { cardInfo, detailElement } = this.props;
         return(
             <Container>
                 <div id="card_image_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardImageGallery cardNo={cardNo} />
                 </div>
+                <div id="card_property_progress_bar" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    <CardPropertyBar infoResult={cardInfo.result} infoError={cardInfo.error} />
+                </div>
                 <div id="card_detail_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    카드 세부 정보 출력
+                    <CardDetailInfo infoResult={cardInfo.result} infoError={cardInfo.error} detailResult={detailElement.result.length > 0 ? detailElement.result[0] : null} detailError={detailElement.error} />
                 </div>
                 <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     카드 효과 정보 출력
