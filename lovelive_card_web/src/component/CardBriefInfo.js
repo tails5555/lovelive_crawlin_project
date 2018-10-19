@@ -104,6 +104,9 @@ class CardBriefInfo extends React.Component {
                     </div>
                 </td>
                 <td className="align-middle">
+                    {
+                        smallCardInfo !== null ? smallCardInfo : null
+                    }
                     <div id="info_box" className="d-flex flex-column bd-highlight" onMouseEnter={() => this.handleMouseEnter(info && (info.no || 0))} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)} onClick={() => this.handleClickPushingOrTouching(info.no)} onTouchStart={() => this.handleClickPushingOrTouching(info.no)}>
                         {
                             info && info.card_title ? <span style={{ wordBreak : 'keep-all' }}><b>{info && (info.card_title || '')}</b></span> : null

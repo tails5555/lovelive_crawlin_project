@@ -32,7 +32,7 @@ class CardInfoDetailView extends React.Component {
         return(
             <Row>
                 <Col sm={6} className="align-self-center">
-                    <CardInfoTable infoResult={infoResult} />
+                    <CardInfoTable infoResult={infoResult} infoError={infoError} hasPopup={true} />
                 </Col>
                 <Col sm={6}>
                     <CardDetailTable detailResult={detailResult} />

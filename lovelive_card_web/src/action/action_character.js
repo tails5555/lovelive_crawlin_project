@@ -11,7 +11,12 @@ export const RESET_FETCH_CHARACTER_LIST_BY_QUERY = 'RESET_FETCH_CHARACTER_LIST_B
 export const FETCH_CHARACTER_INFO_BY_ID = 'FETCH_CHARACTER_INFO_BY_ID';
 export const FETCH_CHARACTER_INFO_BY_ID_SUCCESS = 'FETCH_CHARACTER_INFO_BY_ID_SUCCESS';
 export const FETCH_CHARACTER_INFO_BY_ID_FAILURE = 'FETCH_CHARACTER_INFO_BY_ID_FAILURE';
-export const RESET_FETCH_CHARACTER_INFO_BY_ID = 'RESET_FETCH_CHARACTER_INFO_BY_ID'; 
+export const RESET_FETCH_CHARACTER_INFO_BY_ID = 'RESET_FETCH_CHARACTER_INFO_BY_ID';
+
+export const FETCH_CHARACTER_INFO_BY_KOR_NAME = 'FETCH_CHARACTER_INFO_BY_KOR_NAME';
+export const FETCH_CHARACTER_INFO_BY_KOR_NAME_SUCCESS = 'FETCH_CHARACTER_INFO_BY_KOR_NAME_SUCCESS';
+export const FETCH_CHARACTER_INFO_BY_KOR_NAME_FAILURE = 'FETCH_CHARACTER_INFO_BY_KOR_NAME_FAILURE';
+export const RESET_FETCH_CHARACTER_INFO_BY_KOR_NAME = 'RESET_FETCH_CHARACTER_INFO_BY_KOR_NAME';
 
 export function fetchCharacterListByQuery(qs){
     const queryModel = queryString.parse(qs);
@@ -79,5 +84,36 @@ export function fetchCharacterInfoByIdFailure(error){
 export function resetFetchCharacterInfoById(){
     return {
         type : RESET_FETCH_CHARACTER_INFO_BY_ID
+    }
+}
+
+export function fetchCharacterInfoByKorName(korName){
+    const request = axios({
+        url : `${CHARACTER_INFO_URL}?kor_name=${korName}`,
+        method : 'get'
+    });
+    return {
+        type : FETCH_CHARACTER_INFO_BY_KOR_NAME,
+        payload : request
+    }
+}
+
+export function fetchCharacterInfoByKorNameSuccess(request){
+    return {
+        type : FETCH_CHARACTER_INFO_BY_KOR_NAME_SUCCESS,
+        payload : request.data
+    }
+}
+
+export function fetchCharacterInfoByKorNameFailure(error){
+    return {
+        type : FETCH_CHARACTER_INFO_BY_KOR_NAME_FAILURE,
+        payload : error
+    }
+}
+
+export function resetFetchCharacterInfoByKorName(){
+    return {
+        type : RESET_FETCH_CHARACTER_INFO_BY_KOR_NAME
     }
 }

@@ -4,5 +4,19 @@
 	width: 400px;
 	height: 580px;
 	padding: 8px;
-	z-index: 2;
+	z-index: 1031;
+}
+
+.characterPopupLayer {
+	background-color: #ffffff;
+	border: solid 2px slateblue;
+	width: 400px;
+	height: 315px;
+	padding: 8px;
+	z-index: 1031;
+}
+
+#info_box:hover {
+    cursor : pointer;
+    text-decoration : underline;
 }
