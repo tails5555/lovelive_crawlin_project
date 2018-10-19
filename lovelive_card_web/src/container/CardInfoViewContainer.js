@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import { withRouter } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 import { Container, Button } from 'reactstrap';
+
 import { 
     fetchCardInfoByNo, fetchCardInfoByNoSuccess, fetchCardInfoByNoFailure, resetFetchCardInfoByNo 
 } from '../action/action_card';
@@ -10,13 +11,18 @@ import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
 } from '../action/action_detail';
 import {
-    CardImageGallery, CardPropertyBar, CardInfoDetailView
+    fetchCardEffectsByInfoNo, fetchCardEffectsByInfoNoSuccess, fetchCardEffectsByInfoNoFailure, resetFetchCardEffectsByInfoNo
+} from '../action/action_effect';
+
+import {
+    CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects
 } from '../component';
 
 const mapStateToProps = (state) => {
     return {
         cardInfo : state.card.cardInfo,
-        detailElement : state.detail.detailElement
+        detailElement : state.detail.detailElement,
+        effectList : state.effect.effectList
     }
 }
 
@@ -40,7 +46,17 @@ const mapDispatchToProps = (dispatch) => {
                 if(status !== 200)
                     dispatch(fetchCardDetailByInfoNoFailure(data));
             }),
-        resetFetchDetailByCardNo : () => dispatch(resetFetchCardDetailByInfoNo())
+        resetFetchDetailByCardNo : () => dispatch(resetFetchCardDetailByInfoNo()),
+        fetchEffectsByCardNo : (cardNo) => dispatch(fetchCardEffectsByInfoNo(cardNo)).then(response => {
+            if(!response.error)
+                dispatch(fetchCardEffectsByInfoNoSuccess(response.payload));
+            })
+        .catch(error => {
+            const { status, data } = error.response;
+            if(status !== 200)
+                dispatch(fetchCardEffectsByInfoNoFailure(data));
+        }),
+        resetFetchEffectsByCardNo : () => dispatch(resetFetchCardEffectsByInfoNo())
     }
 }
 
@@ -73,17 +89,19 @@ class CardInfoViewContainer extends React.Component {
         if(cardNo !== 0){
             this.props.fetchCardInfo(cardNo);
             this.props.fetchDetailByCardNo(cardNo);
+            this.props.fetchEffectsByCardNo(cardNo);
         }
     }
 
     componentWillUnmount(){
         this.props.resetFetchCardInfo();
         this.props.resetFetchDetailByCardNo();
+        this.props.resetFetchEffectsByCardNo();
     }
 
     render(){
         const { cardNo } = this.state;
-        const { cardInfo, detailElement } = this.props;
+        const { cardInfo, detailElement, effectList } = this.props;
         return(
             <Container>
                 <div id="card_image_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
@@ -99,7 +117,7 @@ class CardInfoViewContainer extends React.Component {
                     <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 카드 목록으로</Button>
                 </div>
                 <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    카드 효과 정보 출력
+                    <CardLevelEffects effectResult={effectList.results} effectError={effectList.error} />
                 </div>
                 <div id="card_message_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     카드 메시지 정보 출력

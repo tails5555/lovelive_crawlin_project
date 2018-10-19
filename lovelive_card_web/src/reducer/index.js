@@ -4,11 +4,13 @@ import cardReducer from './card_reducer';
 import detailReducer from './detail_reducer';
 import mediaReducer from './media_reducer';
 import characterReducer from './character_reducer';
+import effectReducer from './effect_reducer';
 
 export const rootReducer = combineReducers({
     form : formReducer,
     card : cardReducer,
     detail : detailReducer,
     media : mediaReducer,
-    character : characterReducer
+    character : characterReducer,
+    effect : effectReducer
 });
