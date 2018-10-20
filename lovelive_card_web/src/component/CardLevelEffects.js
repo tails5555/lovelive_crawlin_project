@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { Media } from 'reactstrap';
+import CountUp from 'react-countup';
+import { ListGroup, ListGroupItem, Badge, Row, Col, Progress } from 'reactstrap';
 import './style/level_effect_circle.css';
 
 class CardLevelEffects extends React.Component {
@@ -24,25 +25,26 @@ class CardLevelEffects extends React.Component {
 
     render(){
         const { effectResult, effectError } = this.state;
+        const numList = effectResult.map(effect => effect.active_context.replace(/[^0-9.]/g, ' ').split(/(\s+)/).filter(context => context.trim() !== ''));
         let effectView =
             effectResult.length > 0 ?
-                effectResult.map(effect => (
-                    <Media key={`effect_view_${effect.id}`}>
-                        <Media left>
-                            <div className="circle" id={effect.active_level}><h1>{effect.active_level}</h1></div>
-                        </Media>
-                        <Media body>
-                            <Media heading>
-                                <p><b>{effect.active_level} 레벨</b></p>
-                            </Media>
-                            <p style={{ wordBreak : 'keep-all' }}>{effect.active_context}</p>
-                        </Media>
-                    </Media>
+                effectResult.map((effect, idx) => (
+                    <ListGroupItem key={`effect_view_${effect.id}`} className="justify-content-between">
+                        <Badge id={`color_${effect.active_level}`}>{effect.active_level} 레벨</Badge><br/>
+                        {effect.active_context}
+                        {
+                            numList.length === 8 ?
+                            <Progress animated color="info" bar value={ numList[idx].length > 2 ? numList[idx][1] : 0 } max={100}><CountUp end={ numList[idx].length > 2 ? numList[idx][1] * 1 : 0 } duration={10} suffix="%" /></Progress>
+                                : null
+                        }
+                    </ListGroupItem>
                 )) : null
 
         return(
             <Fragment>
-                {effectView}
+                <ListGroup>
+                    {effectView}
+                </ListGroup>
             </Fragment>
         ) 
     }
