@@ -84,10 +84,11 @@ class CharacterGallery extends React.Component {
         const { imageResult, imageError } = this.state;
 
         const resultImages = imageResult.length > 0 ? 
-            imageResult.map(image => (
+            imageResult.map((image, idx) => (
+                image.model !== undefined ? 
                 <div key={`character_img_${image.pk}`}>
                     <img className="img-fluid" alt={`character_card_img_${image.pk}`} src={`${MEDIA_URL}/${image.fields && image.fields.img_file}`} />
-                </div>
+                </div> : <div key={`character_img_${idx}`}></div>
             )) : null;
 
         const settings = {

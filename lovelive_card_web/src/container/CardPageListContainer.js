@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom'; 
 import queryString from 'query-string';
 import {connect} from 'react-redux';
-import {CardTable} from '../component';
+import {CardTable, CardPagination} from '../component';
 import {
     fetchCardInfosByPage, fetchCardInfosByPageSuccess, fetchCardInfosByPageFailure, resetFetchCardInfosByPage
 } from '../action/action_card';
-import CardPagination from '../component/CardPagination';
+import {
+    resetFetchCardImagesByInfoNo
+} from '../action/action_image';
+import {
+    resetFetchCardDetailByInfoNo
+} from '../action/action_detail';
+
 
 const mapStateToProps = (state) => {
     return {
@@ -24,7 +30,9 @@ const mapDispatchToProps = (dispatch) => {
                 if(status !== 200)
                     dispatch(fetchCardInfosByPageFailure(data));
             }),
-        resetFetchCardList : () => dispatch(resetFetchCardInfosByPage())
+        resetFetchCardList : () => dispatch(resetFetchCardInfosByPage()),
+        resetFetchImagesByCardNo : () => dispatch(resetFetchCardImagesByInfoNo()),
+        resetFetchDetailByCardNo : () => dispatch(resetFetchCardDetailByInfoNo())
     }
 }
 
@@ -52,6 +60,8 @@ class CardPageListContainer extends Component {
 
     componentWillUnmount(){
         this.props.resetFetchCardList();
+        this.props.resetFetchImagesByCardNo();
+        this.props.resetFetchDetailByCardNo();
     }
 
     render(){

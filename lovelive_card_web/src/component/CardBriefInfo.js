@@ -11,7 +11,8 @@ const IMAGE_ICON_URL = `http://localhost:8000/card_icons/`
 class CardBriefInfo extends React.Component {
     constructor(props){
         super(props);
-        this.state = { info : props.info, icons : [], mouseNo : 0, mouseX : 0, mouseY : 0 };
+        this._isMounted = false;
+        this.state = { info : props.info, icons : [], mouseNo : 0, mouseX : 0, mouseY : 0, _isMounted : false };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -27,18 +28,28 @@ class CardBriefInfo extends React.Component {
     componentDidMount(){
         const {info} = this.state;
         const infoNo = info && (info.no || 0);
-        if(infoNo !== 0)
-            axios({
-                url : `${IMAGE_ICON_URL}?info=${infoNo}`,
-                method : 'get'
-            }).then(response => {
-                const { data } = response;
-                const images = data.map(d => d.img_file);
+        this._isMounted = true;
+        if(this._isMounted && infoNo !== 0){
+            this.getIconImages(infoNo);
+        }
+    }
+
+    async getIconImages(infoNo) {
+        axios({
+            url : `${IMAGE_ICON_URL}?info=${infoNo}`,
+            method : 'get'
+        }).then(response => {
+            const { data } = response;
+            const images = data.map(d => d.img_file);
+            if(this._isMounted)
                 this.setState({
                     icons : images
                 });
-            });
-            
+        });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     handleMouseEnter = (no) => {
@@ -61,6 +72,7 @@ class CardBriefInfo extends React.Component {
     }
 
     handleClickPushingOrTouching = (infoNo) => {
+        this._isMounted = false;
         const { location } = this.props.history;
         const clientQueryModel = queryString.parse(location.search);
         clientQueryModel['id'] = infoNo

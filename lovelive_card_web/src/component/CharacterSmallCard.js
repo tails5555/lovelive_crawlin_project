@@ -11,20 +11,32 @@ const CARD_IMAGE_URL = 'http://127.0.0.1:8000/card_images/';
 class CharacterSmallCard extends React.Component {
     constructor(props){
         super(props);
+        this._isMounted = false;
         this.state = { character : props.character, imageResult : [], imageError : null, randomURL : null };
     }
 
     componentDidMount(){
         const { character } = this.props;
+        this._isMounted = true;
         if(character && character.kor_name)
-            axios({
-                url : `${CARD_IMAGE_URL}character_name?character=${character.kor_name}`,
-                method : 'get'
-            }).then(response => {
+            this.getCardImageListByKorName(character.kor_name);
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+
+    async getCardImageListByKorName(korName){
+        axios({
+            url : `${CARD_IMAGE_URL}character_name?character=${korName}`,
+            method : 'get'
+        }).then(response => {
+            if(this._isMounted)
                 this.setState({ imageResult : response.data })
-            }).catch(error => {
+        }).catch(error => {
+            if(this._isMounted)
                 this.setState({ imageError : '이미지를 불러오는 도중 오류가 발생했습니다.'});
-            });
+        });
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {

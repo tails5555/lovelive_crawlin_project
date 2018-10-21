@@ -9,6 +9,7 @@ const CARD_IMAGE_URL = 'http://127.0.0.1:8000/card_images/';
 class CardImageGallery extends React.Component {
     constructor(props){
         super(props);
+        this._isMounted = false;
         this.state = { cardNo : props.cardNo, imageResult : [], imageError : null };
     }
 
@@ -24,15 +25,26 @@ class CardImageGallery extends React.Component {
 
     componentDidMount(){
         const { cardNo } = this.state;
+        this._isMounted = true;
         if(cardNo !== 0)
-            axios({
-                url : `${CARD_IMAGE_URL}?info=${cardNo}`,
-                method : 'get'
-            }).then(response => {
+            this.getCardImages(cardNo);
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+
+    async getCardImages(cardNo){
+        axios({
+            url : `${CARD_IMAGE_URL}?info=${cardNo}`,
+            method : 'get'
+        }).then(response => {
+            if(this._isMounted)
                 this.setState({ imageResult : response.data });
-            }).catch(error => {
+        }).catch(error => {
+            if(this._isMounted)
                 this.setState({ imageError : '이미지를 불러오는 도중 오류가 발생했습니다.'});
-            });
+        });
     }
 
     render(){

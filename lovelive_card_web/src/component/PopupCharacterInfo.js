@@ -70,7 +70,7 @@ class PopupCharacterInfo extends React.Component {
     }
 
     render(){
-        const { korName, mouseX, mouseY, infoResult, infoError } = this.state;
+        const { mouseX, mouseY, infoResult, infoError } = this.state;
 
         let sWidth = window.innerWidth;
         let sHeight = window.innerHeight;
