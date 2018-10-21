@@ -7,6 +7,7 @@ import CharacterInfoViewContainer from '../container/CharacterInfoViewContainer'
 import CardInfoViewContainer from '../container/CardInfoViewContainer';
 import NotFoundContainer from '../container/NotFoundContainer';
 import ServiceCheckingContainer from '../container/ServiceCheckingContainer';
+import IndexViewContainer from '../container/IndexViewContainer';
 
 class ApplicationRouter extends React.Component {
     constructor(props){
@@ -32,6 +33,7 @@ class ApplicationRouter extends React.Component {
         } else {
             router = (
                 <Switch>
+                    <Route exact path="/" component={IndexViewContainer} />
                     <Route exact path="/card/list" component={CardPageListContainer} />
                     <Route exact path="/card/info" component={CardInfoViewContainer} />
                     <Route exact path="/character/list" component={CharacterCardListContainer} />

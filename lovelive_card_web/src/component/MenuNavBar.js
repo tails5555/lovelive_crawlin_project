@@ -40,19 +40,22 @@ class MenuNavBar extends React.Component {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1">카드 목록 조회</NavLink>
+                            <NavLink style={ pathname === '/' ? activeStyle : null } tag={Link} to="/"><i className="fas fa-home" /> 홈</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1">캐릭터 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1"><i className="fas fa-boxes" /> 카드 목록 조회</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname === '/album/list' ? activeStyle : null } tag={Link} to="/album/list?pg=1">앨범 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1"><i className="fas fa-users" /> 캐릭터 목록 조회</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info">개발 정보 안내</NavLink>
+                            <NavLink style={ pathname === '/album/list' ? activeStyle : null } tag={Link} to="/album/list?pg=1"><i className="fas fa-compact-disc" /> 앨범 목록 조회</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="http://lovelive.inven.co.kr/">Inven Lovelive 이동</NavLink>
+                            <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info"><i className="fab fa-react" /> 개발 정보 안내</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="http://lovelive.inven.co.kr/"><i class="fas fa-external-link-square-alt" /> Inven Lovelive 이동</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
