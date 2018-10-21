@@ -55,7 +55,7 @@ class MenuNavBar extends React.Component {
                             <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info"><i className="fab fa-react" /> 개발 정보 안내</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="http://lovelive.inven.co.kr/"><i class="fas fa-external-link-square-alt" /> Inven Lovelive 이동</NavLink>
+                            <NavLink href="http://lovelive.inven.co.kr/"><i className="fas fa-external-link-square-alt" /> Inven Lovelive 이동</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>

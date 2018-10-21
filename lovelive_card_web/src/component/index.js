@@ -1,3 +1,6 @@
+// Index
+export {default as CharacterSearchView} from './CharacterSearchView';
+
 // Card Brief Info
 export {default as CardTable} from './CardTable';
 export {default as PopupCardInfo} from './PopupCardInfo';

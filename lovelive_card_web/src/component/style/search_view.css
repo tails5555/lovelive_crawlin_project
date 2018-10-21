@@ -1,0 +1,45 @@
+@media (min-width: 320px) {
+    .background_view {
+        background: url(../../resource/image/search_view_phone_background.png) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 100%;
+        min-width: 100%;
+        display: table;
+    }
+    .search_middle_box {
+        width : 80%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .background_view {
+        background: url(../../resource/image/search_view_background.png) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 100%;
+        min-width: 100%;
+        display: table;
+    }
+    
+    .search_middle_box {
+        width : 50%;
+    }
+}
+
+.search_middle_view {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.search_middle_box {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    display: inline-block;
+}
