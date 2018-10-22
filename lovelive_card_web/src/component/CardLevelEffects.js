@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import CountUp from 'react-countup';
-import { ListGroup, ListGroupItem, Badge, Row, Col, Progress } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge, Progress } from 'reactstrap';
 import './style/level_effect_circle.css';
 
 class CardLevelEffects extends React.Component {
