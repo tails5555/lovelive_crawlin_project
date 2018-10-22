@@ -22,7 +22,7 @@ class IndexViewContainer extends React.Component {
                     offset={0}
                     speed={0.5}
                     >
-                    <CharacterSearchView handleClick={() => this.refs.parallax.scrollTo(1)}/>
+                    <CharacterSearchView handleClickLeft={() => this.refs.parallax.scrollTo(2)} handleClickRight={() => this.refs.parallax.scrollTo(1)}/>
                 </Parallax.Layer>
 
                 <Parallax.Layer
