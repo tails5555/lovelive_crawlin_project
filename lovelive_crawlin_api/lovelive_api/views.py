@@ -17,7 +17,7 @@ class CardInfoViewSet(viewsets.ModelViewSet) :
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filter_fields = ('rank', 'character_name')
     search_fields = ('rank', 'character_name')
-    ordering_fields = ('rank', 'character_name')
+    ordering_fields = ('no', 'rank', 'character_name')
     pagination_class = ListPagination
 
 class CardDetailViewSet(viewsets.ModelViewSet) :

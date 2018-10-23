@@ -79,17 +79,20 @@ def parse_character_info(card_no) :
         for idx, card_td in enumerate(character_table.find_all('td')) :
             if idx == NAME_IDX :
                 hangul_reg = re.compile('[ ㄱ-ㅣ가-힣]+')
-                hanja_reg = re.compile('[^ ㄱ-ㅣ가-힣()]+')
+                foreign_reg = re.compile('[^ ㄱ-ㅣ가-힣()]+')
 
                 name_value = card_td.find(text=True)
                 kor_name = hangul_reg.findall(name_value)
-                jap_name = hanja_reg.findall(name_value)
+                jap_name = foreign_reg.findall(name_value)
                 
                 if len(kor_name) == 1 :
                     character_info.set_kor_name(kor_name[0].strip())
                 
                 if len(jap_name) == 1 :
                     character_info.set_jap_name(jap_name[0].strip())
+
+                    if len(kor_name) == 0 : # 이는 이번 캐릭터 카드 사항 중에서 유닛 팀명에 해당되는 카드가 추가 되어 (u's, Aqours 등) 한글 이름을 못 찾은 경우를 대비하였음.
+                        character_info.set_kor_name(jap_name[0].strip())
 
             elif idx == VOICE_ACTOR_IDX :
                 voice_actor_value = card_td.find(text=True)
@@ -136,10 +139,10 @@ def parse_character_info(card_no) :
                 character_info.set_hobbies(hobbies_value)
 
         if character_info.kor_name.strip() != '' :
-            character_query_result = CharacterMainInfo.objects.filter(kor_name=character_info.kor_name).first()
+            character_query_result = CharacterMainInfo.objects.filter(kor_name=character_info.kor_name.strip()).first()
             if character_query_result == None :
                 CharacterMainInfo(
-                    kor_name = character_info.kor_name,
+                    kor_name = character_info.kor_name.strip(),
                     jap_name = character_info.jap_name,
                     voice_actor = character_info.voice_actor,
                     grade = character_info.grade,
@@ -153,10 +156,16 @@ def parse_character_info(card_no) :
             else :
                 if character_info.three_size != '' :
                     character_query_result.three_size = character_info.three_size
+                
                 if character_info.hobbies != '' :
                     hangul_reg = re.compile('[ ㄱ-ㅣ가-힣]+')
-                    if len(hangul_reg.findall(character_info.hobbies)) > 1 :
-                        character_query_result.hobbies = character_info.hobbies
+                    if type(character_info.hobbies) is str :
+                        hangul_arr = hangul_reg.findall(character_info.hobbies)
+
+                        if type(hangul_arr) is list :
+                            if len(hangul_arr) > 1 :
+                                character_query_result.hobbies = hangul_arr[0]
+
                 character_query_result.save()
 
 if __name__ == '__main__' :
