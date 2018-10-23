@@ -23,7 +23,7 @@ function diffNGram(search, target, num) {
     let cnt = 0;
     for(var k=0;k<searchNGram.length;k++){
         for(var l=0;l<targetNGram.length;l++){
-            if(searchNGram[k] == targetNGram[l])
+            if(searchNGram[k] === targetNGram[l])
                 cnt += 1;
         }
     }
@@ -55,13 +55,13 @@ class CharacterSearchView extends React.Component {
                 if(this._isMounted){
                     const { results } = response.data;
                     this.setState({
-                        characters : results.slice(0, 5).map(character => {
+                        characters : results.map(character => {
                             return {
                                 id : character.id,
                                 name : character.kor_name,
                                 similarity : diffNGram(searchKeyword, character.kor_name, 1)
                             }
-                        }).sort((character1, character2) => character1.similarity < character2.similarity)
+                        }).sort((character1, character2) => character1.similarity < character2.similarity).slice(0, 5)
                     });
                 }
             });
@@ -120,7 +120,7 @@ class CharacterSearchView extends React.Component {
         });
 
         return(
-            <ParallaxStructureView handleClickLeft={handleClickLeft} handleClickRight={handleClickRight}>
+            <ParallaxStructureView viewId="character_search_view" handleClickLeft={handleClickLeft} handleClickRight={handleClickRight}>
                 <div className="parallax_box">
                     <h3>캐릭터 이름 검색</h3>
                     <hr/>

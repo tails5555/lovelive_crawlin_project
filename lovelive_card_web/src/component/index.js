@@ -1,5 +1,6 @@
 // Index
 export {default as CharacterSearchView} from './CharacterSearchView';
+export {default as RecentlyCardListView} from './RecentlyCardListView';
 
 // Card Brief Info
 export {default as CardTable} from './CardTable';

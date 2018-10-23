@@ -1,6 +1,17 @@
 @media (min-width: 320px) {
-    .background_view {
-        background: url(../../resource/image/search_view_phone_background.png) no-repeat center center fixed; 
+    .background_view[id="character_search_view"] {
+        background: url(../../resource/image/search_view_phone_background.png) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 100%;
+        min-width: 100%;
+        display: table;
+    }
+
+    .background_view[id="recently_card_list_view"] {
+        background: url(../../resource/image/recently_card_view_phone_background.png) no-repeat center center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -16,8 +27,8 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .background_view {
-        background: url(../../resource/image/search_view_background.png) no-repeat center center fixed; 
+    .background_view[id="character_search_view"] {
+        background: url(../../resource/image/search_view_background.png) no-repeat center center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -27,6 +38,17 @@
         display: table;
     }
 
+    .background_view[id="recently_card_list_view"] {
+        background: url(../../resource/image/recently_card_view_background.png) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 100%;
+        min-width: 100%;
+        display: table;
+    }
+    
     .parallax_box {
         width : 50%;
     }
@@ -39,7 +61,7 @@
 }
 
 .parallax_box {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.85);
     border-radius: 10px;
     padding: 20px;
     display: inline-block;

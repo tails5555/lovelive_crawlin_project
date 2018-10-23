@@ -43,16 +43,19 @@ class MenuNavBar extends React.Component {
                             <NavLink style={ pathname === '/' ? activeStyle : null } tag={Link} to="/"><i className="fas fa-home" /> 홈</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1"><i className="fas fa-boxes" /> 카드 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1"><i className="fas fa-boxes" /> 카드</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1"><i className="fas fa-users" /> 캐릭터 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1"><i className="fas fa-users" /> 캐릭터</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname === '/album/list' ? activeStyle : null } tag={Link} to="/album/list?pg=1"><i className="fas fa-compact-disc" /> 앨범 목록 조회</NavLink>
+                            <NavLink style={ pathname.startsWith('/album') ? activeStyle : null } tag={Link} to="/album/list?pg=1"><i className="fas fa-compact-disc" /> 앨범</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info"><i className="fab fa-react" /> 개발 정보 안내</NavLink>
+                            <NavLink style={ pathname.startsWith('/event') ? activeStyle : null } tag={Link} to="/event/list?pg=1"><i className="fas fa-calendar" /> 이벤트</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info"><i className="fab fa-react" /> 개발 정보</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink href="http://lovelive.inven.co.kr/"><i className="fas fa-external-link-square-alt" /> Inven Lovelive 이동</NavLink>

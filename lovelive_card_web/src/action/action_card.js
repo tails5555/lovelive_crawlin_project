@@ -7,6 +7,11 @@ export const FETCH_CARD_INFOS_BY_PAGE_SUCCESS = 'FETCH_CARD_INFOS_BY_PAGE_SUCCES
 export const FETCH_CARD_INFOS_BY_PAGE_FAILURE = 'FETCH_CARD_INFOS_BY_PAGE_FAILURE';
 export const RESET_FETCH_CARD_INFOS_BY_PAGE = 'RESET_FETCH_CARD_INFOS_BY_PAGE';
 
+export const FETCH_CARD_INFOS_RECENTLY = 'FETCH_CARD_INFOS_RECENTLY';
+export const FETCH_CARD_INFOS_RECENTLY_SUCCESS = 'FETCH_CARD_INFOS_RECENTLY_SUCCESS';
+export const FETCH_CARD_INFOS_RECENTLY_FAILURE = 'FETCH_CARD_INFOS_RECENTLY_FAILURE';
+export const RESET_FETCH_CARD_INFOS_RECENTLY = 'RESET_FETCH_CARD_INFOS_RECENTLY';
+
 export const FETCH_CARD_INFO_BY_NO = 'FETCH_CARD_INFO_BY_NO';
 export const FETCH_CARD_INFO_BY_NO_SUCCESS = 'FETCH_CARD_INFO_BY_NO_SUCCESS';
 export const FETCH_CARD_INFO_BY_NO_FAILURE = 'FETCH_CARD_INFO_BY_NO_FAILURE';
@@ -41,6 +46,38 @@ export function fetchCardInfosByPageFailure(error){
 export function resetFetchCardInfosByPage(){
     return {
         type : RESET_FETCH_CARD_INFOS_BY_PAGE
+    }
+}
+
+export function fetchCardInfosRecently(){
+    const request = axios({
+        url : `${CARD_INFO_URL}?ordering=-no&page=1`,
+        method : 'get'
+    });
+    
+    return {
+        type : FETCH_CARD_INFOS_RECENTLY,
+        payload : request
+    }
+}
+
+export function fetchCardInfosRecentlySuccess(request){
+    return {
+        type : FETCH_CARD_INFOS_RECENTLY_SUCCESS,
+        payload : request.data
+    }
+}
+
+export function fetchCardInfosRecentlyFailure(error){
+    return {
+        type : FETCH_CARD_INFOS_RECENTLY_FAILURE,
+        payload : error
+    }
+}
+
+export function resetFetchCardInfosRecently(){
+    return {
+        type : RESET_FETCH_CARD_INFOS_RECENTLY
     }
 }
 

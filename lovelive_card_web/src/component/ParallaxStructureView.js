@@ -15,9 +15,9 @@ const rightButtonStyle = {
 };
 
 const ParallaxStructureView = (props) => {
-    const { handleClickLeft, handleClickRight } = props;
+    const { viewId, handleClickLeft, handleClickRight } = props;
     return (
-        <div className="background_view">
+        <div className="background_view" id={viewId}>
             <div style={leftButtonStyle}>
                 <Button color="info" onClick={() => handleClickLeft()}><i className="fas fa-chevron-left" /></Button>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import Parallax from 'react-springy-parallax';
-import { CharacterSearchView } from '../component';
+import { Parallax, ParallaxLayer } from 'react-spring';
+import { CharacterSearchView, RecentlyCardListView } from '../component';
 
 class IndexViewContainer extends React.Component {
     render() {
@@ -11,36 +11,22 @@ class IndexViewContainer extends React.Component {
             color: 'white',
             display: 'flex', alignItems: 'center', justifyContent: 'center'
         }
+    
         return (
-            <Parallax ref="parallax" pages={3} scrolling={false} horizontal>
+            <Parallax ref={ref => this.parallax = ref} pages={3} horizontal scrolling={false}>
+                <ParallaxLayer offset={0}>
+                    <CharacterSearchView handleClickLeft={() => this.parallax.scrollTo(2)} handleClickRight={() => this.parallax.scrollTo(1)}/>
+                </ParallaxLayer>
 
-                <Parallax.Layer offset={0} speed={1} style={{ backgroundColor: '#243B4A' }} />
-                <Parallax.Layer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
-                <Parallax.Layer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
+                <ParallaxLayer offset={1}>
+                    <RecentlyCardListView handleClickLeft={() => this.parallax.scrollTo(0)} handleClickRight={() => this.parallax.scrollTo(2)} />
+                </ParallaxLayer>
 
-                <Parallax.Layer
-                    offset={0}
-                    speed={0.5}
-                    >
-                    <CharacterSearchView handleClickLeft={() => this.refs.parallax.scrollTo(2)} handleClickRight={() => this.refs.parallax.scrollTo(1)}/>
-                </Parallax.Layer>
-
-                <Parallax.Layer
-                    offset={1}
-                    speed={0.5}
-                    style={styles}
-                    onClick={() => this.refs.parallax.scrollTo(2)}>
-                    Another page ...
-                </Parallax.Layer>
-
-                <Parallax.Layer
+                <ParallaxLayer
                     offset={2}
-                    speed={0.5}
-                    style={styles}
-                    onClick={() => this.refs.parallax.scrollTo(0)}>
+                    onClick={() => this.parallax.scrollTo(0)} style={styles}>
                     The end.
-                </Parallax.Layer>
-
+                </ParallaxLayer>
             </Parallax>
         )
     }

@@ -12,7 +12,7 @@ class CardBriefInfo extends React.Component {
     constructor(props){
         super(props);
         this._isMounted = false;
-        this.state = { info : props.info, icons : [], mouseNo : 0, mouseX : 0, mouseY : 0, _isMounted : false };
+        this.state = { info : props.info, icons : [], mouseNo : 0, mouseX : 0, mouseY : 0 };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
