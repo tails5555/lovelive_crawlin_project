@@ -19,7 +19,7 @@ export const RESET_FETCH_CARD_INFO_BY_NO = 'RESET_FETCH_CARD_INFO_BY_NO';
 
 export function fetchCardInfosByPage(pageNo) {
     const request = axios({
-        url : `${CARD_INFO_URL}?page=${pageNo}`,
+        url : `${CARD_INFO_URL}?ordering=-no&page=${pageNo}`,
         method : 'get'
     });
     
