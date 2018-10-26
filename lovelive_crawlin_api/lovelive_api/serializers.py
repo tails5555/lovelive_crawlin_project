@@ -19,7 +19,7 @@ class CardLevelEffectSerializer(serializers.ModelSerializer) :
 class CardMessageSerializer(serializers.ModelSerializer) :
     class Meta :
         model = CardMessage
-        fields = ('id', 'info', 'type', 'context')
+        fields = ('id', 'info', 'context')
 
 class CardPairSerializer(serializers.ModelSerializer) :
     class Meta :

@@ -42,8 +42,8 @@ class CardMessageViewSet(viewsets.ModelViewSet) :
     queryset = CardMessage.objects.all()
     serializer_class = CardMessageSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('info', 'type')
-    search_fields = ('info', 'type')
+    filter_fields = ('info',)
+    search_fields = ('info',)
     ordering_fields = ('info',)
     ordering = ('info',)
 
