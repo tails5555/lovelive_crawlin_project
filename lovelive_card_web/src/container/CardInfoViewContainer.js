@@ -13,16 +13,20 @@ import {
 import {
     fetchCardEffectsByInfoNo, fetchCardEffectsByInfoNoSuccess, fetchCardEffectsByInfoNoFailure, resetFetchCardEffectsByInfoNo
 } from '../action/action_effect';
+import {
+    fetchMessagesByInfo, fetchMessagesByInfoSuccess, fetchMessagesByInfoFailure, resetFetchMessagesByInfo
+} from '../action/action_message';
 
 import {
-    CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects
+    CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects, CardVoiceMessageList
 } from '../component';
 
 const mapStateToProps = (state) => {
     return {
         cardInfo : state.card.cardInfo,
         detailElement : state.detail.detailElement,
-        effectList : state.effect.effectList
+        effectList : state.effect.effectList,
+        messageElement : state.message.messageElement
     }
 }
 
@@ -56,7 +60,17 @@ const mapDispatchToProps = (dispatch) => {
             if(status !== 200)
                 dispatch(fetchCardEffectsByInfoNoFailure(data));
         }),
-        resetFetchEffectsByCardNo : () => dispatch(resetFetchCardEffectsByInfoNo())
+        resetFetchEffectsByCardNo : () => dispatch(resetFetchCardEffectsByInfoNo()),
+        fetchMessageJsonData : (cardNo) => dispatch(fetchMessagesByInfo(cardNo)).then(response => {
+            if(!response.error)
+                dispatch(fetchMessagesByInfoSuccess(response.payload));
+            })
+        .catch(error => {
+            const { status, data } = error.response;
+            if(status !== 200)
+                dispatch(fetchMessagesByInfoFailure(data));
+        }),
+        resetFetchMessageJsonData : () => dispatch(resetFetchMessagesByInfo())
     }
 }
 
@@ -90,6 +104,7 @@ class CardInfoViewContainer extends React.Component {
             this.props.fetchCardInfo(cardNo);
             this.props.fetchDetailByCardNo(cardNo);
             this.props.fetchEffectsByCardNo(cardNo);
+            this.props.fetchMessageJsonData(cardNo);
         }
     }
 
@@ -97,11 +112,12 @@ class CardInfoViewContainer extends React.Component {
         this.props.resetFetchCardInfo();
         this.props.resetFetchDetailByCardNo();
         this.props.resetFetchEffectsByCardNo();
+        this.props.resetFetchMessageJsonData();
     }
 
     render(){
         const { cardNo } = this.state;
-        const { cardInfo, detailElement, effectList } = this.props;
+        const { cardInfo, detailElement, effectList, messageElement } = this.props;
         return(
             <Container>
                 <div id="card_image_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
@@ -120,7 +136,7 @@ class CardInfoViewContainer extends React.Component {
                     <CardLevelEffects effectResult={effectList.results} effectError={effectList.error} />
                 </div>
                 <div id="card_message_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    카드 메시지 정보 출력
+                    <CardVoiceMessageList messageResult={messageElement.result} messageError={messageElement.error} />
                 </div>
                 <div id="card_pair_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     카드 세트 정보 출력

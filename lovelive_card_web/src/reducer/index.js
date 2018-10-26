@@ -5,6 +5,7 @@ import detailReducer from './detail_reducer';
 import mediaReducer from './media_reducer';
 import characterReducer from './character_reducer';
 import effectReducer from './effect_reducer';
+import messageReducer from './message_reducer';
 
 export const rootReducer = combineReducers({
     form : formReducer,
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
     detail : detailReducer,
     media : mediaReducer,
     character : characterReducer,
-    effect : effectReducer
+    effect : effectReducer,
+    message : messageReducer
 });

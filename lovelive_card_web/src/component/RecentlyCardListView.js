@@ -1,10 +1,11 @@
 import React from 'react';
+import { Button, ListGroup } from 'reactstrap';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import ParallaxStructureView from './ParallaxStructureView';
 import {
     fetchCardInfosRecently, fetchCardInfosRecentlySuccess, fetchCardInfosRecentlyFailure, resetFetchCardInfosRecently
 } from '../action/action_card';
-import { ListGroup } from 'reactstrap';
 import RecentlyCardBriefInfo from './RecentlyCardBriefInfo';
 
 const mapStateToProps = (state) => {
@@ -55,6 +56,10 @@ class RecentlyCardListView extends React.Component {
         return null;
     }
 
+    handleClickCardMoreView = () => {
+        this.props.history.push('/card/list?pg=1');
+    }
+
     render(){
         const { cardResult, cardError } = this.state;
         const { handleClickLeft, handleClickRight } = this.props;
@@ -67,10 +72,12 @@ class RecentlyCardListView extends React.Component {
                     <ListGroup>
                         {recentlyCards}
                     </ListGroup>
+                    <br/>
+                    <Button block color="primary" onClick={() => this.handleClickCardMoreView()}><i className="fas fa-search-plus" /> 카드 목록 조회</Button>
                 </div>
             </ParallaxStructureView>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecentlyCardListView);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RecentlyCardListView));

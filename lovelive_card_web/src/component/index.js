@@ -11,6 +11,7 @@ export {default as CardImageGallery} from './CardImageGallery';
 export {default as CardPropertyBar} from './CardPropertyBar';
 export {default as CardInfoDetailView} from './CardInfoDetailView';
 export {default as CardLevelEffects} from './CardLevelEffects';
+export {default as CardVoiceMessageList} from './CardVoiceMessageList';
 
 // Character Brief Info
 export {default as CharacterCardList} from './CharacterCardList';
