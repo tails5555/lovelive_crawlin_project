@@ -29,7 +29,7 @@ class CharacterCardList extends React.Component {
         }
 
         return(
-            <Row>
+            <Row className="justify-content-around">
                 {characterCards}
             </Row>
         )

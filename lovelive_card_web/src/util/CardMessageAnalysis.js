@@ -1,11 +1,19 @@
 function japAndKorMessage(msgJp, msgKr) {
-    return `${msgJp}${msgKr ? '\n' + msgKr : ''}`;
+    return {
+        totalMessage : `${msgJp}${msgKr ? '<br />' + msgKr : ''}`,
+        hasKorean : msgKr ? true : false,
+        jpMessage : msgJp
+    };
 }
 
 function japAndKorMessageOfMap(key, msgJp, msgKr){
     const jpMessage = msgJp[key];
     const krMessage = msgKr[key];
-    return `${jpMessage}${krMessage ? '\n' + krMessage : ''}`;
+    return {
+        totalMessage : `${jpMessage}${krMessage ? '<br />' + krMessage : ''}`,
+        hasKorean : krMessage ? true : false,
+        jpMessage : jpMessage
+    };
 }
 
 function japAndKorMessageWithDate(key, msgJp, msgKr, msgDT, unitText) {
@@ -13,7 +21,11 @@ function japAndKorMessageWithDate(key, msgJp, msgKr, msgDT, unitText) {
     const krMessage = msgKr[key];
     const startDate = msgDT[key]["start"];
     const endDate = msgDT[key]["end"];
-    return `${startDate}${unitText} ~ ${endDate}${unitText}\n${jpMessage}${krMessage ? '\n' + krMessage : ''}`
+    return {
+        totalMessage : `${startDate}${unitText} ~ ${endDate}${unitText}<br />${jpMessage}${krMessage ? '<br />' + krMessage : ''}`,
+        hasKorean : krMessage,
+        jpMessage : jpMessage
+    }
 }
 
 export default function(message) {

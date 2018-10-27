@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Nav, NavItem, NavLink, TabContent, TabPane, Button } from 'reactstrap';
+import classnames from 'classnames';
+
 import { CardMessageAnalysis } from '../util';
+
+const tabName = {
+    skill : '스킬 발동',
+    function : '메뉴 화면',
+    random : '랜덤',
+    touch : '터치할 때',
+    time : '특정 시간',
+    period : '특정 날짜',   
+}
+
 class CardVoiceMessageList extends React.Component {
     constructor(props){
         super(props);
-        this.state = { messageResult : props.messageResult, messageError : props.messageError, messageData : [] };
+        this.state = { messageResult : props.messageResult, messageError : props.messageError, messageData : null, activeTab : 0 };
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -31,13 +44,90 @@ class CardVoiceMessageList extends React.Component {
         }
     }
 
+    handleClickTab = (idx) => {
+        this.setState({
+            activeTab : idx
+        });
+    }
+
+    handleClickPapagoTranslate = (japMessage) => {
+        window.open(`https://papago.naver.com/?sk=ja&tk=ko&st=${japMessage}`);
+    }
+
     render(){
-        const { messageData, messageError } = this.state;
-        console.log(messageData)
+        const { messageData, messageError, activeTab } = this.state;
+        const messageKeys = messageData ? Object.keys(messageData) : [];
+        let messageViews = null;
+
+        let navItems = messageKeys.map((key, idx) => 
+            <NavItem key={`navlink_key_${idx}`}>
+                <NavLink
+                    className={classnames({ active: activeTab === idx })}
+                    onClick={() => this.handleClickTab(idx)}
+                    style={{ cursor : 'pointer' }}
+                >
+                    {tabName[key]}
+                </NavLink>
+            </NavItem>
+        );
+        
+        if(messageKeys.length > 0) {
+            messageViews = messageKeys.map((key, idx) => 
+                <TabPane tabId={idx} key={`message_view_${key}_${idx}`}>
+                    {
+                        key === 'skill' ? 
+                            messageData[key].totalMessage !== 'null' ?
+                                <div className="d-flex rounded border border-primary" style={{ backgroundColor : 'azure', margin : '10px', padding : '5px' }}>
+                                    <div className="p-2 align-self-center" dangerouslySetInnerHTML={{__html: messageData[key].totalMessage }} />
+                                    {
+                                        !messageData[key].hasKorean ? 
+                                            <div className="ml-auto align-self-center">
+                                                <Button color="info" onClick={() => this.handleClickPapagoTranslate(messageData[key].jpMessage)}><i className="fas fa-language" /> 번역</Button>
+                                            </div>: null
+                                    }
+                                </div> :
+                                <div className="d-flex rounded border border-primary" style={{ backgroundColor : 'azure', margin : '10px', padding : '5px' }}>
+                                    <div className="p-2 align-self-center">
+                                        해당하는 보이스 메시지가 없습니다.
+                                    </div>
+                                    <div className="ml-auto align-self-center">
+                                        <h2><i className="fas fa-times-circle" /></h2>
+                                    </div>
+                                </div> 
+                        : 
+                            messageData[key].length > 0 ?
+                                messageData[key].map((message, idx) => 
+                                    <div className="d-flex rounded border border-primary" key={`message_detail_${key}_${idx}`} style={{ backgroundColor : 'azure', margin : '10px', padding : '5px' }}>
+                                        <div className="p-2 align-self-center" dangerouslySetInnerHTML={{__html: message.totalMessage }} />
+                                        {
+                                            !message.hasKorean ? 
+                                                <div className="ml-auto align-self-center">
+                                                    <Button color="info" onClick={() => this.handleClickPapagoTranslate(message.jpMessage)}><i className="fas fa-language" /> 번역</Button>
+                                                </div> : null
+                                        }
+                                    </div>
+                                ) :
+                                <div className="d-flex rounded border border-primary" style={{ backgroundColor : 'azure', margin : '10px', padding : '5px' }}>
+                                    <div className="p-2 align-self-center">
+                                        해당하는 보이스 메시지가 없습니다.
+                                    </div>
+                                    <div className="ml-auto align-self-center">
+                                        <h2><i className="fas fa-times-circle" /></h2>
+                                    </div>
+                                </div> 
+                    }
+                </TabPane>
+            )
+        }
         return(
-            <div>
-                
-            </div>
+            <Fragment>
+                <Nav tabs className="justify-content-around">
+                    {navItems}
+                </Nav>
+                <TabContent activeTab={this.state.activeTab}>
+                    {messageViews}
+                </TabContent>
+            </Fragment>
         )
     }
 }

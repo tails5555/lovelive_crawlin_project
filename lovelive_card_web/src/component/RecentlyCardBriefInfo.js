@@ -53,10 +53,6 @@ class RecentlyCardBriefInfo extends React.Component {
         this.props.history.push(`/card/info?pg=1&id=${infoNo}`)
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
-
     handleMouseEnter = () => { 
         this.setState({
             mouseOn : true
