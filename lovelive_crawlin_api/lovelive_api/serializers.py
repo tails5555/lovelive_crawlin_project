@@ -24,7 +24,7 @@ class CardMessageSerializer(serializers.ModelSerializer) :
 class CardPairSerializer(serializers.ModelSerializer) :
     class Meta :
         model = CardPair
-        fields = ('id', 'info', 'img_url_1', 'img_url_2')
+        fields = ('id', 'info', 'primary_file', 'secondary_file')
 
 class CardIconSerializer(serializers.ModelSerializer) :
     class Meta :

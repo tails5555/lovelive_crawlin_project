@@ -70,7 +70,7 @@ class CardImageViewSet(viewsets.ModelViewSet) :
     serializer_class = CardImageSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filter_fields = ('info',)
-    search_fields = ('info',)
+    search_fields = ('img_file',)
     ordering_fields = ('info',)
     ordering = ('info',)
 

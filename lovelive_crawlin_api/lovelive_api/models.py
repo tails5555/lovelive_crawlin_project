@@ -71,8 +71,8 @@ class CardImage(models.Model) :
 class CardPair(models.Model) :
     id = models.AutoField(primary_key=True)
     info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)
-    img_url_1 = models.URLField()
-    img_url_2 = models.URLField()
+    primary_file = models.TextField(null=False, default='default_file1.jpg')
+    secondary_file = models.TextField(null=False, default='default_file2.jpg')
 
 class CharacterMainInfo(models.Model) :
     id = models.AutoField(primary_key=True)

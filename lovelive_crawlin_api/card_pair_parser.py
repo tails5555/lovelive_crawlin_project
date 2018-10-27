@@ -14,19 +14,19 @@ from common_functions import parse_card_id_list
 
 
 class CardPairModel :
-    def __init___(self, info=None, img_url_1='', img_url_2='') :
+    def __init___(self, info=None, primary_file='', secondary_file='') :
         self.info = info
-        self.img_url_1 = img_url_1
-        self.img_url_2 = img_url_2
+        self.primary_file = primary_file
+        self.secondary_file = secondary_file
 
     def set_info(self, info) :
         self.info = info
 
-    def set_img_url_1(self, img_url_1) :
-        self.img_url_1 = img_url_1
+    def set_primary_file(self, primary_file) :
+        self.primary_file = primary_file
 
-    def set_img_url_2(self, img_url_2) :
-        self.img_url_2 = img_url_2
+    def set_secondary_file(self, secondary_file) :
+        self.secondary_file = secondary_file
 
 def parse_each_pairs(card_no) :
     card_info = CardInfo.objects.filter(no=card_no).first()
@@ -47,13 +47,16 @@ def parse_each_pairs(card_no) :
                     image_tags = pair.find_all('img')
                     card_pair_model = CardPairModel()
                     card_pair_model.set_info(card_info)
-                    card_pair_model.set_img_url_1(image_tags[0]['src'])
-                    card_pair_model.set_img_url_2(image_tags[1]['src'])
-                    
+                    first_file_token = image_tags[0]['src'].split('/')
+                    second_file_token = image_tags[1]['src'].split('/')
+
+                    card_pair_model.set_primary_file(first_file_token[len(first_file_token) - 1])
+                    card_pair_model.set_secondary_file(second_file_token[len(second_file_token) - 1])
+
                     CardPair(
                         info = card_pair_model.info,
-                        img_url_1 = card_pair_model.img_url_1,
-                        img_url_2 = card_pair_model.img_url_2
+                        primary_file = card_pair_model.primary_file,
+                        secondary_file = card_pair_model.secondary_file
                     ).save()
 
 if __name__ == '__main__' :
