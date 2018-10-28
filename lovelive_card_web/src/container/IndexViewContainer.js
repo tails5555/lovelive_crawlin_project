@@ -1,5 +1,6 @@
 import React from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
+
 import { CharacterSearchView, RecentlyCardListView } from '../component';
 
 class IndexViewContainer extends React.Component {

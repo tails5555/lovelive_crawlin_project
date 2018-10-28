@@ -3,10 +3,14 @@ import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Button } from 'reactstrap';
+
 import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
+
 import { CharacterProfileTable, CharacterGallery, CharacterGridAlbum } from '../component';
+
+import './style/background_view.css';
 
 const mapStateToProps = (state) => {
     return {
@@ -66,20 +70,24 @@ class CharacterInfoViewContainer extends React.Component {
     render(){
         const { result, error } = this.props.characterInfo;
         return(
-            <Container style={{ marginTop : '10px', marginBottom : '10px' }}>
-                <div id="character_gallery" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterGallery character={ result && result.kor_name } />
-                </div>
-                <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterProfileTable character={ result } />
-                </div>
-                <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 캐릭터 목록으로</Button>
-                </div>
-                <div id="character_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterGridAlbum />
-                </div>
-            </Container>
+            <div className="background_view" id="character_info">
+                <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
+                    <div id="container_top_margin" style={{ height : '10px' }} />
+                    <div id="character_gallery" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CharacterGallery character={ result && result.kor_name } />
+                    </div>
+                    <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CharacterProfileTable character={ result } />
+                    </div>
+                    <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 캐릭터 목록으로</Button>
+                    </div>
+                    <div id="character_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CharacterGridAlbum />
+                    </div>
+                    <div id="container_bottom_margin" style={{ height : '10px' }} />
+                </Container>
+            </div>
         )
     }
 }

@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom'; 
+import React from 'react';
 import queryString from 'query-string';
-import {connect} from 'react-redux';
-import {CardTable, CardPagination} from '../component';
+import { withRouter } from 'react-router-dom'; 
+import { connect } from 'react-redux';
+import { Container } from 'reactstrap';
+
 import {
     fetchCardInfosByPage, fetchCardInfosByPageSuccess, fetchCardInfosByPageFailure, resetFetchCardInfosByPage
 } from '../action/action_card';
@@ -13,6 +14,9 @@ import {
     resetFetchCardDetailByInfoNo
 } from '../action/action_detail';
 
+import { CardTable, CardPagination } from '../component';
+
+import './style/background_view.css';
 
 const mapStateToProps = (state) => {
     return {
@@ -38,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class CardPageListContainer extends Component {
+class CardPageListContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = { page : 1 };
@@ -69,13 +73,15 @@ class CardPageListContainer extends Component {
     render(){
         const { results, count } = this.props.cardList;
         return(
-            <div className="container">
-                <div id="card_brief_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardTable infos={results} />
-                </div>
-                <div id="card_brief_pagination" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardPagination count={count} pageBase={20} />
-                </div>
+            <div className="background_view" id="card_list">
+                <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
+                    <div id="card_brief_list" style={{ marginBottom : '10px' }}>
+                        <CardTable infos={results} />
+                    </div>
+                    <div id="card_brief_pagination" style={{ marginTop : '10px' }}>
+                        <CardPagination count={count} pageBase={20} />
+                    </div>
+                </Container>
             </div>
         )
     }

@@ -31,6 +31,10 @@ class CardPairSetView extends React.Component {
         }
     }
 
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+
     async getImagesByFilename(pairResult) {
         if(pairResult.length > 0)
             pairResult.map((pair, idx) => {

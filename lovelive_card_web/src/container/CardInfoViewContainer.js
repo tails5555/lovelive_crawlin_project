@@ -20,7 +20,6 @@ import {
     fetchPairsByCardNo, fetchPairsByCardNoSuccess, fetchPairsByCardNoFailure, resetFetchPairsByCardNo
 } from '../action/action_pair';
 
-
 import {
     CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects, CardVoiceMessageList, CardPairSetView
 } from '../component';
@@ -146,32 +145,36 @@ class CardInfoViewContainer extends React.Component {
         const { cardNo } = this.state;
         const { cardInfo, detailElement, effectList, messageElement, pairList } = this.props;
         return(
-            <Container>
-                <div id="card_image_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardImageGallery cardNo={cardNo} />
-                </div>
-                <div id="card_property_progress_bar" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardPropertyBar infoResult={cardInfo.result} infoError={cardInfo.error} />
-                </div>
-                <div id="card_detail_info" style={{ marginTop : '10px' }}>
-                    <CardInfoDetailView infoResult={cardInfo.result} infoError={cardInfo.error} detailResult={detailElement.result.length > 0 ? detailElement.result[0] : null} detailError={detailElement.error} />
-                </div>
-                <div id="back_button" style={{ marginBottom : '10px' }}>
-                    <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 카드 목록으로</Button>
-                </div>
-                <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardLevelEffects effectResult={effectList.results} effectError={effectList.error} />
-                </div>
-                {
-                    pairList.results.length > 0 ? 
-                        <div id="card_pair_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                            <CardPairSetView pairResult={pairList.results} pairError={pairList.error} />
-                        </div> : null
-                }
-                <div id="card_message_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardVoiceMessageList messageResult={messageElement.result} messageError={messageElement.error} />
-                </div>
-            </Container>
+            <div className="background_view" id="card_info">
+                <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
+                    <div id="container_top_margin" style={{ height : '20px' }} />
+                    <div id="card_image_view" style={{ marginBottom : '10px' }}>
+                        <CardImageGallery cardNo={cardNo} />
+                    </div>
+                    <div id="card_property_progress_bar" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CardPropertyBar infoResult={cardInfo.result} infoError={cardInfo.error} />
+                    </div>
+                    <div id="card_detail_info" style={{ marginTop : '10px' }}>
+                        <CardInfoDetailView infoResult={cardInfo.result} infoError={cardInfo.error} detailResult={detailElement.result.length > 0 ? detailElement.result[0] : null} detailError={detailElement.error} />
+                    </div>
+                    <div id="back_button" style={{ marginBottom : '10px' }}>
+                        <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 카드 목록으로</Button>
+                    </div>
+                    <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CardLevelEffects effectResult={effectList.results} effectError={effectList.error} />
+                    </div>
+                    {
+                        pairList.results.length > 0 ? 
+                            <div id="card_pair_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                                <CardPairSetView pairResult={pairList.results} pairError={pairList.error} />
+                            </div> : null
+                    }
+                    <div id="card_message_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CardVoiceMessageList messageResult={messageElement.result} messageError={messageElement.error} />
+                    </div>
+                    <div id="container_bottom_margin" style={{ height : '10px' }} />
+                </Container>
+            </div>
         )
     }
 }

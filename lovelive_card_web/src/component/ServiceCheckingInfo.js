@@ -2,7 +2,7 @@ import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 
 const ServiceCheckingInfo = () => (
-    <Jumbotron className="p-2 border align-self-center text-center">
+    <Jumbotron className="p-2 border align-self-center text-center" style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
         <h1 className="display-3">서비스 점검 중입니다...</h1>
         <p className="lead">서비스 점검은 매일 새벽 1시부터 3시까지 이뤄집니다.</p>
         <p className="lead">이외에 관련된 문제는 개발자에게 연락을 취하여 조치하시길 바랍니다.</p>

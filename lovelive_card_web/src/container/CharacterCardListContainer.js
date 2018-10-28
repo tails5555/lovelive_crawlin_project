@@ -1,12 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom'; 
-import {connect} from 'react-redux';
-import {CharacterCardList} from '../component';
+import { connect } from 'react-redux';
+import { Container } from 'reactstrap';
+
 import {
     fetchCharacterListByQuery, fetchCharacterListByQuerySuccess, fetchCharacterListByQueryFailure, resetFetchCharacterListByQuery
 } from '../action/action_character';
-import CardPagination from '../component/CardPagination';
-import CharacterSearchForm from '../component/CharacterSearchForm';
+
+import { CardPagination, CharacterSearchForm, CharacterCardList } from '../component';
+
+import './style/background_view.css';
 
 const mapStateToProps = (state) => {
     return {
@@ -30,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class CharacterCardListContainer extends Component {
+class CharacterCardListContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = { query : '' };
@@ -58,16 +61,19 @@ class CharacterCardListContainer extends Component {
     render(){
         const { results, count } = this.props.characterList;
         return(
-            <div className="container">
-                <div id="character_search_form" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterSearchForm />
-                </div>
-                <div id="character_small_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CharacterCardList characters={results} />
-                </div>
-                <div id="character_small_card_pagination" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <CardPagination count={count} pageBase={9} />
-                </div>
+            <div className="background_view" id="character_list">
+                <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
+                    <div id="search_form_margin" style={{ height : '10px' }} />
+                    <div id="character_search_form" style={{ marginBottom : '10px' }}>
+                        <CharacterSearchForm />
+                    </div>
+                    <div id="character_small_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <CharacterCardList characters={results} />
+                    </div>
+                    <div id="character_small_card_pagination" style={{ marginTop : '10px' }}>
+                        <CardPagination count={count} pageBase={9} />
+                    </div>
+                </Container>
             </div>
         )
     }

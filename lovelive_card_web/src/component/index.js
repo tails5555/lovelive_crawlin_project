@@ -16,6 +16,7 @@ export {default as CardPairSetView} from './CardPairSetView';
 
 // Character Brief Info
 export {default as CharacterCardList} from './CharacterCardList';
+export {default as CharacterSearchForm} from './CharacterSearchForm';
 
 // Character Detail Info
 export {default as CharacterGallery} from './CharacterGallery';
