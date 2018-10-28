@@ -20,9 +20,11 @@ const mapDispatchToProps = (dispatch) => {
             if(!response.error)
                 dispatch(fetchCardInfosRecentlySuccess(response.payload));
         }).catch(error => {
-            const { status, data } = error.response;
-            if(status !== 200)
-                dispatch(fetchCardInfosRecentlyFailure(data));
+            if(error && error.response){
+                const { status, data } = error.response;
+                if(status !== 200)
+                    dispatch(fetchCardInfosRecentlyFailure(data));
+            }
         }),
         resetFetchCardsRecently : () => dispatch(resetFetchCardInfosRecently())
     }

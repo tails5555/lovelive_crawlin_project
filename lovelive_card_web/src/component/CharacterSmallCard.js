@@ -35,7 +35,7 @@ class CharacterSmallCard extends React.Component {
                 this.setState({ imageResult : response.data })
         }).catch(error => {
             if(this._isMounted)
-                this.setState({ imageError : '이미지를 불러오는 도중 오류가 발생했습니다.'});
+                this.setState({ imageError : '이미지를 불러오는 도중 오류가 발생했습니다.' });
         });
     }
 

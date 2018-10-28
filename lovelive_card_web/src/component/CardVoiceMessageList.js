@@ -86,7 +86,7 @@ class CardVoiceMessageList extends React.Component {
                                             </div>: null
                                     }
                                 </div> :
-                                <div className="d-flex rounded border border-primary" style={{ backgroundColor : 'azure', margin : '10px', padding : '5px' }}>
+                                <div className="d-flex rounded border border-danger" style={{ backgroundColor : 'lavenderblush', margin : '10px', padding : '5px' }}>
                                     <div className="p-2 align-self-center">
                                         해당하는 보이스 메시지가 없습니다.
                                     </div>
@@ -107,7 +107,7 @@ class CardVoiceMessageList extends React.Component {
                                         }
                                     </div>
                                 ) :
-                                <div className="d-flex rounded border border-primary" style={{ backgroundColor : 'azure', margin : '10px', padding : '5px' }}>
+                                <div className="d-flex rounded border border-danger" style={{ backgroundColor : 'lavenderblush', margin : '10px', padding : '5px' }}>
                                     <div className="p-2 align-self-center">
                                         해당하는 보이스 메시지가 없습니다.
                                     </div>

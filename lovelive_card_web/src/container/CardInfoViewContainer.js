@@ -16,6 +16,10 @@ import {
 import {
     fetchMessagesByInfo, fetchMessagesByInfoSuccess, fetchMessagesByInfoFailure, resetFetchMessagesByInfo
 } from '../action/action_message';
+import {
+    fetchPairsByCardNo, fetchPairsByCardNoSuccess, fetchPairsByCardNoFailure, resetFetchPairsByCardNo
+} from '../action/action_pair';
+
 
 import {
     CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects, CardVoiceMessageList
@@ -26,7 +30,8 @@ const mapStateToProps = (state) => {
         cardInfo : state.card.cardInfo,
         detailElement : state.detail.detailElement,
         effectList : state.effect.effectList,
-        messageElement : state.message.messageElement
+        messageElement : state.message.messageElement,
+        pairList : state.pair.pairList
     }
 }
 
@@ -37,18 +42,22 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(fetchCardInfoByNoSuccess(response.payload));
             })
         .catch(error => {
-            const { status, data } = error.response;
-            if(status !== 200)
-                dispatch(fetchCardInfoByNoFailure(data));
+            if(error && error.response){
+                const { status, data } = error.response;
+                if(status !== 200)
+                    dispatch(fetchCardInfoByNoFailure(data));
+            }
         }),
         resetFetchCardInfo : () => dispatch(resetFetchCardInfoByNo()),
         fetchDetailByCardNo : (cardNo) => dispatch(fetchCardDetailByInfoNo(cardNo)).then(response => {
             if(!response.error)
                 dispatch(fetchCardDetailByInfoNoSuccess(response.payload));
             }).catch(error => {
-                const { status, data } = error.response;
-                if(status !== 200)
-                    dispatch(fetchCardDetailByInfoNoFailure(data));
+                if(error && error.response){
+                    const { status, data } = error.response;
+                    if(status !== 200)
+                        dispatch(fetchCardDetailByInfoNoFailure(data));
+                }
             }),
         resetFetchDetailByCardNo : () => dispatch(resetFetchCardDetailByInfoNo()),
         fetchEffectsByCardNo : (cardNo) => dispatch(fetchCardEffectsByInfoNo(cardNo)).then(response => {
@@ -56,9 +65,11 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(fetchCardEffectsByInfoNoSuccess(response.payload));
             })
         .catch(error => {
-            const { status, data } = error.response;
-            if(status !== 200)
-                dispatch(fetchCardEffectsByInfoNoFailure(data));
+            if(error && error.response){
+                const { status, data } = error.response;
+                if(status !== 200)
+                    dispatch(fetchCardEffectsByInfoNoFailure(data));
+            }
         }),
         resetFetchEffectsByCardNo : () => dispatch(resetFetchCardEffectsByInfoNo()),
         fetchMessageJsonData : (cardNo) => dispatch(fetchMessagesByInfo(cardNo)).then(response => {
@@ -66,11 +77,25 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(fetchMessagesByInfoSuccess(response.payload));
             })
         .catch(error => {
-            const { status, data } = error.response;
-            if(status !== 200)
-                dispatch(fetchMessagesByInfoFailure(data));
+            if(error && error.response){
+                const { status, data } = error.response;
+                if(status !== 200)
+                    dispatch(fetchMessagesByInfoFailure(data));
+            }
         }),
-        resetFetchMessageJsonData : () => dispatch(resetFetchMessagesByInfo())
+        resetFetchMessageJsonData : () => dispatch(resetFetchMessagesByInfo()),
+        fetchPairListByCardNo : (cardNo) => dispatch(fetchPairsByCardNo(cardNo)).then(response => {
+            if(!response.error)
+                dispatch(fetchPairsByCardNoSuccess(response.payload));
+            })
+        .catch(error => {
+            if(error && error.response){
+                const { status, data } = error.response;
+                if(status !== 200)
+                    dispatch(fetchPairsByCardNoFailure(data));
+            }
+        }),
+        resetFetchPairListByCardNo : () => dispatch(resetFetchPairsByCardNo())
     }
 }
 
@@ -104,6 +129,7 @@ class CardInfoViewContainer extends React.Component {
             this.props.fetchCardInfo(cardNo);
             this.props.fetchDetailByCardNo(cardNo);
             this.props.fetchEffectsByCardNo(cardNo);
+            this.props.fetchPairListByCardNo(cardNo);
             this.props.fetchMessageJsonData(cardNo);
         }
     }
@@ -112,6 +138,7 @@ class CardInfoViewContainer extends React.Component {
         this.props.resetFetchCardInfo();
         this.props.resetFetchDetailByCardNo();
         this.props.resetFetchEffectsByCardNo();
+        this.props.resetFetchPairListByCardNo();
         this.props.resetFetchMessageJsonData();
     }
 
@@ -126,10 +153,10 @@ class CardInfoViewContainer extends React.Component {
                 <div id="card_property_progress_bar" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardPropertyBar infoResult={cardInfo.result} infoError={cardInfo.error} />
                 </div>
-                <div id="card_detail_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                <div id="card_detail_info" style={{ marginTop : '10px' }}>
                     <CardInfoDetailView infoResult={cardInfo.result} infoError={cardInfo.error} detailResult={detailElement.result.length > 0 ? detailElement.result[0] : null} detailError={detailElement.error} />
                 </div>
-                <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                <div id="back_button" style={{ marginBottom : '10px' }}>
                     <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 카드 목록으로</Button>
                 </div>
                 <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>

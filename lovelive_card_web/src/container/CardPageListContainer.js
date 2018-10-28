@@ -26,9 +26,11 @@ const mapDispatchToProps = (dispatch) => {
             if(!response.error)
                 dispatch(fetchCardInfosByPageSuccess(response.payload));
             }).catch(error => {
-                const { status, data } = error.response;
-                if(status !== 200)
-                    dispatch(fetchCardInfosByPageFailure(data));
+                if(error && error.response){
+                    const { status, data } = error.response;
+                    if(status !== 200)
+                        dispatch(fetchCardInfosByPageFailure(data));
+                }
             }),
         resetFetchCardList : () => dispatch(resetFetchCardInfosByPage()),
         resetFetchImagesByCardNo : () => dispatch(resetFetchCardImagesByInfoNo()),

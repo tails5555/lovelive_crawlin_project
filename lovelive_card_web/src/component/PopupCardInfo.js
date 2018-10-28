@@ -24,18 +24,22 @@ const mapDispatchToProps = (dispatch) => {
             if(!response.error)
                 dispatch(fetchCardDetailByInfoNoSuccess(response.payload));
             }).catch(error => {
-                const { status, data } = error.response;
-                if(status !== 200)
-                    dispatch(fetchCardDetailByInfoNoFailure(data));
+                if(error && error.response){
+                    const { status, data } = error.response;
+                    if(status !== 200)
+                        dispatch(fetchCardDetailByInfoNoFailure(data));
+                }
             }),
         resetFetchDetailByCardNo : () => dispatch(resetFetchCardDetailByInfoNo()),
         fetchImagesByCardNo : (cardNo) => dispatch(fetchCardImagesByInfoNo(cardNo)).then(response => {
             if(!response.error)
                 dispatch(fetchCardImagesByInfoNoSuccess(response.payload));
             }).catch(error => {
-                const { status, data } = error.response;
-                if(status !== 200)
-                    dispatch(fetchCardImagesByInfoNoFailure(data));
+                if(error && error.response){
+                    const { status, data } = error.response;
+                    if(status !== 200)
+                        dispatch(fetchCardImagesByInfoNoFailure(data));
+                }
             }),
         resetFetchImagesByCardNo : () => dispatch(resetFetchCardImagesByInfoNo()),
     }
