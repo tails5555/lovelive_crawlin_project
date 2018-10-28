@@ -22,7 +22,7 @@ import {
 
 
 import {
-    CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects, CardVoiceMessageList
+    CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects, CardVoiceMessageList, CardPairSetView
 } from '../component';
 
 const mapStateToProps = (state) => {
@@ -144,7 +144,7 @@ class CardInfoViewContainer extends React.Component {
 
     render(){
         const { cardNo } = this.state;
-        const { cardInfo, detailElement, effectList, messageElement } = this.props;
+        const { cardInfo, detailElement, effectList, messageElement, pairList } = this.props;
         return(
             <Container>
                 <div id="card_image_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
@@ -162,11 +162,14 @@ class CardInfoViewContainer extends React.Component {
                 <div id="card_effect_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardLevelEffects effectResult={effectList.results} effectError={effectList.error} />
                 </div>
+                {
+                    pairList.results.length > 0 ? 
+                        <div id="card_pair_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                            <CardPairSetView pairResult={pairList.results} pairError={pairList.error} />
+                        </div> : null
+                }
                 <div id="card_message_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <CardVoiceMessageList messageResult={messageElement.result} messageError={messageElement.error} />
-                </div>
-                <div id="card_pair_info" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    카드 세트 정보 출력
                 </div>
             </Container>
         )

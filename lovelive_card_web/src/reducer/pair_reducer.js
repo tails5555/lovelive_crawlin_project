@@ -4,7 +4,7 @@ import {
 
 const INITIAL_STATE = {
     pairList : {
-        results : null, error : []
+        results : [], error : []
     }
 }
 

@@ -50,7 +50,7 @@ class CardImageGallery extends React.Component {
     render(){
         const { imageResult, imageError } = this.state;
         const imageView = imageResult.map(image => (
-            <Col key={`card_detail_img_${image.id}`} xs={6} sm={6} className="fade-in">
+            <Col key={`card_detail_img_${image.id}`} xs={6} sm={6} className="fade-in text-center">
                 <img className="img-fluid" alt={`card_detail_img_${image.id}`} src={image && image.img_file} />
             </Col>
         ));
