@@ -15,10 +15,47 @@ class CardInfoViewSet(viewsets.ModelViewSet) :
     queryset = CardInfo.objects.all()
     serializer_class = CardInfoSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('rank', 'character_name')
-    search_fields = ('rank', 'character_name')
-    ordering_fields = ('no', 'rank', 'character_name')
+    filter_fields = ('character_name', 'property',)
+    search_fields = ('card_title',)
+    ordering_fields = ('no', 'smile', 'pure', 'cool')
     pagination_class = ListPagination
+
+    def get_queryset(self):
+        query_params = self.request.query_params
+        
+        ranks = query_params.get('rank', None)
+        conditions = query_params.get('condition', None)
+        skills = query_params.get('skill', None)
+
+        rankParams = []
+        conditionParams = []
+        skillParams = []
+
+        if ranks is not None:
+            for value in ranks.split(','):
+                rankParams.append(value)
+        if conditions is not None:
+            for value in conditions.split(','):
+                conditionParams.append(value)
+        if skills is not None:
+            for value in skills.split(','):
+                skillParams.append(value)
+
+        if ranks or conditions or skills is not None:
+            queryset_list = CardInfo.objects.all()
+            if ranks is not None :
+                queryset_list = queryset_list.filter(rank__in=rankParams)
+
+            if conditions is not None :
+                queryset_list = queryset_list.filter(active_condition__in=conditionParams)
+
+            if skills is not None :
+                queryset_list = queryset_list.filter(active_skill__in=skillParams)
+
+            return queryset_list
+
+        else : 
+            return CardInfo.objects.all()
 
 class CardDetailViewSet(viewsets.ModelViewSet) :
     queryset = CardDetail.objects.all()
