@@ -1,6 +1,6 @@
 import React from 'react';
 import queryString from 'query-string';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 function makeQueryStringAboutPage(qs, pg){
@@ -56,23 +56,23 @@ class CardPagination extends React.Component {
             (number > base && number < base + 11) ?
                 number === query.pg * 1 ?
                     <PaginationItem active key={`paginate_item_${number}`}>
-                        <PaginationLink href={makeQueryStringAboutPage(search, number)}>
+                        <PaginationLink tag={Link} to={`./list/_page${makeQueryStringAboutPage(search, number)}`} >
                             {number}
                         </PaginationLink>
                     </PaginationItem> :
                     <PaginationItem key={`paginate_item_${number}`}>
-                        <PaginationLink href={makeQueryStringAboutPage(search, number)}>
+                        <PaginationLink tag={Link} to={`./list/_page${makeQueryStringAboutPage(search, number)}`} >
                             {number}
                         </PaginationLink>
                     </PaginationItem>
                 : 
                 (idx === 0) ?
                     <PaginationItem key={`paginate_item_${number}`}>
-                        <PaginationLink previous href={makeQueryStringAboutPage(search, base)} />
+                        <PaginationLink previous tag={Link} to={`./list/_page${makeQueryStringAboutPage(search, base)}`}  />
                     </PaginationItem>
                     : 
                     <PaginationItem key={`paginate_item_${number}`}>
-                        <PaginationLink next href={makeQueryStringAboutPage(search, next)} />
+                        <PaginationLink next tag={Link} to={`./list/_page${makeQueryStringAboutPage(search, next)}`}  />
                     </PaginationItem>
         ));
         return(

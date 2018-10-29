@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import {MenuNavBar} from '../component';
 import CardPageListContainer from '../container/CardPageListContainer';
 import CharacterCardListContainer from '../container/CharacterCardListContainer';
@@ -35,8 +35,10 @@ class ApplicationRouter extends React.Component {
                 <Switch>
                     <Route exact path="/" component={IndexViewContainer} />
                     <Route exact path="/card/list" component={CardPageListContainer} />
+                    <Route exact path="/card/list/_page" render={({ location }) => <Redirect to={`/card/list${location.search}`} />} />
                     <Route exact path="/card/info" component={CardInfoViewContainer} />
                     <Route exact path="/character/list" component={CharacterCardListContainer} />
+                    <Route exact path="/character/list/_page" render={({ location }) => <Redirect to={`/character/list${location.search}`} />} />
                     <Route exact path="/character/info" component={CharacterInfoViewContainer} />
                     <Route component={NotFoundContainer} />
                 </Switch>
