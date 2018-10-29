@@ -1,13 +1,34 @@
 import React from 'react';
-import { Form, Button } from 'reactstrap';
+import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { Form, Button } from 'reactstrap';
 import { TextFormRender, SelectFormRender } from './form';
-import queryString from 'query-string';
+
+function validate(values){
+    let errors = {};
+    let hasErrors = false;
+
+    if(!values.character || values.character.trim() === ''){
+        if(!values.grade) {
+            errors.character = '캐릭터 이름을 입력하시길 바랍니다.';
+            hasErrors = true;
+        }
+    } 
+    
+    if(!values.grade){
+        if(!values.character || values.character.trim() === '') {
+            errors.grade = '학년을 선택하시길 바랍니다.';
+            hasErrors = true;
+        }
+    } 
+
+    return hasErrors && errors;
+}
 
 const validateAndSearch = (values, dispatch) => {
     const clientQueryModel = {
-        st : values && values.character === '' ? undefined : values.character,
+        st : values && values.character.trim() === '' ? undefined : values.character.trim(),
         gr : values && values.grade === '' ? undefined : values.grade,
         pg : 1
     }
@@ -38,7 +59,7 @@ class CharacterSearchForm extends React.Component {
         this.setState({
             isSearch : false
         });
-        window.location.href = '/character/list?pg=1';
+        this.props.history.push('/character/list/_page?pg=1');
     }
 
     render(){
@@ -67,6 +88,7 @@ class CharacterSearchForm extends React.Component {
 
 export default reduxForm({
     form : 'characterSearchForm',
+    validate,
     enableReinitialize : true,
-    keepDirtyOnReinitialize : true
+    keepDirtyOnReinitialize : true,
 })(withRouter(CharacterSearchForm));

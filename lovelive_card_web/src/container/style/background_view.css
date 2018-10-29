@@ -1,8 +1,10 @@
 .background_view {
     min-width: 100%;
-    max-width: 100%;
+    min-height: 100vh;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left : 5px;
+    padding-right : 5px;
 }
 
 #card_list {

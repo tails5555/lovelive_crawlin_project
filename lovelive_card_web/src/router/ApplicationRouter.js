@@ -8,6 +8,7 @@ import CardInfoViewContainer from '../container/CardInfoViewContainer';
 import NotFoundContainer from '../container/NotFoundContainer';
 import ServiceCheckingContainer from '../container/ServiceCheckingContainer';
 import IndexViewContainer from '../container/IndexViewContainer';
+import SlideAnotherView from './SlideAnotherView';
 
 class ApplicationRouter extends React.Component {
     constructor(props){
@@ -47,8 +48,10 @@ class ApplicationRouter extends React.Component {
         
         return (
             <Fragment>
-                <MenuNavBar />
-                {router}
+                <SlideAnotherView>
+                    <MenuNavBar />
+                    {router}
+                </SlideAnotherView>
             </Fragment>
         )
     }
