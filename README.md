@@ -11,10 +11,9 @@ React Native App 을 실질적으로 학습하는 목적을 위해 크롤링 데
 
 모든 개발의 IDE는 Visual Studio Code 를 이용하였습니다.
 
-- Server - Python, django, Beautiful Soup
-- Web - React.js, Redux
+- Server - Python 3, django REST Framework, Beautiful Soup 4
+- Web - React.js, Redux, Axios
 - App - React Native
-
 
 ## Thanks To
 - [django REST API 구축 방법](http://jamanbbo.tistory.com/43)

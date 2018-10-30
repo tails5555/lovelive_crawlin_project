@@ -1,11 +1,12 @@
 import axios from 'axios';
+import queryString from 'query-string';
 
 const CARD_INFO_URL = 'http://127.0.0.1:8000/card_infos';
 
-export const FETCH_CARD_INFOS_BY_PAGE = 'FETCH_CARD_INFOS_BY_PAGE';
-export const FETCH_CARD_INFOS_BY_PAGE_SUCCESS = 'FETCH_CARD_INFOS_BY_PAGE_SUCCESS';
-export const FETCH_CARD_INFOS_BY_PAGE_FAILURE = 'FETCH_CARD_INFOS_BY_PAGE_FAILURE';
-export const RESET_FETCH_CARD_INFOS_BY_PAGE = 'RESET_FETCH_CARD_INFOS_BY_PAGE';
+export const FETCH_CARD_INFOS_BY_QUERY = 'FETCH_CARD_INFOS_BY_QUERY';
+export const FETCH_CARD_INFOS_BY_QUERY_SUCCESS = 'FETCH_CARD_INFOS_BY_QUERY_SUCCESS';
+export const FETCH_CARD_INFOS_BY_QUERY_FAILURE = 'FETCH_CARD_INFOS_BY_QUERY_FAILURE';
+export const RESET_FETCH_CARD_INFOS_BY_QUERY = 'RESET_FETCH_CARD_INFOS_BY_QUERY';
 
 export const FETCH_CARD_INFOS_RECENTLY = 'FETCH_CARD_INFOS_RECENTLY';
 export const FETCH_CARD_INFOS_RECENTLY_SUCCESS = 'FETCH_CARD_INFOS_RECENTLY_SUCCESS';
@@ -17,35 +18,45 @@ export const FETCH_CARD_INFO_BY_NO_SUCCESS = 'FETCH_CARD_INFO_BY_NO_SUCCESS';
 export const FETCH_CARD_INFO_BY_NO_FAILURE = 'FETCH_CARD_INFO_BY_NO_FAILURE';
 export const RESET_FETCH_CARD_INFO_BY_NO = 'RESET_FETCH_CARD_INFO_BY_NO';
 
-export function fetchCardInfosByPage(pageNo) {
+export function fetchCardInfosByQuery(qs) {
+    const queryModel = queryString.parse(qs);
+    const serverQuery = {
+        page : queryModel && queryModel.pg,
+        search : queryModel && queryModel.st,
+        rank : queryModel && queryModel.rank,
+        condition : queryModel && queryModel.condition,
+        skill : queryModel && queryModel.skill,
+        ordering : '-no'
+    };
+    const serverQS = queryString.stringify(serverQuery);
     const request = axios({
-        url : `${CARD_INFO_URL}?ordering=-no&page=${pageNo}`,
+        url : `${CARD_INFO_URL}?${serverQS}`,
         method : 'get'
     });
     
     return {
-        type : FETCH_CARD_INFOS_BY_PAGE,
+        type : FETCH_CARD_INFOS_BY_QUERY,
         payload : request
     }
 }
 
-export function fetchCardInfosByPageSuccess(request){
+export function fetchCardInfosByQuerySuccess(request){
     return {
-        type : FETCH_CARD_INFOS_BY_PAGE_SUCCESS,
+        type : FETCH_CARD_INFOS_BY_QUERY_SUCCESS,
         payload : request.data
     }
 }
 
-export function fetchCardInfosByPageFailure(error){
+export function fetchCardInfosByQueryFailure(error){
     return {
-        type : FETCH_CARD_INFOS_BY_PAGE_FAILURE,
+        type : FETCH_CARD_INFOS_BY_QUERY_FAILURE,
         payload : error
     }
 }
 
-export function resetFetchCardInfosByPage(){
+export function resetFetchCardInfosByQuery(){
     return {
-        type : RESET_FETCH_CARD_INFOS_BY_PAGE
+        type : RESET_FETCH_CARD_INFOS_BY_QUERY
     }
 }
 

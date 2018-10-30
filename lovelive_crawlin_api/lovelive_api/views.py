@@ -15,8 +15,8 @@ class CardInfoViewSet(viewsets.ModelViewSet) :
     queryset = CardInfo.objects.all()
     serializer_class = CardInfoSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('character_name', 'property',)
-    search_fields = ('card_title',)
+    filter_fields = ('property',)
+    search_fields = ('character_name', 'card_title')
     ordering_fields = ('no', 'smile', 'pure', 'cool')
     pagination_class = ListPagination
 

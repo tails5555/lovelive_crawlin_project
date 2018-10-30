@@ -5,6 +5,7 @@ export {default as RecentlyCardListView} from './RecentlyCardListView';
 // Card Brief Info
 export {default as CardTable} from './CardTable';
 export {default as PopupCardInfo} from './PopupCardInfo';
+export {default as CardSearchForm} from './CardSearchForm';
 
 // Card Detail Info
 export {default as CardImageGallery} from './CardImageGallery';

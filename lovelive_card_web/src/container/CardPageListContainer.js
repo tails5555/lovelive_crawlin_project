@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 
 import {
-    fetchCardInfosByPage, fetchCardInfosByPageSuccess, fetchCardInfosByPageFailure, resetFetchCardInfosByPage
+    fetchCardInfosByQuery, fetchCardInfosByQuerySuccess, fetchCardInfosByQueryFailure, resetFetchCardInfosByQuery
 } from '../action/action_card';
 import {
     resetFetchCardImagesByInfoNo
@@ -14,7 +14,7 @@ import {
     resetFetchCardDetailByInfoNo
 } from '../action/action_detail';
 
-import { CardTable, CardPagination } from '../component';
+import { CardTable, CardPagination, CardSearchForm } from '../component';
 
 import './style/background_view.css';
 
@@ -26,17 +26,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCardList : (pageNo) =>  dispatch(fetchCardInfosByPage(pageNo)).then(response => {
+        fetchCardList : (clientQS) =>  dispatch(fetchCardInfosByQuery(clientQS)).then(response => {
             if(!response.error)
-                dispatch(fetchCardInfosByPageSuccess(response.payload));
+                dispatch(fetchCardInfosByQuerySuccess(response.payload));
             }).catch(error => {
                 if(error && error.response){
                     const { status, data } = error.response;
                     if(status !== 200)
-                        dispatch(fetchCardInfosByPageFailure(data));
+                        dispatch(fetchCardInfosByQueryFailure(data));
                 }
             }),
-        resetFetchCardList : () => dispatch(resetFetchCardInfosByPage()),
+        resetFetchCardList : () => dispatch(resetFetchCardInfosByQuery()),
         resetFetchImagesByCardNo : () => dispatch(resetFetchCardImagesByInfoNo()),
         resetFetchDetailByCardNo : () => dispatch(resetFetchCardDetailByInfoNo())
     }
@@ -45,23 +45,22 @@ const mapDispatchToProps = (dispatch) => {
 class CardPageListContainer extends React.Component {
     constructor(props){
         super(props);
-        this.state = { page : 1 };
+        this.state = { query : '' };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { search } = nextProps.history.location;
-        const query = queryString.parse(search);
-        if(query && (query.pg || 1) !== prevState.page){
+        if(search !== ''){
             return {
-                page : query.pg
+                query : search
             };
         }
         return null;
     }
 
     componentDidMount(){
-        const { page } = this.state;
-        this.props.fetchCardList(page);
+        const { query } = this.state;
+        this.props.fetchCardList(query);
     }
 
     componentWillUnmount(){
@@ -75,7 +74,11 @@ class CardPageListContainer extends React.Component {
         return(
             <div className="background_view" id="card_list">
                 <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
-                    <div id="card_brief_list" style={{ marginBottom : '10px' }}>
+                    <div id="search_form_margin" style={{ height : '10px' }} />
+                    <div id="card_search_form" style={{ marginBottom : '10px' }}>
+                        <CardSearchForm />
+                    </div>
+                    <div id="card_brief_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <CardTable infos={results} />
                     </div>
                     <div id="card_brief_pagination" style={{ marginTop : '10px' }}>
