@@ -23,6 +23,7 @@ export function fetchCardInfosByQuery(qs) {
     const serverQuery = {
         page : queryModel && queryModel.pg,
         search : queryModel && queryModel.st,
+        property : queryModel && queryModel.property,
         rank : queryModel && queryModel.rank,
         condition : queryModel && queryModel.condition,
         skill : queryModel && queryModel.skill,

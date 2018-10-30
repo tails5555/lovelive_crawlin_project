@@ -5,7 +5,7 @@ const TextFormRender = ({ input, label, placeholder, type, meta: { touched, erro
     <FormGroup row>
         <Label for={input.name} sm={2}>{label}</Label>
         <Col sm={10}>
-            <Input type={type} {...(touched ? { invalid : error !== undefined, valid : error === undefined } : {})} {...input} placeholder={placeholder} />
+            <Input type={type} {...(touched ? { invalid : error !== undefined, valid : error === undefined } : {})} {...input} placeholder={placeholder} {...custom} />
             {error && <FormFeedback>{error}</FormFeedback>}
             {!error && warning && <FormText>{warning}</FormText>}
         </Col>

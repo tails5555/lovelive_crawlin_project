@@ -5,7 +5,7 @@ const SelectFormRender = ({ input, label, placeholder, type, children, meta: { t
     <FormGroup row>
         <Label for={input.name} sm={2}>{label}</Label>
         <Col sm={10}>
-            <Input type="select" {...input} {...(touched ? { invalid : error !== undefined, valid : error === undefined } : {})}>
+            <Input type="select" {...input} {...(touched ? { invalid : error !== undefined, valid : error === undefined } : {})} {...custom}>
                 <option value="">-- 해당 사항 선택 --</option>
                 {children}
             </Input>
