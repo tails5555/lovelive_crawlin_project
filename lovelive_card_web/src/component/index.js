@@ -29,3 +29,4 @@ export {default as MenuNavBar} from './MenuNavBar';
 export {default as CardPagination} from './CardPagination';
 export {default as NotFoundInfo} from './NotFoundInfo';
 export {default as ServiceCheckingInfo} from './ServiceCheckingInfo';
+export {default as TitleRibbon} from './TitleRibbon';

@@ -8,7 +8,7 @@ import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
 } from '../action/action_character';
 
-import { CharacterProfileTable, CharacterGallery, CharacterGridAlbum } from '../component';
+import { CharacterProfileTable, CharacterGallery, CharacterGridAlbum, TitleRibbon } from '../component';
 
 import './style/background_view.css';
 
@@ -71,20 +71,37 @@ class CharacterInfoViewContainer extends React.Component {
         const { result, error } = this.props.characterInfo;
         return(
             <div className="background_view" id="character_info">
+                <div id="back_button" style={{ position : 'fixed', right : '20px', bottom : '20px', zIndex : '2' }}>
+                    <Button className="shadow" color="warning" size="lg" style={{ borderRadius : '10px' }} onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /></Button>
+                </div>
+
                 <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
                     <div id="container_top_margin" style={{ height : '10px' }} />
+
+                    <div id="character_gallery_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <TitleRibbon title="슬라이딩 갤러리" />
+                    </div>
+
                     <div id="character_gallery" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <CharacterGallery character={ result && result.kor_name } />
                     </div>
+                    
+                    <div id="character_profile_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <TitleRibbon title="캐릭터 정보" />
+                    </div>
+                    
                     <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <CharacterProfileTable character={ result } />
                     </div>
-                    <div id="back_button text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                        <Button color="info" size="lg" block onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /> 캐릭터 목록으로</Button>
+                    
+                    <div id="character_card_list_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <TitleRibbon title="캐릭터 사진 모음" />
                     </div>
+
                     <div id="character_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <CharacterGridAlbum />
                     </div>
+
                     <div id="container_bottom_margin" style={{ height : '10px' }} />
                 </Container>
             </div>
