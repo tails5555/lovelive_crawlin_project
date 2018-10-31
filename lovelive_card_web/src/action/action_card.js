@@ -27,7 +27,7 @@ export function fetchCardInfosByQuery(qs) {
         rank : queryModel && queryModel.rank,
         condition : queryModel && queryModel.condition,
         skill : queryModel && queryModel.skill,
-        ordering : '-no'
+        ordering : queryModel && (queryModel.ordering || '-no') 
     };
     const serverQS = queryString.stringify(serverQuery);
     const request = axios({

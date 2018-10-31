@@ -64,7 +64,8 @@ class CardSearchForm extends React.Component {
             property : clientQueryModel.property ? clientQueryModel.property : '',
             rank : clientQueryModel.rank ? clientQueryModel.rank.split(',') : '',
             condition : clientQueryModel.condition ? clientQueryModel.condition.split(',') : '',
-            skill : clientQueryModel.skill ? clientQueryModel.skill.split(',') : ''
+            skill : clientQueryModel.skill ? clientQueryModel.skill.split(',') : '',
+            ordering : '-no'
         };
         this.props.initialize(formInitialValues);
         

@@ -63,7 +63,8 @@ class CardPairSetView extends React.Component {
                             });
                         }
                     })
-                )
+                );
+                return null;
             });
         
     }

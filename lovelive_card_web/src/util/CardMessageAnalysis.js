@@ -1,12 +1,10 @@
-function japAndKorMessage(msgJp, msgKr) {
-    return {
-        totalMessage : `${msgJp}${msgKr ? '<br />' + msgKr : ''}`,
-        hasKorean : msgKr ? true : false,
-        jpMessage : msgJp
-    };
-}
+const japAndKorMessage = (msgJp, msgKr) => ({
+    totalMessage : `${msgJp}${msgKr ? '<br />' + msgKr : ''}`,
+    hasKorean : msgKr ? true : false,
+    jpMessage : msgJp
+});
 
-function japAndKorMessageOfMap(key, msgJp, msgKr){
+const japAndKorMessageOfMap = (key, msgJp, msgKr) => {
     const jpMessage = msgJp[key];
     const krMessage = msgKr[key];
     return {
@@ -16,7 +14,7 @@ function japAndKorMessageOfMap(key, msgJp, msgKr){
     };
 }
 
-function japAndKorMessageWithDate(key, msgJp, msgKr, msgDT, unitText) {
+const japAndKorMessageWithDate = (key, msgJp, msgKr, msgDT, unitText) => {
     const jpMessage = msgJp[key];
     const krMessage = msgKr[key];
     const startDate = msgDT[key]["start"];
@@ -61,7 +59,7 @@ export default function(message) {
             } else {
                 if(!Array.isArray(jsonData[jpKey])){
                     const keys = Object.keys(jsonData[jpKey]);
-                    let tmpMsgs = keys.map(key => tmpKey ? japAndKorMessageWithDate(key, jsonData[jpKey], jsonData[krKey], jsonData[tmpKey], [typeKeys[k]] == 'time' ? '시' : '') : japAndKorMessageOfMap(key, jsonData[jpKey], jsonData[krKey]));
+                    let tmpMsgs = keys.map(key => tmpKey !== null ? japAndKorMessageWithDate(key, jsonData[jpKey], jsonData[krKey], jsonData[tmpKey], [typeKeys[k]] === 'time' ? '시' : '') : japAndKorMessageOfMap(key, jsonData[jpKey], jsonData[krKey]));
                     Object.assign(messages, { [typeKeys[k]] : tmpMsgs });
                 } else {
                     Object.assign(messages, { [typeKeys[k]] : [] });
