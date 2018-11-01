@@ -4,13 +4,11 @@ from bs4 import BeautifulSoup
 from multiprocessing import Pool 
 
 import os
-from os.path import basename
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lovelive_crawlin_api.settings")
 
 import django
 from django.core.files import File
-from django.conf import settings
 
 django.setup()
 

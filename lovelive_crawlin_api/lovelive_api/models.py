@@ -111,6 +111,6 @@ class SongDetail(models.Model) :
     
 class SongCoverImage(models.Model) :
     id = models.AutoField(primary_key=True)
-    info = models.ForeignKey(SongInfo, on_delete=models.CASCADE)
+    info = models.OneToOneField(SongInfo, on_delete=models.CASCADE)
     img_url = models.URLField(null=True)
     img_file = models.ImageField(upload_to='song/main', blank=True, default='song/main/default_image.jpg')
