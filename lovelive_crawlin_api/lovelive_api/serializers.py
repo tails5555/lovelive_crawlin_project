@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo, SongInfo, SongDetail, SongCoverImage
 
 class CardInfoSerializer(serializers.ModelSerializer) :
     class Meta :
@@ -42,3 +42,17 @@ class CharacterMainInfoSerializer(serializers.ModelSerializer) :
         model = CharacterMainInfo
         fields = ('id', 'kor_name', 'jap_name', 'voice_actor', 'grade', 'birthday', 'height', 'three_size', 'blood_type', 'hobbies')
 
+class SongInfoSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = SongInfo
+        fields = ('id', 'kor_title', 'jap_title', 'type', 'property', 'unlock_level', 'unlock_condition')
+
+class SongDetailSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = SongDetail
+        fields = ('id', 'info', 'difficulty', 'star_count', 'level_value', 'exp_value', 'note_count', 'destiny_count', 'c_rank_score', 'b_rank_score', 'a_rank_score', 's_rank_score')
+
+class SongCoverImageSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = SongCoverImage
+        fields = ('id', 'info', 'img_url', 'img_file')

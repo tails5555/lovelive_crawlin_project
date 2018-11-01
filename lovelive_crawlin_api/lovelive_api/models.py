@@ -85,3 +85,32 @@ class CharacterMainInfo(models.Model) :
     three_size = models.CharField(max_length=15)
     blood_type = models.CharField(max_length=10)
     hobbies = models.CharField(max_length=30, null=True)
+
+class SongInfo(models.Model) :
+    id = models.IntegerField(unique=True, primary_key=True)
+    kor_title = models.CharField(max_length=60)
+    jap_title = models.CharField(max_length=60)
+    type = models.CharField(max_length=10)
+    property = models.CharField(max_length=5)
+    unlock_level = models.IntegerField()
+    unlock_condition = models.CharField(max_length=100)
+    
+class SongDetail(models.Model) :
+    id = models.AutoField(primary_key=True)
+    info = models.ForeignKey(SongInfo, on_delete=models.CASCADE)
+    difficulty = models.CharField(max_length=10)
+    star_count = models.IntegerField()
+    level_value = models.IntegerField()
+    exp_value = models.IntegerField()
+    note_count = models.IntegerField()
+    destiny_count = models.IntegerField()
+    c_rank_score = models.IntegerField()
+    b_rank_score = models.IntegerField()
+    a_rank_score = models.IntegerField()
+    s_rank_score = models.IntegerField()
+    
+class SongCoverImage(models.Model) :
+    id = models.AutoField(primary_key=True)
+    info = models.ForeignKey(SongInfo, on_delete=models.CASCADE)
+    img_url = models.URLField(null=True)
+    img_file = models.ImageField(upload_to='song/main', blank=True, default='song/main/default_image.jpg')
