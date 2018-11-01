@@ -1,6 +1,6 @@
-from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CardIconSerializer, CardImageSerializer, CharacterMainInfoSerializer
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo
-from .utils import ListPagination, CardPagination
+from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CardIconSerializer, CardImageSerializer, CharacterMainInfoSerializer, SongInfoSerializer, SongDetailSerializer, SongCoverImageSerializer
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo, SongInfo, SongDetail, SongCoverImage
+from .utils import ListPagination, CardPagination, SongPagination
 
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
@@ -16,8 +16,8 @@ class CardInfoViewSet(viewsets.ModelViewSet) :
     serializer_class = CardInfoSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filter_fields = ('property',)
-    search_fields = ('character_name', 'card_title')
-    ordering_fields = ('no', 'smile', 'pure', 'cool')
+    search_fields = ('character_name', 'card_title',)
+    ordering_fields = ('no', 'smile', 'pure', 'cool',)
     pagination_class = ListPagination
 
     def get_queryset(self):
@@ -60,55 +60,44 @@ class CardInfoViewSet(viewsets.ModelViewSet) :
 class CardDetailViewSet(viewsets.ModelViewSet) :
     queryset = CardDetail.objects.all()
     serializer_class = CardDetailSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('info', 'property_shape')
-    search_fields = ('info', 'property_shape')
-    ordering_fields = ('info', 'property_shape')
-    ordering=('info')
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('info',)
+    ordering = ('info',)
 
 class CardLevelEffectViewSet(viewsets.ModelViewSet) :
     queryset = CardLevelEffect.objects.all()
     serializer_class = CardLevelEffectSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('info', 'active_level')
-    search_fields = ('info', 'active_level')
-    ordering_fields = ('info', 'active_level')
-    ordering = ('info')
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('info',)
+    ordering = ('info', 'active_level',)
 
 class CardMessageViewSet(viewsets.ModelViewSet) :
     queryset = CardMessage.objects.all()
     serializer_class = CardMessageSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_backends = (DjangoFilterBackend,)
     filter_fields = ('info',)
-    search_fields = ('info',)
-    ordering_fields = ('info',)
     ordering = ('info',)
 
 class CardPairViewSet(viewsets.ModelViewSet) :
     queryset = CardPair.objects.all()
     serializer_class = CardPairSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_backends = (DjangoFilterBackend,)
     filter_fields = ('info',)
-    search_fields = ('info',)
-    ordering_fields = ('info',)
     ordering = ('info',)
 
 class CardIconViewSet(viewsets.ModelViewSet) :
     queryset = CardIcon.objects.all()
     serializer_class = CardIconSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_backends = (DjangoFilterBackend,)
     filter_fields = ('info',)
-    search_fields = ('info',)
-    ordering_fields = ('info',)
     ordering = ('info',)
 
 class CardImageViewSet(viewsets.ModelViewSet) :
     queryset = CardImage.objects.all()
     serializer_class = CardImageSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_backends = (SearchFilter, DjangoFilterBackend,)
     filter_fields = ('info',)
     search_fields = ('img_file',)
-    ordering_fields = ('info',)
     ordering = ('info',)
 
     @list_route(methods = ['get'])
@@ -126,7 +115,30 @@ class CardImageViewSet(viewsets.ModelViewSet) :
 class CharacterMainInfoViewSet(viewsets.ModelViewSet) :
     queryset = CharacterMainInfo.objects.all()
     serializer_class = CharacterMainInfoSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('kor_name', 'grade')
-    search_fields = ('kor_name', )
+    filter_backends = (SearchFilter, DjangoFilterBackend,)
+    filter_fields = ('grade',)
+    search_fields = ('kor_name',)
     pagination_class = CardPagination
+
+class SongInfoViewSet(viewsets.ModelViewSet) :
+    queryset = SongInfo.objects.all()
+    serializer_class = SongInfoSerializer
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    filter_fields = ('type', 'property',)
+    search_fields = ('kor_title',)
+    ordering_fields = ('id', 'unlock_level',)
+    pagination_class = SongPagination
+
+class SongDetailViewSet(viewsets.ModelViewSet) :
+    queryset = SongDetail.objects.all()
+    serializer_class = SongDetailSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('info',)
+    ordering = ('info',)
+
+class SongCoverImageViewSet(viewsets.ModelViewSet) :
+    queryset = SongCoverImage.objects.all()
+    serializer_class = SongCoverImageSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('info',)
+    ordering = ('info',)
