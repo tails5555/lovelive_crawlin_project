@@ -19,6 +19,20 @@ class MenuNavBar extends React.Component {
         });
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     render(){
         const { isOpen } = this.state;
         const { location } = this.props.history;
@@ -43,13 +57,13 @@ class MenuNavBar extends React.Component {
                             <NavLink style={ pathname === '/' ? activeStyle : null } tag={Link} to="/"><i className="fas fa-home" /> 홈</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1"><i className="fas fa-boxes" /> 카드</NavLink>
+                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1"><i className="fas fa-id-card" /> 카드</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1"><i className="fas fa-users" /> 캐릭터</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/album') ? activeStyle : null } tag={Link} to="/album/list?pg=1"><i className="fas fa-compact-disc" /> 앨범</NavLink>
+                            <NavLink style={ pathname.startsWith('/song') ? activeStyle : null } tag={Link} to="/song/list?pg=1"><i className="fas fa-drum" /> 음악</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink style={ pathname.startsWith('/event') ? activeStyle : null } tag={Link} to="/event/list?pg=1"><i className="fas fa-calendar" /> 이벤트</NavLink>

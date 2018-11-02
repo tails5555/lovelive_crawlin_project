@@ -62,10 +62,17 @@ class PhotoPreviewModal extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        const { detailElement, info } = this.props;
-        const infoResult = info !== nextProps.info || info !== nextState.info;
-        const detailResult = detailElement !== nextProps.detailElement || detailElement.result !== nextState.detailResult || detailElement.error !== nextState.detailError;
-        return infoResult || detailResult;
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     componentDidUpdate(prevProps, prevState) {

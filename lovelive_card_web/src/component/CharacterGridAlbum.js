@@ -41,6 +41,20 @@ class CharacterGridAlbum extends React.Component {
         return null;
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     handleClickNext = () => {
         const { pageNo, imageResult, pageSize } = this.state;
         const pageLength = Math.ceil(imageResult.length / pageSize);

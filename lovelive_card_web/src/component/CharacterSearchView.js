@@ -41,6 +41,20 @@ class CharacterSearchView extends React.Component {
         this._isMounted = false;
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     componentDidUpdate(prevProps, prevState) {
         const { search_keyword } = this.state;
         if(search_keyword !== prevState.search_keyword){

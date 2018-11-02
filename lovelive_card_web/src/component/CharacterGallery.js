@@ -65,6 +65,20 @@ class CharacterGallery extends React.Component {
             this.getCharacterImagesByName(character);
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         const { character } = this.state;
         if(character !== prevState.character)

@@ -40,7 +40,7 @@ function validate(values){
 const validateAndSearch = (values, dispatch) => {
     const clientQueryModel = {
         st : values && values.keyword.trim() === '' ? undefined : values.keyword.trim(),
-        property : values && values.property,
+        property : values && values.property === '' ? undefined : values.property,
         rank : values && Array.isArray(values.rank) ? (values.rank.length > 0 ? values.rank.join(',') : undefined) : undefined,
         condition : values && Array.isArray(values.condition) ? (values.condition.length > 0 ? values.condition.join(',') : undefined) : undefined,
         skill : values && Array.isArray(values.skill) ? (values.skill.length > 0 ? values.skill.join(',') : undefined) : undefined,
@@ -65,20 +65,35 @@ class CardSearchForm extends React.Component {
             rank : clientQueryModel.rank ? clientQueryModel.rank.split(',') : '',
             condition : clientQueryModel.condition ? clientQueryModel.condition.split(',') : '',
             skill : clientQueryModel.skill ? clientQueryModel.skill.split(',') : '',
-            ordering : '-no'
+            ordering : clientQueryModel.ordering ? clientQueryModel.ordering : ''
         };
         this.props.initialize(formInitialValues);
         
         let searched = false;
         for(var key in formInitialValues){
             if(formInitialValues[key] !== '') {
-                searched = true
+                searched = true;
                 break;
             }
         }
+
         this.setState({
             isSearch : searched
         });
+    }
+    
+    shouldComponentUpdate(nextProps, nextState){
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     handleClickFormInitialize(){
