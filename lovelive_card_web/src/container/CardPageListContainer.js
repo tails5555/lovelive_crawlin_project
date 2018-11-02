@@ -60,6 +60,7 @@ class CardPageListContainer extends React.Component {
     componentDidMount(){
         const { query } = this.state;
         this.props.fetchCardList(query);
+        window.onpopstate = this.onBackButtonEvent;
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -80,6 +81,13 @@ class CardPageListContainer extends React.Component {
         this.props.resetFetchCardList();
         this.props.resetFetchImagesByCardNo();
         this.props.resetFetchDetailByCardNo();
+    }
+
+    onBackButtonEvent = (e) => {
+        e.preventDefault();
+        const { history } = this.props;
+        if(history.location.pathname === '/card/list')
+            this.props.history.push(`/card/list/_page${history.location.search}`);
     }
 
     render(){

@@ -52,6 +52,7 @@ class CharacterCardListContainer extends React.Component {
     componentDidMount(){
         const { query } = this.state;
         this.props.fetchCharacterList(query);
+        window.onpopstate = this.onBackButtonEvent;
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -70,6 +71,13 @@ class CharacterCardListContainer extends React.Component {
 
     componentWillUnmount(){
         this.props.resetFetchCharacterList();
+    }
+
+    onBackButtonEvent = (e) => {
+        e.preventDefault();
+        const { history } = this.props;
+        if(history.location.pathname === '/character/list')
+            this.props.history.push(`/character/list/_page${history.location.search}`);
     }
 
     render(){

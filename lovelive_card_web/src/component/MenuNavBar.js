@@ -57,10 +57,10 @@ class MenuNavBar extends React.Component {
                             <NavLink style={ pathname === '/' ? activeStyle : null } tag={Link} to="/"><i className="fas fa-home" /> 홈</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list?pg=1"><i className="fas fa-id-card" /> 카드</NavLink>
+                            <NavLink style={ pathname.startsWith('/card') ? activeStyle : null } tag={Link} to="/card/list/_page?pg=1"><i className="fas fa-id-card" /> 카드</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list?pg=1"><i className="fas fa-users" /> 캐릭터</NavLink>
+                            <NavLink style={ pathname.startsWith('/character') ? activeStyle : null } tag={Link} to="/character/list/_page?pg=1"><i className="fas fa-users" /> 캐릭터</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink style={ pathname.startsWith('/song') ? activeStyle : null } tag={Link} to="/song/list?pg=1"><i className="fas fa-drum" /> 음악</NavLink>
