@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Row, Col, Alert } from 'reactstrap';
 import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
-} from '../action/action_detail';
+} from '../action/action_card_detail';
 import CardDetailTable from './CardDetailTable';
 
 const MEDIA_URL = 'http://localhost:8000/media';

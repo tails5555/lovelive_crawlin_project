@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Alert, Table} from 'reactstrap';
 import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
-} from '../action/action_detail';
+} from '../action/action_card_detail';
 import {
     fetchCardImagesByInfoNo, fetchCardImagesByInfoNoSuccess, fetchCardImagesByInfoNoFailure, resetFetchCardImagesByInfoNo
 } from '../action/action_image';

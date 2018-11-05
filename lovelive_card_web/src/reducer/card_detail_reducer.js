@@ -1,6 +1,6 @@
 import {
     FETCH_CARD_DETAIL_BY_INFO_NO, FETCH_CARD_DETAIL_BY_INFO_NO_SUCCESS, FETCH_CARD_DETAIL_BY_INFO_NO_FAILURE, RESET_FETCH_CARD_DETAIL_BY_INFO_NO
-} from '../action/action_detail';
+} from '../action/action_card_detail';
 
 const INITIAL_STATE = {
     detailElement : {

@@ -1,6 +1,6 @@
 import {
     FETCH_MESSAGES_BY_INFO, FETCH_MESSAGES_BY_INFO_SUCCESS, FETCH_MESSAGES_BY_INFO_FAILURE, RESET_FETCH_MESSAGES_BY_INFO
-} from '../action/action_message';
+} from '../action/action_card_message';
 
 const INITIAL_STATE = {
     messageElement : {

@@ -1,6 +1,6 @@
 import {
     FETCH_PAIRS_BY_CARD_NO, FETCH_PAIRS_BY_CARD_NO_SUCCESS, FETCH_PAIRS_BY_CARD_NO_FAILURE, RESET_FETCH_PAIRS_BY_CARD_NO
-} from '../action/action_pair';
+} from '../action/action_card_pair';
 
 const INITIAL_STATE = {
     pairList : {

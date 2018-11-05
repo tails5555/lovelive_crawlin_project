@@ -6,23 +6,24 @@ import { Container, Button } from 'reactstrap';
 
 import { 
     fetchCardInfoByNo, fetchCardInfoByNoSuccess, fetchCardInfoByNoFailure, resetFetchCardInfoByNo 
-} from '../action/action_card';
+} from '../action/action_card_info';
 import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
-} from '../action/action_detail';
+} from '../action/action_card_detail';
 import {
     fetchCardEffectsByInfoNo, fetchCardEffectsByInfoNoSuccess, fetchCardEffectsByInfoNoFailure, resetFetchCardEffectsByInfoNo
-} from '../action/action_effect';
+} from '../action/action_card_effect';
 import {
     fetchMessagesByInfo, fetchMessagesByInfoSuccess, fetchMessagesByInfoFailure, resetFetchMessagesByInfo
-} from '../action/action_message';
+} from '../action/action_card_message';
 import {
     fetchPairsByCardNo, fetchPairsByCardNoSuccess, fetchPairsByCardNoFailure, resetFetchPairsByCardNo
-} from '../action/action_pair';
-
+} from '../action/action_card_pair';
 import {
     CardImageGallery, CardPropertyBar, CardInfoDetailView, CardLevelEffects, CardVoiceMessageList, CardPairSetView, TitleRibbon
 } from '../component';
+
+import './style/background_view.css';
 
 const mapStateToProps = (state) => {
     return {

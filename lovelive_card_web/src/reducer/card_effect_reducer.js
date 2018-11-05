@@ -1,6 +1,6 @@
 import {
     FETCH_CARD_EFFECTS_BY_INFO_NO, FETCH_CARD_EFFECTS_BY_INFO_NO_SUCCESS, FETCH_CARD_EFFECTS_BY_INFO_NO_FAILURE, RESET_FETCH_CARD_EFFECTS_BY_INFO_NO
-} from '../action/action_effect';
+} from '../action/action_card_effect';
 
 const INITIAL_STATE = {
     effectList : {

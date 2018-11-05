@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import ParallaxStructureView from './ParallaxStructureView';
 import {
     fetchCardInfosRecently, fetchCardInfosRecentlySuccess, fetchCardInfosRecentlyFailure, resetFetchCardInfosRecently
-} from '../action/action_card';
+} from '../action/action_card_info';
 import RecentlyCardBriefInfo from './RecentlyCardBriefInfo';
 
 const mapStateToProps = (state) => {

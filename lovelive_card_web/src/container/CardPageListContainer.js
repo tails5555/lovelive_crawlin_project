@@ -5,13 +5,13 @@ import { Container } from 'reactstrap';
 
 import {
     fetchCardInfosByQuery, fetchCardInfosByQuerySuccess, fetchCardInfosByQueryFailure, resetFetchCardInfosByQuery
-} from '../action/action_card';
+} from '../action/action_card_info';
 import {
     resetFetchCardImagesByInfoNo
 } from '../action/action_image';
 import {
     resetFetchCardDetailByInfoNo
-} from '../action/action_detail';
+} from '../action/action_card_detail';
 
 import { CardTable, CardPagination, CardSearchForm } from '../component';
 
