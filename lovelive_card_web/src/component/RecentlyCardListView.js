@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ListGroup } from 'reactstrap';
+import { Button, ListGroup, Alert } from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ParallaxStructureView from './ParallaxStructureView';
@@ -79,7 +79,18 @@ class RecentlyCardListView extends React.Component {
     render(){
         const { cardResult, cardError } = this.state;
         const { handleClickLeft, handleClickRight } = this.props;
-        const recentlyCards = cardResult.map(card => <RecentlyCardBriefInfo key={card.no} info={card} />);
+        const recentlyCards = 
+            cardError === null ? 
+                cardResult.map(card => <RecentlyCardBriefInfo key={card.no} info={card} />) :
+                (
+                    <Alert color="danger">
+                        <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                        <p className="text-center">최신 카드 정보 불러오는 도중 에러가 발생 했습니다.</p>
+                        <p className="text-center">내용은 다음과 같습니다.</p>
+                        <hr/>
+                        <p className="text-center">{cardError}</p>
+                    </Alert>
+                );
         return(
             <ParallaxStructureView viewId="recently_card_list_view" handleClickLeft={handleClickLeft} handleClickRight={handleClickRight}>
                 <div className="parallax_box">

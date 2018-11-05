@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Alert } from 'reactstrap';
 import CardInfoTable from './CardInfoTable';
 import CardDetailTable from './CardDetailTable';
 
@@ -49,7 +49,17 @@ class CardInfoDetailView extends React.Component {
                     <CardInfoTable infoResult={infoResult} infoError={infoError} hasPopup={true} />
                 </Col>
                 <Col sm={6}>
-                    <CardDetailTable detailResult={detailResult} />
+                {
+                    Array.isArray(detailError) ? 
+                        <CardDetailTable detailResult={detailResult} /> :
+                        <Alert color="danger">
+                            <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                            <p className="text-center">카드 세부 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                            <p className="text-center">내용은 다음과 같습니다.</p>
+                            <hr/>
+                            <p className="text-center">{detailError}</p>
+                        </Alert>
+                }
                 </Col>
             </Row>
         )

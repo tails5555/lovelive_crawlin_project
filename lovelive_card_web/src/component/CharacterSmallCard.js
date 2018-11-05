@@ -78,11 +78,11 @@ class CharacterSmallCard extends React.Component {
     }
 
     selectRandomURL = () => {
-        const { imageResult } = this.state;
+        const { imageResult, imageError } = this.state;
         let randomIdx = -1;
         let randomImage = null;
 
-        if(imageResult.length > 1){
+        if(imageResult.length > 1 && imageError === null){
             randomIdx = Math.floor(Math.random() * imageResult.length)
         }
         
@@ -98,7 +98,7 @@ class CharacterSmallCard extends React.Component {
     }
 
     render(){
-        const { character, imageResult, imageError, randomURL } = this.state;
+        const { character, randomURL } = this.state;
         const { search } = this.props.history.location;
         return(
             <Card className="animationCard">

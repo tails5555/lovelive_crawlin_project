@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Row, Col } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Row, Col, Alert } from 'reactstrap';
 import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
 } from '../action/action_detail';
@@ -98,7 +98,24 @@ class PhotoPreviewModal extends React.Component {
     render(){
         const { handleToggle } = this.props;
         const { info, showModal, photoURI, detailResult, detailError } = this.state;
+        let detailDisplay = null;
 
+        if(detailResult !== null){
+            detailDisplay = (
+                <CardDetailTable detailResult={detailResult} />
+            );
+        } else {
+            detailDisplay = (
+                <Alert color="danger">
+                    <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                    <p className="text-center">카드 세부 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                    <p className="text-center">내용은 다음과 같습니다.</p>
+                    <hr/>
+                    <p className="text-center">{detailError}</p>
+                </Alert>
+            );
+        }
+        
         return(
             <Fragment>
                 <Modal isOpen={showModal} toggle={handleToggle} className={this.props.className + " modal-lg"}>
@@ -108,8 +125,8 @@ class PhotoPreviewModal extends React.Component {
                             <Col sm={6}>
                                 { photoURI !== null ? <img src={`${MEDIA_URL}/${photoURI}`} className="img-fluid" alt={`modal_img_${info}}`} /> : null }
                             </Col>
-                            <Col sm={6}>
-                                <CardDetailTable detailResult={detailResult} />
+                            <Col sm={6} className="d-flex align-items-center">
+                                {detailDisplay}
                             </Col>
                         </Row>
                     </ModalBody>

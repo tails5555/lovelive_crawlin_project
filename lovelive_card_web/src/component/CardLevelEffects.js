@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import CountUp from 'react-countup';
-import { ListGroup, ListGroupItem, Badge, Progress } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge, Progress, Alert } from 'reactstrap';
 import './style/level_effect_circle.css';
 
 class CardLevelEffects extends React.Component {
@@ -39,9 +39,10 @@ class CardLevelEffects extends React.Component {
 
     render(){
         const { effectResult, effectError } = this.state;
+     
         const numList = effectResult.map(effect => effect.active_context.replace(/[^0-9.]/g, ' ').split(/(\s+)/).filter(context => context.trim() !== ''));
         let effectView =
-            effectResult.length > 0 ?
+            Array.isArray(effectError) && effectResult.length > 0 ?
                 effectResult.map((effect, idx) => (
                     <ListGroupItem key={`effect_view_${effect.id}`} className="justify-content-between">
                         <Badge id={`color_${effect.active_level}`}>{effect.active_level} 레벨</Badge><br/>
@@ -52,7 +53,16 @@ class CardLevelEffects extends React.Component {
                                 : null
                         }
                     </ListGroupItem>
-                )) : null
+                )) : 
+                (
+                    <Alert color="danger">
+                        <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                        <p className="text-center">카드 효과 수치를 불러오는 도중 에러가 발생 했습니다.</p>
+                        <p className="text-center">내용은 다음과 같습니다.</p>
+                        <hr/>
+                        <p className="text-center">{effectError}</p>
+                    </Alert>
+                )
 
         return(
             <Fragment>

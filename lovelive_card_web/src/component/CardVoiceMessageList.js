@@ -85,7 +85,7 @@ class CardVoiceMessageList extends React.Component {
             </NavItem>
         );
         
-        if(messageKeys.length > 0) {
+        if(messageKeys.length > 0 && Array.isArray(messageError)) {
             messageViews = messageKeys.map((key, idx) => 
                 <TabPane tabId={idx} key={`message_view_${key}_${idx}`}>
                     {

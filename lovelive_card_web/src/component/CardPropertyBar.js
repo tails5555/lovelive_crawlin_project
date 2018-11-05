@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Progress } from 'reactstrap';
+import { Progress, Alert } from 'reactstrap';
 
 import './style/progress_bar_style.css';
 
@@ -47,14 +47,26 @@ class CardPropertyBar extends React.Component {
         if(smile && pure && cool){
             max = (smile > pure) ? (smile > cool) ? smile : cool : (pure > cool) ? pure : cool;
         }
-        
+
         return(
-            <Fragment>
-                <Progress className="smile_bar" bar value={smile} max={max}>{smile}</Progress>
-                <Progress className="pure_bar" bar value={pure} max={max}>{pure}</Progress>
-                <Progress className="cool_bar" bar value={cool} max={max}>{cool}</Progress>
-            </Fragment>
-        )
+            (infoError === null) ?
+                (
+                    <Fragment>
+                        <Progress className="smile_bar" bar value={smile} max={max}>{smile}</Progress>
+                        <Progress className="pure_bar" bar value={pure} max={max}>{pure}</Progress>
+                        <Progress className="cool_bar" bar value={cool} max={max}>{cool}</Progress>
+                    </Fragment>
+                ) :
+                (
+                    <Alert color="danger">
+                        <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                        <p className="text-center">카드 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                        <p className="text-center">내용은 다음과 같습니다.</p>
+                        <hr/>
+                        <p className="text-center">{infoError}</p>
+                    </Alert>
+                )
+        );
     }
 }
 

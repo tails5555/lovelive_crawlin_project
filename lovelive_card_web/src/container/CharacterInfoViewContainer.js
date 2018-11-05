@@ -2,7 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Button } from 'reactstrap';
+import { Container, Button, Alert } from 'reactstrap';
 
 import {
     fetchCharacterInfoById, fetchCharacterInfoByIdSuccess, fetchCharacterInfoByIdFailure, resetFetchCharacterInfoById
@@ -83,6 +83,7 @@ class CharacterInfoViewContainer extends React.Component {
 
     render(){
         const { result, error } = this.props.characterInfo;
+        
         return(
             <div className="background_view" id="character_info">
                 <div id="back_button" style={{ position : 'fixed', right : '20px', bottom : '20px', zIndex : '2' }}>
@@ -95,25 +96,59 @@ class CharacterInfoViewContainer extends React.Component {
                     <div id="character_gallery_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <TitleRibbon title="슬라이딩 갤러리" />
                     </div>
-
+                    
                     <div id="character_gallery" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                        <CharacterGallery character={ result && result.kor_name } />
+                    {
+                        error === null ? 
+                            <CharacterGallery character={ result && result.kor_name } /> :
+                            <Alert color="danger">
+                                <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                                <p className="text-center">캐릭터 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                                <p className="text-center">내용은 다음과 같습니다.</p>
+                                <hr/>
+                                <p className="text-center">{error}</p>
+                            </Alert>
+                    }
                     </div>
                     
                     <div id="character_profile_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <TitleRibbon title="캐릭터 정보" />
                     </div>
                     
-                    <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                        <CharacterProfileTable character={ result } />
-                    </div>
-                    
+                    {
+                        error === null ?
+                        (
+                            <div id="character_profile" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                                <CharacterProfileTable character={ result } />
+                            </div>
+                        ) : 
+                        (
+                            <Alert color="danger">
+                                <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                                <p className="text-center">캐릭터 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                                <p className="text-center">내용은 다음과 같습니다.</p>
+                                <hr/>
+                                <p className="text-center">{error}</p>
+                            </Alert>
+                        )
+                    }
                     <div id="character_card_list_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <TitleRibbon title="캐릭터 사진 모음" />
                     </div>
 
                     <div id="character_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                        <CharacterGridAlbum />
+                    {
+                        error === null ?
+                            <CharacterGridAlbum />
+                            :
+                            <Alert color="danger">
+                                <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                                <p className="text-center">캐릭터 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                                <p className="text-center">내용은 다음과 같습니다.</p>
+                                <hr/>
+                                <p className="text-center">{error}</p>
+                            </Alert>
+                    }
                     </div>
 
                     <div id="container_bottom_margin" style={{ height : '10px' }} />

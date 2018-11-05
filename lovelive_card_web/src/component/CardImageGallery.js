@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Alert } from 'reactstrap';
 
 import './style/image_animate.css';
 
@@ -63,11 +63,21 @@ class CardImageGallery extends React.Component {
 
     render(){
         const { imageResult, imageError } = this.state;
-        const imageView = imageResult.map(image => (
-            <Col key={`card_detail_img_${image.id}`} xs={6} sm={6} className="fade-in text-center">
-                <img className="img-fluid" alt={`card_detail_img_${image.id}`} src={image && image.img_file} />
-            </Col>
-        ));
+        const imageView = imageError === null ? 
+            imageResult.map(image => (
+                <Col key={`card_detail_img_${image.id}`} xs={6} sm={6} className="fade-in text-center">
+                    <img className="img-fluid" alt={`card_detail_img_${image.id}`} src={image && image.img_file} />
+                </Col>
+            )) :
+            (
+                <Alert color="danger">
+                    <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                    <p className="text-center">카드 이미지를 불러오는 도중 에러가 발생 했습니다.</p>
+                    <p className="text-center">내용은 다음과 같습니다.</p>
+                    <hr/>
+                    <p className="text-center">{imageError}</p>
+                </Alert>
+            );
         return(
             <Row>
                 {imageView}

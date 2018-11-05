@@ -92,19 +92,20 @@ class CharacterGridAlbum extends React.Component {
         const { imageResult, imageError, pageNo, pageSize, selectInfo, showModal, photoURI } = this.state;
         const pageLength = Math.ceil(imageResult.length / pageSize);
         const pageArray = imageResult.length > 0 ? paginate(imageResult, pageSize, pageNo) : [];
-        const cardView = imageResult.length > 0 ? 
-            pageArray.map((image, idx) => 
-                image.model !== undefined ?
-                <Col xs={4} sm={2} key={`image_card_${image.pk}`}>
-                    <img 
-                        className="img-fluid img-thumbnail smallCard" 
-                        alt={`card_image_${idx}`} 
-                        src={`${MEDIA_URL}/${image.fields && image.fields.img_file}`} 
-                        onClick={() => this.handleClickModalToggle(image.fields && image.fields.info, image.fields && image.fields.img_file)}
-                        style={{ cursor : 'pointer' }}
-                    />
-                </Col> : <Col xs={4} sm={2} key={`image_card_${idx}`}></Col>
-            ) : 
+        const cardView = 
+            Array.isArray(imageError) && imageResult.length > 0 ? 
+                pageArray.map((image, idx) => 
+                    image.model !== undefined ?
+                        <Col xs={4} sm={2} key={`image_card_${image.pk}`}>
+                            <img 
+                                className="img-fluid img-thumbnail smallCard" 
+                                alt={`card_image_${idx}`} 
+                                src={`${MEDIA_URL}/${image.fields && image.fields.img_file}`} 
+                                onClick={() => this.handleClickModalToggle(image.fields && image.fields.info, image.fields && image.fields.img_file)}
+                                style={{ cursor : 'pointer' }}
+                            />
+                        </Col> : <Col xs={4} sm={2} key={`image_card_${idx}`}></Col>
+                ) : 
             null;
         return (
             <Fragment>

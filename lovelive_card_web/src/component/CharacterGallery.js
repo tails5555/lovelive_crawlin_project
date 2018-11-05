@@ -96,8 +96,7 @@ class CharacterGallery extends React.Component {
 
     render(){
         const { imageResult, imageError } = this.state;
-
-        const resultImages = imageResult.length > 0 ? 
+        const resultImages = Array.isArray(imageError) && imageResult.length > 0 ? 
             imageResult.map((image, idx) => (
                 image.model !== undefined ? 
                 <div key={`character_img_${image.pk}`}>

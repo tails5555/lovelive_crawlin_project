@@ -142,7 +142,17 @@ class PopupCardInfo extends React.Component {
                     </Alert>
                     <div id="mini_card_imgs" className="fade-in" style={{ marginBottom : '15px' }}>
                         {
-                            imageResult.map((image, idx) => <img key={`card_img_${image.info}_${idx}`} alt={`card_img_${image.id}`} src={image.img_file} style={{ width : '185px' }} />)
+                            Array.isArray(imageError) ?    
+                                imageResult.map((image, idx) => <img key={`card_img_${image.info}_${idx}`} alt={`card_img_${image.id}`} src={image.img_file} style={{ width : '185px' }} />) :
+                                (
+                                    <Alert color="danger">
+                                        <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                                        <p className="text-center">이미지를 불러오는 도중 에러가 발생 했습니다.</p>
+                                        <p className="text-center">내용은 다음과 같습니다.</p>
+                                        <hr/>
+                                        <p className="text-center">{imageError}</p>
+                                    </Alert>
+                                )
                         }
                     </div>
                     <Table className="fade-in" size="sm" bordered>
@@ -193,6 +203,16 @@ class PopupCardInfo extends React.Component {
                         </tbody>
                     </Table>
                 </div>
+            )
+        } else {
+            resultRender = (
+                <Alert color="danger">
+                    <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                    <p className="text-center">카드 세부 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                    <p className="text-center">내용은 다음과 같습니다.</p>
+                    <hr/>
+                    <p className="text-center">{detailError}</p>
+                </Alert>
             )
         }
 

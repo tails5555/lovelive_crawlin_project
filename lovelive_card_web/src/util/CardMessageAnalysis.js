@@ -42,7 +42,7 @@ export default function(message) {
                     return a;
                 }, []);
 
-        for(var k = 0; k < typeKeys.length; k++){
+        for(let k = 0; k < typeKeys.length; k++){
             let jpKey = `${typeKeys[k]}_jp`;
             let krKey = `${typeKeys[k]}_kr`;
             let tmpKey = null;
@@ -58,8 +58,13 @@ export default function(message) {
                 Object.assign(messages, { [typeKeys[k]] : message });
             } else {
                 if(!Array.isArray(jsonData[jpKey])){
-                    const keys = Object.keys(jsonData[jpKey]);
-                    let tmpMsgs = keys.map(key => tmpKey !== null ? japAndKorMessageWithDate(key, jsonData[jpKey], jsonData[krKey], jsonData[tmpKey], [typeKeys[k]] === 'time' ? '시' : '') : japAndKorMessageOfMap(key, jsonData[jpKey], jsonData[krKey]));
+                    let tmpMsgs = [];
+                    for(let key in jsonData[jpKey]){
+                        if(tmpKey !== null)
+                            tmpMsgs.push(japAndKorMessageWithDate(key, jsonData[jpKey], jsonData[krKey], jsonData[tmpKey], [typeKeys[k]] === 'time' ? '시' : ''));
+                        else
+                            tmpMsgs.push(japAndKorMessageOfMap(key, jsonData[jpKey], jsonData[krKey]));
+                    }
                     Object.assign(messages, { [typeKeys[k]] : tmpMsgs });
                 } else {
                     Object.assign(messages, { [typeKeys[k]] : [] });
