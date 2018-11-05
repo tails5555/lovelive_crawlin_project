@@ -9,6 +9,8 @@ import pairReducer from './card_pair_reducer';
 
 import characterReducer from './character_reducer';
 
+import songReducer from './song_info_reducer';
+
 import mediaReducer from './media_reducer';
 
 export const rootReducer = combineReducers({
@@ -19,5 +21,6 @@ export const rootReducer = combineReducers({
     message : messageReducer,
     pair : pairReducer,
     character : characterReducer,
+    song : songReducer,
     media : mediaReducer,
 });

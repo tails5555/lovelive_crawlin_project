@@ -24,6 +24,9 @@ export {default as CharacterGallery} from './CharacterGallery';
 export {default as CharacterProfileTable} from './CharacterProfileTable';
 export {default as CharacterGridAlbum} from './CharacterGridAlbum';
 
+// Song Brief Info
+export {default as SongCardList} from './SongCardList';
+
 // Common Using
 export {default as MenuNavBar} from './MenuNavBar';
 export {default as CardPagination} from './CardPagination';

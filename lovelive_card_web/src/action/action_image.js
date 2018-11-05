@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const CARD_IMAGE_URL = 'http://127.0.0.1:8000/card_images/';
+const SONG_IMAGE_URL = 'http://127.0.0.1:8000/song_cover_images/';
 
 export const FETCH_CARD_IMAGES_BY_INFO_NO = 'FETCH_CARD_IMAGES_BY_INFO_NO';
 export const FETCH_CARD_IMAGES_BY_INFO_NO_SUCCESS = 'FETCH_CARD_IMAGES_BY_INFO_NO_SUCCESS';
@@ -11,6 +12,11 @@ export const FETCH_CARD_IMAGES_BY_CHARACTER = 'FETCH_CARD_IMAGES_BY_CHARACTER';
 export const FETCH_CARD_IMAGES_BY_CHARACTER_SUCCESS = 'FETCH_CARD_IMAGES_BY_CHARACTER_SUCCESS';
 export const FETCH_CARD_IMAGES_BY_CHARACTER_FAILURE = 'FETCH_CARD_IMAGES_BY_CHARACTER_FAILURE';
 export const RESET_FETCH_CARD_IMAGES_BY_CHARACTER = 'RESET_FETCH_CARD_IMAGES_BY_CHARACTER';
+
+export const FETCH_SONG_IMAGE_BY_ID = 'FETCH_SONG_IMAGE_BY_ID';
+export const FETCH_SONG_IMAGE_BY_ID_SUCCESS = 'FETCH_SONG_IMAGE_BY_ID_SUCCESS';
+export const FETCH_SONG_IMAGE_BY_ID_FAILURE = 'FETCH_SONG_IMAGE_BY_ID_FAILURE';
+export const RESET_FETCH_SONG_IMAGE_BY_ID = 'RESET_FETCH_SONG_IMAGE_BY_ID';
 
 export function fetchCardImagesByInfoNo(cardNo){
     const request = axios({
@@ -71,5 +77,37 @@ export function fetchCardImagesByCharacterFailure(error){
 export function resetFetchCardImagesByCharacter(){
     return {
         type : RESET_FETCH_CARD_IMAGES_BY_CHARACTER
+    }
+}
+
+export function fetchSongImageById(songId){
+    const request = axios({
+        url : `${SONG_IMAGE_URL}/?info=${songId}`,
+        method : 'get'
+    });
+
+    return {
+        type : FETCH_SONG_IMAGE_BY_ID,
+        payload : request
+    }
+}
+
+export function fetchSongImageByIdSuccess(request){
+    return {
+        type : FETCH_SONG_IMAGE_BY_ID_SUCCESS,
+        payload : request.data
+    }
+}
+
+export function fetchSongImageByIdFailure(error){
+    return {
+        type : FETCH_SONG_IMAGE_BY_ID_FAILURE,
+        payload : error
+    }
+}
+
+export function resetFetchSongImageById(){
+    return {
+        type : RESET_FETCH_SONG_IMAGE_BY_ID
     }
 }

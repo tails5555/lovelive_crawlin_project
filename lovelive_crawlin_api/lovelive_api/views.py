@@ -127,6 +127,7 @@ class SongInfoViewSet(viewsets.ModelViewSet) :
     filter_fields = ('type', 'property',)
     search_fields = ('kor_title',)
     ordering_fields = ('id', 'unlock_level',)
+    ordering = ('-id',)
     pagination_class = SongPagination
 
 class SongDetailViewSet(viewsets.ModelViewSet) :

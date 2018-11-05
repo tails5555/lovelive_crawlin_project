@@ -46,3 +46,19 @@
     -o-background-size: cover;
     background-size: cover;
 }
+
+#song_list {
+    background: url(../../resource/image/song_list_background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#song_info {
+    background: url(../../resource/image/song_info_background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

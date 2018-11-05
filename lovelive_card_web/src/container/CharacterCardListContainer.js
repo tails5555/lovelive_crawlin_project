@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCharacterList : (pageNo) =>  dispatch(fetchCharacterListByQuery(pageNo)).then(response => {
+        fetchCharacterList : (query) =>  dispatch(fetchCharacterListByQuery(query)).then(response => {
             if(!response.error)
                 dispatch(fetchCharacterListByQuerySuccess(response.payload));
             }).catch(error => {

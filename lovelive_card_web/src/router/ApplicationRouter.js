@@ -9,6 +9,8 @@ import NotFoundContainer from '../container/NotFoundContainer';
 import ServiceCheckingContainer from '../container/ServiceCheckingContainer';
 import IndexViewContainer from '../container/IndexViewContainer';
 import SlideAnotherView from './SlideAnotherView';
+import SongCardListContainer from '../container/SongCardListContainer';
+import SongInfoViewContainer from '../container/SongInfoViewContainer';
 
 class ApplicationRouter extends React.Component {
     constructor(props){
@@ -41,6 +43,9 @@ class ApplicationRouter extends React.Component {
                     <Route exact path="/character/list" component={CharacterCardListContainer} />
                     <Route exact path="/character/list/_page" render={({ location }) => <Redirect to={`/character/list${location.search}`} />} />
                     <Route exact path="/character/info" component={CharacterInfoViewContainer} />
+                    <Route exact path="/song/list" component={SongCardListContainer} />
+                    <Route exact path="/song/list/_page" render={({ location }) => <Redirect to={`/song/list${location.search}`} />} />
+                    <Route exact path="/song/info" component={SongInfoViewContainer} />
                     <Route component={NotFoundContainer} />
                 </Switch>
             );
