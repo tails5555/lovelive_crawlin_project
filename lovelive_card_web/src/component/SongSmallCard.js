@@ -66,6 +66,11 @@ class SongSmallCard extends React.Component {
     render(){
         const { song, imageResult, imageError } = this.state;
         const { search } = this.props.history.location;
+        const property_color = 
+            song && song.property === '스마일' ? 'deeppink' :
+                song && song.property === '퓨어' ? 'limegreen' : 
+                    song && song.property === '쿨' ? 'slateblue' : 'black';
+        
         return(
             <Card className="animationCard">
                 <CardBody>
@@ -86,6 +91,11 @@ class SongSmallCard extends React.Component {
                         )
                 }
                 <CardBody>
+                    <div className="d-flex justify-content-around" style={{ marginBottom : '10px' }}>
+                        <span style={{ color : property_color }}>{song && song.property}</span>
+                        <span>{ song && song.type === '일일곡' ? '일일한정곡' : song.type }</span>
+                        <span><i className="fas fa-unlock" /> Lv. {song && song.unlock_level}</span>
+                    </div>
                     <Button tag={Link} to={`info?id=${song.id}&${search.replace('?', '')}`} color="info" block><i className="fas fa-music"></i> 노래 정보 조회하러 가기</Button>
                 </CardBody>
             </Card>

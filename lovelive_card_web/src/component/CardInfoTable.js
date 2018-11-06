@@ -62,10 +62,10 @@ class CardInfoTable extends React.Component {
     render(){
         const { infoResult, hasPopup, mouseCharacter, mouseX, mouseY } = this.state;
         var regExp = /[[|\]]/gi;
-            const property_color = 
-                infoResult && infoResult.property === '스마일' ? 'deeppink' :
-                    infoResult && infoResult.property === '퓨어' ? 'limegreen' : 
-                        infoResult && infoResult.property === '쿨' ? 'slateblue' : 'black';
+        const property_color = 
+            infoResult && infoResult.property === '스마일' ? 'deeppink' :
+                infoResult && infoResult.property === '퓨어' ? 'limegreen' : 
+                    infoResult && infoResult.property === '쿨' ? 'slateblue' : 'black';
         
         let characterPopup = (hasPopup && mouseCharacter !== '') ? <PopupCharacterInfo korName={mouseCharacter} mouseX={mouseX} mouseY={mouseY} /> : null;
         
