@@ -26,6 +26,7 @@ export {default as CharacterGridAlbum} from './CharacterGridAlbum';
 
 // Song Brief Info
 export {default as SongCardList} from './SongCardList';
+export {default as SongSearchForm} from './SongSearchForm';
 
 // Common Using
 export {default as MenuNavBar} from './MenuNavBar';

@@ -8,8 +8,9 @@ import {
 } from '../action/action_song_info';
 
 import {
-    SongCardList, CardPagination
+    SongCardList, CardPagination, SongSearchForm
 } from '../component';
+
 import './style/background_view.css';
 
 const mapStateToProps = (state) => ({
@@ -86,7 +87,7 @@ class SongCardListContainer extends React.Component {
                 <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
                     <div id="search_form_margin" style={{ height : '10px' }} />
                     <div id="song_search_form" style={{ marginBottom : '10px' }}>
-                        
+                        <SongSearchForm />
                     </div>
                     <div id="song_small_card_list" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <SongCardList songs={results} />

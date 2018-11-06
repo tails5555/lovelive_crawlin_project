@@ -14,7 +14,8 @@ export function fetchSongInfosByQuery(qs){
         page : queryModel && queryModel.pg,
         search : queryModel && queryModel.st,
         type : queryModel && queryModel.type,
-        property : queryModel && queryModel.property
+        property : queryModel && queryModel.property,
+        ordering : queryModel && (queryModel.ordering || '-id')  
     };
 
     const serverQS = queryString.stringify(serverQuery);
