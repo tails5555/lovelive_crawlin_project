@@ -13,7 +13,7 @@ import '../style/popup_card.css';
 
 function mapStateToProps(state){
     return {
-        detailElement : state.detail.detailElement,
+        detailElement : state.card_detail.detailElement,
         cardImages : state.media.cardImages
     }
 }

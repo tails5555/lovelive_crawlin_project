@@ -8,6 +8,11 @@ export const FETCH_SONG_INFOS_BY_QUERY_SUCCESS = 'FETCH_SONG_INFOS_BY_QUERY_SUCC
 export const FETCH_SONG_INFOS_BY_QUERY_FAILURE = 'FETCH_SONG_INFOS_BY_QUERY_FAILURE';
 export const RESET_FETCH_SONG_INFOS_BY_QUERY = 'RESET_FETCH_SONG_INFOS_BY_QUERY';
 
+export const FETCH_SONG_INFO_BY_ID = 'FETCH_SONG_INFO_BY_ID';
+export const FETCH_SONG_INFO_BY_ID_SUCCESS = 'FETCH_SONG_INFO_BY_ID_SUCCESS';
+export const FETCH_SONG_INFO_BY_ID_FAILURE = 'FETCH_SONG_INFO_BY_ID_FAILURE';
+export const RESET_FETCH_SONG_INFO_BY_ID = 'RESET_FETCH_SONG_INFO_BY_ID';
+
 export function fetchSongInfosByQuery(qs){
     const queryModel = queryString.parse(qs);
     const serverQuery = {
@@ -47,5 +52,36 @@ export function fetchSongInfosByQueryFailure(error){
 export function resetFetchSongInfosByQuery(){
     return {
         type : RESET_FETCH_SONG_INFOS_BY_QUERY
+    }
+}
+
+export function fetchSongInfoById(id){
+    const request = axios({
+        url : `${SONG_INFO_URL}${id}`,
+        method : 'get'
+    });
+    return {
+        type : FETCH_SONG_INFO_BY_ID,
+        payload : request
+    }
+}
+
+export function fetchSongInfoByIdSuccess(request){
+    return {
+        type : FETCH_SONG_INFO_BY_ID_SUCCESS,
+        payload : request.data
+    }
+}
+
+export function fetchSongInfoByIdFailure(error){
+    return {
+        type : FETCH_SONG_INFO_BY_ID_FAILURE,
+        payload : error
+    }
+}
+
+export function resetFetchSongInfoById(){
+    return {
+        type : RESET_FETCH_SONG_INFO_BY_ID
     }
 }

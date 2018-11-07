@@ -27,11 +27,11 @@ import './style/background_view.css';
 
 const mapStateToProps = (state) => {
     return {
-        cardInfo : state.card.cardInfo,
-        detailElement : state.detail.detailElement,
-        effectList : state.effect.effectList,
-        messageElement : state.message.messageElement,
-        pairList : state.pair.pairList
+        cardInfo : state.card_info.cardInfo,
+        detailElement : state.card_detail.detailElement,
+        effectList : state.card_effect.effectList,
+        messageElement : state.card_message.messageElement,
+        pairList : state.card_pair.pairList
     }
 }
 

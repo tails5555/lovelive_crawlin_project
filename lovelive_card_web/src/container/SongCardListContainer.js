@@ -14,7 +14,7 @@ import {
 import './style/background_view.css';
 
 const mapStateToProps = (state) => ({
-    songList : state.song.songList
+    songList : state.song_info.songList
 })
 
 const mapDispatchToProps = (dispatch) => {

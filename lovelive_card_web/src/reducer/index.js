@@ -1,26 +1,28 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import cardReducer from './card_info_reducer';
-import detailReducer from './card_detail_reducer';
-import effectReducer from './card_effect_reducer';
-import messageReducer from './card_message_reducer';
-import pairReducer from './card_pair_reducer';
+import cardInfoReducer from './card_info_reducer';
+import cardDetailReducer from './card_detail_reducer';
+import cardEffectReducer from './card_effect_reducer';
+import cardMessageReducer from './card_message_reducer';
+import cardPairReducer from './card_pair_reducer';
 
 import characterReducer from './character_reducer';
 
-import songReducer from './song_info_reducer';
+import songInfoReducer from './song_info_reducer';
+import songDetailReducer from './song_detail_reducer';
 
 import mediaReducer from './media_reducer';
 
 export const rootReducer = combineReducers({
     form : formReducer,
-    card : cardReducer,
-    detail : detailReducer,
-    effect : effectReducer,
-    message : messageReducer,
-    pair : pairReducer,
+    card_info : cardInfoReducer,
+    card_detail : cardDetailReducer,
+    card_effect : cardEffectReducer,
+    card_message : cardMessageReducer,
+    card_pair : cardPairReducer,
     character : characterReducer,
-    song : songReducer,
+    song_info : songInfoReducer,
+    song_detail : songDetailReducer,
     media : mediaReducer,
 });

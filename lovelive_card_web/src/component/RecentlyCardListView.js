@@ -10,7 +10,7 @@ import RecentlyCardBriefInfo from './RecentlyCardBriefInfo';
 
 const mapStateToProps = (state) => {
     return {
-        cardList : state.card.cardList
+        cardList : state.card_info.cardList
     }
 }
 

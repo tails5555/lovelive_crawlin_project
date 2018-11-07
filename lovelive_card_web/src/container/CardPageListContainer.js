@@ -19,7 +19,7 @@ import './style/background_view.css';
 
 const mapStateToProps = (state) => {
     return {
-        cardList : state.card.cardList
+        cardList : state.card_info.cardList
     }
 }
 

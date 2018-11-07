@@ -10,7 +10,7 @@ const MEDIA_URL = 'http://localhost:8000/media';
 
 const mapStateToProps = (state) => {
     return {
-        detailElement : state.detail.detailElement
+        detailElement : state.card_detail.detailElement
     }
 }
 
