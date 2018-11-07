@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {Alert, Table} from 'reactstrap';
 import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
-} from '../action/action_card_detail';
+} from '../../action/action_card_detail';
 import {
     fetchCardImagesByInfoNo, fetchCardImagesByInfoNoSuccess, fetchCardImagesByInfoNoFailure, resetFetchCardImagesByInfoNo
-} from '../action/action_image';
+} from '../../action/action_image';
 
-import './style/image_animate.css';
-import './style/popup_card.css';
+import '../style/image_animate.css';
+import '../style/popup_card.css';
 
 function mapStateToProps(state){
     return {

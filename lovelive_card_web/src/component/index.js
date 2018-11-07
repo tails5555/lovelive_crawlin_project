@@ -4,7 +4,7 @@ export {default as RecentlyCardListView} from './RecentlyCardListView';
 
 // Card Brief Info
 export {default as CardTable} from './CardTable';
-export {default as PopupCardInfo} from './PopupCardInfo';
+export {default as PopupCardInfo} from './popup/PopupCardInfo';
 export {default as CardSearchForm} from './CardSearchForm';
 
 // Card Detail Info
@@ -21,7 +21,7 @@ export {default as CharacterSearchForm} from './CharacterSearchForm';
 
 // Character Detail Info
 export {default as CharacterGallery} from './CharacterGallery';
-export {default as CharacterProfileTable} from './CharacterProfileTable';
+export {default as CharacterProfileTable} from './table/CharacterProfileTable';
 export {default as CharacterGridAlbum} from './CharacterGridAlbum';
 
 // Song Brief Info

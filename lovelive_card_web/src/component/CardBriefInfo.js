@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
-import PopupCardInfo from './PopupCardInfo';
+import { PopupCardInfo } from './popup';
 
 import './style/card_table.css';
 

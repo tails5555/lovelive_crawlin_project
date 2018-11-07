@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 
-import './style/card_table.css';
-import PopupCharacterInfo from './PopupCharacterInfo';
+import '../style/card_table.css';
+import {PopupCharacterInfo} from '../popup';
 
 class CardInfoTable extends React.Component {
     constructor(props){

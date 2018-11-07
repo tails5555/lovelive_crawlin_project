@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col, Alert } from 'reactstrap';
-import CardInfoTable from './CardInfoTable';
-import CardDetailTable from './CardDetailTable';
+import {CardInfoTable, CardDetailTable} from './table';
 
 class CardInfoDetailView extends React.Component {
     constructor(props){

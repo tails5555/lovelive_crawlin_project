@@ -4,7 +4,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Row, Col, Alert } f
 import {
     fetchCardDetailByInfoNo, fetchCardDetailByInfoNoSuccess, fetchCardDetailByInfoNoFailure, resetFetchCardDetailByInfoNo
 } from '../action/action_card_detail';
-import CardDetailTable from './CardDetailTable';
+import {CardDetailTable} from './table';
 
 const MEDIA_URL = 'http://localhost:8000/media';
 

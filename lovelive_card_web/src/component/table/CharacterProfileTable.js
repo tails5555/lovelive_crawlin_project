@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import './style/image_animate.css';
+import '../style/image_animate.css';
 
 class CharacterProfileTable extends React.Component {
     constructor(props){

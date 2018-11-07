@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { ListGroupItem, Media } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import PopupCardInfo from './PopupCardInfo';
+import { PopupCardInfo } from './popup';
 
 const IMAGE_ICON_URL = `http://localhost:8000/card_icons/`
 

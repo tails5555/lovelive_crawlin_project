@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import { Alert } from 'reactstrap';
 import {
     fetchCharacterInfoByKorName, fetchCharacterInfoByKorNameSuccess, fetchCharacterInfoByKorNameFailure, resetFetchCharacterInfoByKorName
-} from '../action/action_character';
-import CharacterProfileTable from './CharacterProfileTable';
+} from '../../action/action_character';
+import CharacterProfileTable from '../table/CharacterProfileTable';
 
-import './style/image_animate.css';
-import './style/popup_card.css';
+import '../style/image_animate.css';
+import '../style/popup_card.css';
 
 const mapStateToProps = (state) => {
     return {
