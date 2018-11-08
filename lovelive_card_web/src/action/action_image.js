@@ -80,9 +80,9 @@ export function resetFetchCardImagesByCharacter(){
     }
 }
 
-export function fetchSongImageById(songId){
+export function fetchSongImageBySongId(songId){
     const request = axios({
-        url : `${SONG_IMAGE_URL}/?info=${songId}`,
+        url : `${SONG_IMAGE_URL}?info=${songId}`,
         method : 'get'
     });
 
@@ -92,21 +92,21 @@ export function fetchSongImageById(songId){
     }
 }
 
-export function fetchSongImageByIdSuccess(request){
+export function fetchSongImageBySongIdSuccess(request){
     return {
         type : FETCH_SONG_IMAGE_BY_ID_SUCCESS,
         payload : request.data
     }
 }
 
-export function fetchSongImageByIdFailure(error){
+export function fetchSongImageBySongIdFailure(error){
     return {
         type : FETCH_SONG_IMAGE_BY_ID_FAILURE,
         payload : error
     }
 }
 
-export function resetFetchSongImageById(){
+export function resetFetchSongImageBySongId(){
     return {
         type : RESET_FETCH_SONG_IMAGE_BY_ID
     }

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Row, Col } from 'reactstrap'; 
-import {NumericCountingView, RadialBarChartView} from './graph';
+import { Row, Col, Button } from 'reactstrap'; 
+import {NumericCountingView, RadialBarChartView, BarChartView} from './graph';
 
 const noteFillColor = [
     '#AED6F1', '#85C1E9', '#5DADE2', '#3498DB', '#2E86C1'
@@ -11,40 +11,96 @@ const destinyFillColor = [
 ];
 
 class SongDetailGraphView extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { detailResult : props.detailResult, detailError : props.detailError, difficultyPivot : '이지' };
+    }
+
+    
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const { detailResult, detailError } = nextProps;
+        if(detailResult !== prevState.detailResult ||
+            detailError !== prevState.detailError){
+            return {
+                detailResult : detailResult,
+                detailError : detailError
+            };
+        }
+        return null;
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        for (let stateKey in this.state) {
+            if(this.state[stateKey] !== nextState[stateKey]){
+                return true;
+            }
+        }
+        for (let propsKey in this.props) {
+            if(this.props[propsKey] !== nextProps[propsKey]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    handleClickChangeDifficultyPivot = (difficulty) => {
+        this.setState({
+            difficultyPivot : difficulty
+        })
+    }
+
     render(){
+        const { detailResult, detailError, difficultyPivot } = this.state;
+        const noteData = detailResult.map((detail, idx) => ({ name : detail.difficulty, value : detail.note_count, fill : noteFillColor[idx] }));
+        const destinyData = detailResult.map((detail, idx) => ({ name : detail.difficulty, value : detail.destiny_count, fill : destinyFillColor[idx] })); 
+        const difficultyPivotButton = 
+            detailResult.map((detail, idx) => 
+                <Button color={difficultyPivot === detail.difficulty ? 'primary' : 'secondary'} key={`difficulty_pivot_button_${idx}`} style={{ marginTop : '10px', marginBottom : '10px' }} onClick={() => this.handleClickChangeDifficultyPivot(detail && detail.difficulty)}><i className={difficultyPivot === detail.difficulty ? 'far fa-check-square' : 'far fa-square'} /> {detail && detail.difficulty}</Button>
+            );
+        const pivotDetail = detailResult.length > 0 ? detailResult.find((detail) => detail.difficulty === difficultyPivot) : null;
+        const scoreGraphData = pivotDetail !== null ? 
+            [ 
+                { name : 'C랭크', score : pivotDetail.c_rank_score },
+                { name : 'B랭크', score : pivotDetail.b_rank_score },
+                { name : 'A랭크', score : pivotDetail.a_rank_score },
+                { name : 'S랭크', score : pivotDetail.s_rank_score }
+            ] 
+            : []
+        const levelDisplayed = pivotDetail && pivotDetail.level_value > 0;
+        const expDisplayes = pivotDetail && pivotDetail.exp_value > 0;
         return(
             <Fragment>
                 <Row>
-                    <Col sm={4}>
-                        <NumericCountingView iconName={'fas fa-star'} numericValue={10} color="#F5B041" />
-                    </Col>
-                    <Col sm={4}>
-                        <NumericCountingView iconName={'fas fa-heart'} numericValue={20} color="#FF00FF" />
-                    </Col>
-                    <Col sm={4}>
-                        <NumericCountingView iconName={'fas fa-chart-area'} numericValue={90} color="#45B39D" />
-                    </Col>
-                </Row>
-                <Row>
                     <Col sm={6}>
-                        <RadialBarChartView data={[
-                            {name: '이지', value: 2400, fill: '#AED6F1'},
-                            {name: '노멀', value: 4567, fill: '#85C1E9'},
-                            {name: '하드', value: 1398, fill: '#5DADE2'},
-                            {name: 'EX', value: 9800, fill: '#3498DB'},
-                            {name: 'Master', value: 3908, fill: '#2E86C1'}
-                        ]} />
+                        <RadialBarChartView data={noteData} />
                     </Col>
                     <Col sm={6}>
-                        <RadialBarChartView data={[
-                            {name: '이지', value: 2400, fill: '#AED6F1'},
-                            {name: '노멀', value: 4567, fill: '#85C1E9'},
-                            {name: '하드', value: 1398, fill: '#5DADE2'},
-                            {name: 'EX', value: 9800, fill: '#3498DB'},
-                            {name: 'Master', value: 3908, fill: '#2E86C1'}
-                        ]}/>
+                        <RadialBarChartView data={destinyData}/>
                     </Col>
                 </Row>
+                <div className="d-flex flex-wrap justify-content-around" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    {difficultyPivotButton}
+                </div>
+                <Row className="d-flex flex-wrap justify-content-around" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    <Col xs={4}>
+                        <NumericCountingView iconName={'fas fa-star'} numericValue={pivotDetail ? pivotDetail.star_count : 0} color="#F5B041" />
+                    </Col>
+                    {
+                        levelDisplayed ? 
+                            <Col xs={4}>
+                                <NumericCountingView iconName={'fas fa-heart'} numericValue={pivotDetail ? pivotDetail.level_value : 0} color="#FF00FF" />
+                            </Col> : null
+                    }
+                    {
+                        expDisplayes ?
+                            <Col xs={4}>
+                                <NumericCountingView iconName={'fas fa-chart-area'} numericValue={pivotDetail ? pivotDetail.exp_value : 0} color="#45B39D" />
+                            </Col> : null
+                    }
+                </Row>
+                <div id="level_score_bar_chart" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                    <BarChartView data={scoreGraphData} />
+                </div>
             </Fragment>
         )
     }
