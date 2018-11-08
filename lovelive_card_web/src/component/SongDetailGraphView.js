@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Row, Col, Button } from 'reactstrap'; 
-import {NumericCountingView, RadialBarChartView, BarChartView} from './graph';
+import { Row, Col, Button, Alert } from 'reactstrap'; 
+import { NumericCountingView, RadialBarChartView, BarChartView } from './graph';
 
 const noteFillColor = [
     '#AED6F1', '#85C1E9', '#5DADE2', '#3498DB', '#2E86C1'
@@ -16,7 +16,6 @@ class SongDetailGraphView extends React.Component {
         this.state = { detailResult : props.detailResult, detailError : props.detailError, difficultyPivot : '이지' };
     }
 
-    
     static getDerivedStateFromProps(nextProps, prevState) {
         const { detailResult, detailError } = nextProps;
         if(detailResult !== prevState.detailResult ||
@@ -69,39 +68,47 @@ class SongDetailGraphView extends React.Component {
         const levelDisplayed = pivotDetail && pivotDetail.level_value > 0;
         const expDisplayes = pivotDetail && pivotDetail.exp_value > 0;
         return(
-            <Fragment>
-                <Row>
-                    <Col sm={6}>
-                        <RadialBarChartView data={noteData} />
-                    </Col>
-                    <Col sm={6}>
-                        <RadialBarChartView data={destinyData}/>
-                    </Col>
-                </Row>
-                <div className="d-flex flex-wrap justify-content-around" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    {difficultyPivotButton}
-                </div>
-                <Row className="d-flex flex-wrap justify-content-around" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <Col xs={4}>
-                        <NumericCountingView iconName={'fas fa-star'} numericValue={pivotDetail ? pivotDetail.star_count : 0} color="#F5B041" />
-                    </Col>
-                    {
-                        levelDisplayed ? 
-                            <Col xs={4}>
-                                <NumericCountingView iconName={'fas fa-heart'} numericValue={pivotDetail ? pivotDetail.level_value : 0} color="#FF00FF" />
-                            </Col> : null
-                    }
-                    {
-                        expDisplayes ?
-                            <Col xs={4}>
-                                <NumericCountingView iconName={'fas fa-chart-area'} numericValue={pivotDetail ? pivotDetail.exp_value : 0} color="#45B39D" />
-                            </Col> : null
-                    }
-                </Row>
-                <div id="level_score_bar_chart" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                    <BarChartView data={scoreGraphData} />
-                </div>
-            </Fragment>
+            Array.isArray(detailError) ? 
+                <Fragment>
+                    <Row>
+                        <Col sm={6}>
+                            <RadialBarChartView data={noteData} />
+                        </Col>
+                        <Col sm={6}>
+                            <RadialBarChartView data={destinyData}/>
+                        </Col>
+                    </Row>
+                    <div className="d-flex flex-wrap justify-content-around" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        {difficultyPivotButton}
+                    </div>
+                    <Row className="d-flex flex-wrap justify-content-around" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <Col xs={4}>
+                            <NumericCountingView iconName={'fas fa-star'} numericValue={pivotDetail ? pivotDetail.star_count : 0} color="#F5B041" />
+                        </Col>
+                        {
+                            levelDisplayed ? 
+                                <Col xs={4}>
+                                    <NumericCountingView iconName={'fas fa-heart'} numericValue={pivotDetail ? pivotDetail.level_value : 0} color="#FF00FF" />
+                                </Col> : null
+                        }
+                        {
+                            expDisplayes ?
+                                <Col xs={4}>
+                                    <NumericCountingView iconName={'fas fa-chart-area'} numericValue={pivotDetail ? pivotDetail.exp_value : 0} color="#45B39D" />
+                                </Col> : null
+                        }
+                    </Row>
+                    <div id="level_score_bar_chart" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <BarChartView data={scoreGraphData} />
+                    </div>
+                </Fragment> :
+                <Alert color="danger">
+                    <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
+                    <p className="text-center">노래 세부 정보를 불러오는 도중 에러가 발생 했습니다.</p>
+                    <p className="text-center">내용은 다음과 같습니다.</p>
+                    <hr/>
+                    <p className="text-center">{detailError}</p>
+                </Alert>
         )
     }
 }

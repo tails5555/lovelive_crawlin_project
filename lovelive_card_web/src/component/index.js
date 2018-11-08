@@ -29,6 +29,7 @@ export {default as SongCardList} from './SongCardList';
 export {default as SongSearchForm} from './SongSearchForm';
 
 // Song Detail Info
+export {default as SongImageAndInfoView} from './SongImageAndInfoView';
 export {default as SongDetailGraphView} from './SongDetailGraphView';
 
 // Common Using

@@ -16,13 +16,13 @@ import {
     fetchSongImageBySongId, fetchSongImageBySongIdSuccess, fetchSongImageBySongIdFailure, resetFetchSongImageBySongId
 } from '../action/action_image';
 
-import { SongDetailGraphView, TitleRibbon } from '../component';
+import { SongImageAndInfoView, SongDetailGraphView, TitleRibbon } from '../component';
 
 import './style/background_view.css';
 
 const mapStateToProps = (state) => ({
     songInfo : state.song_info.songInfo,
-    songImages : state.media.sognImages,
+    songImages : state.media.songImages,
     songDetail : state.song_detail.detailElement
 });
 
@@ -130,12 +130,20 @@ class SongInfoViewContainer extends React.Component {
                 <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
                     <div id="container_top_margin" style={{ height : '10px' }} />
 
+                    <div id="song_info_and_cover_image_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <TitleRibbon title="노래 정보" />
+                    </div>
+                    <div id="song_info_and_cover_image" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <SongImageAndInfoView infoResult={songInfo.result} infoError={songInfo.error} imageResult={songImages.results} imageError={songImages.error} />
+                    </div>
                     <div id="song_detail_graph_view_title" style={{ marginTop : '10px', marginBottom : '10px' }}>
-                        <TitleRibbon title="노래 점수 분산 그래프" />
+                        <TitleRibbon title="노래 수치 및 점수 그래프" />
                     </div>
                     <div id="song_detail_graph_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <SongDetailGraphView detailResult={songDetail.result} detailError={songDetail.error}/>
                     </div>
+
+                    <div id="container_bottom_margin" style={{ height : '10px' }} />
                 </Container>
             </div>
         );
