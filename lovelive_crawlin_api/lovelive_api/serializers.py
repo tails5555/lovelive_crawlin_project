@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo, SongInfo, SongDetail, SongCoverImage
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo, SongInfo, SongDetail, SongCoverImage, EventInfo
 
 class CardInfoSerializer(serializers.ModelSerializer) :
     class Meta :
@@ -56,3 +56,8 @@ class SongCoverImageSerializer(serializers.ModelSerializer) :
     class Meta :
         model = SongCoverImage
         fields = ('id', 'info', 'img_url', 'img_file')
+
+class EventInfoSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = EventInfo
+        fields = ('id', 'region', 'card_info', 'song_info', 'event_title', 'event_context', 'start_date', 'end_date', 'album_cut_score', 'skill_cut_score', 'skill_pivot_rank', 'wake_up_cut_score', 'wake_up_pivot_rank', 'first_cut_score')

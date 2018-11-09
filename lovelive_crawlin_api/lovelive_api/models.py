@@ -114,3 +114,29 @@ class SongCoverImage(models.Model) :
     info = models.OneToOneField(SongInfo, on_delete=models.CASCADE)
     img_url = models.URLField(null=True)
     img_file = models.ImageField(upload_to='song/main', blank=True, default='song/main/default_image.jpg')
+
+class EventInfo(models.Model) :
+    KOREA = 'KOR'
+    JAPAN = 'JAP'
+    SERVER_REGIONS = (
+        (KOREA, '한국 서버'),
+        (JAPAN, '일본 서버')
+    )
+    id = models.AutoField(primary_key=True)
+    region = models.CharField(
+        max_length=3,
+        choices=SERVER_REGIONS,
+        default=JAPAN,
+    )
+    card_info = models.OneToOneField(CardInfo, on_delete=models.CASCADE)
+    song_info = models.OneToOneField(SongInfo, on_delete=models.CASCADE, null=True)
+    event_title = models.CharField(max_length=100, default='')
+    event_context = models.CharField(max_length=100, null=True)
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(auto_now_add=True)
+    album_cut_score = models.PositiveIntegerField()
+    skill_cut_score = models.PositiveIntegerField()
+    skill_pivot_rank = models.PositiveIntegerField()
+    wake_up_cut_score = models.PositiveIntegerField()
+    wake_up_pivot_rank = models.PositiveIntegerField()
+    first_cut_score = models.PositiveIntegerField()

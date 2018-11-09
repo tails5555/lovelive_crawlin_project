@@ -1,5 +1,5 @@
-from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CardIconSerializer, CardImageSerializer, CharacterMainInfoSerializer, SongInfoSerializer, SongDetailSerializer, SongCoverImageSerializer
-from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo, SongInfo, SongDetail, SongCoverImage
+from .serializers import CardInfoSerializer, CardDetailSerializer, CardLevelEffectSerializer, CardMessageSerializer, CardPairSerializer, CardIconSerializer, CardImageSerializer, CharacterMainInfoSerializer, SongInfoSerializer, SongDetailSerializer, SongCoverImageSerializer, EventInfoSerializer
+from .models import CardInfo, CardDetail, CardLevelEffect, CardMessage, CardPair, CardIcon, CardImage, CharacterMainInfo, SongInfo, SongDetail, SongCoverImage, EventInfo
 from .utils import ListPagination, CardPagination, SongPagination
 
 from rest_framework import viewsets
@@ -143,3 +143,12 @@ class SongCoverImageViewSet(viewsets.ModelViewSet) :
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('info',)
     ordering = ('info',)
+
+class EventInfoViewSet(viewsets.ModelViewSet) :
+    queryset = EventInfo.objects.all()
+    serializer_class = EventInfoSerializer
+    filter_backends = (SearchFilter, OrderingFilter,)
+    search_fields = ('event_title',)
+    ordering_fields = ('start_date',)
+    ordering = ('-start_date',)
+    pagination_class = CardPagination
