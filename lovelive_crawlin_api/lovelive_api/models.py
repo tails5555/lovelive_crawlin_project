@@ -2,6 +2,7 @@ from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.core.files import File
+from django.utils import timezone
 
 import urllib.request
 import os.path
@@ -128,12 +129,12 @@ class EventInfo(models.Model) :
         choices=SERVER_REGIONS,
         default=JAPAN,
     )
-    card_info = models.OneToOneField(CardInfo, on_delete=models.CASCADE)
-    song_info = models.OneToOneField(SongInfo, on_delete=models.CASCADE, null=True)
+    card_info = models.ForeignKey(CardInfo, on_delete=models.CASCADE)
+    song_info = models.ForeignKey(SongInfo, on_delete=models.CASCADE, null=True)
     event_title = models.CharField(max_length=100, default='')
     event_context = models.CharField(max_length=100, null=True)
-    start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateTimeField(default=timezone.now())
+    end_date = models.DateTimeField(default=timezone.now())
     album_cut_score = models.PositiveIntegerField()
     skill_cut_score = models.PositiveIntegerField()
     skill_pivot_rank = models.PositiveIntegerField()
