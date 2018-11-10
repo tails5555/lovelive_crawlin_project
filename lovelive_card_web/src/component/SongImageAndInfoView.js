@@ -42,10 +42,10 @@ class SongImageAndInfoView extends React.Component {
         const { infoResult, infoError, imageResult, imageError } = this.state;
         return(
             <Row>
-                <Col sm={3} className="text-center" style={{ marginBottom : '10px' }}>
+                <Col sm={3} className="d-flex align-items-center justify-content-center" style={{ marginBottom : '10px' }}>
                     {
                         Array.isArray(imageError) ? 
-                            imageResult.map((image, idx) => <img className="" key={`song_cover_image_${idx}`} src={image && image.img_file} alt={`song_cover_image_${image.info}`} />) :
+                            imageResult.map((image, idx) => <img className="img-fluid" key={`song_cover_image_${idx}`} src={image && image.img_file} alt={`song_cover_image_${image.info}`} />) :
                             <Alert color="danger">
                                 <h1 className="text-center"><i className="fas fa-exclamation-triangle" /></h1>
                                 <p className="text-center">노래 커버 이미지를 불러오는 도중 에러가 발생 했습니다.</p>

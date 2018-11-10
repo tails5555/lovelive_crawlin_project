@@ -32,6 +32,9 @@ export {default as SongSearchForm} from './SongSearchForm';
 export {default as SongImageAndInfoView} from './SongImageAndInfoView';
 export {default as SongDetailGraphView} from './SongDetailGraphView';
 
+// Event Brief Info
+export {default as EventTimeLineView} from './EventTimeLineView';
+
 // Common Using
 export {default as MenuNavBar} from './MenuNavBar';
 export {default as CardPagination} from './CardPagination';

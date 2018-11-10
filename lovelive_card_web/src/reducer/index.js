@@ -12,6 +12,8 @@ import characterReducer from './character_reducer';
 import songInfoReducer from './song_info_reducer';
 import songDetailReducer from './song_detail_reducer';
 
+import eventInfoReducer from './event_info_reducer';
+
 import mediaReducer from './media_reducer';
 
 export const rootReducer = combineReducers({
@@ -24,5 +26,6 @@ export const rootReducer = combineReducers({
     character : characterReducer,
     song_info : songInfoReducer,
     song_detail : songDetailReducer,
+    event_info : eventInfoReducer,
     media : mediaReducer,
 });
