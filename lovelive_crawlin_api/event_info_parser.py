@@ -101,7 +101,7 @@ def parse_event_info() :
                         if card_info != None :
                             event_info_model.set_card_info(card_info)
 
-                    if idx_td == SONG_AND_EVENT_CONTEXT_IDX :
+                    elif idx_td == SONG_AND_EVENT_CONTEXT_IDX :
                         event_title = event_td.find(text=True) if idx == 0 else event_td.find(text=True, recursive=False)
                         special_tag = event_td.find('span', { 'class' : 'special' })
                         song_link_tag = event_td.find('a')    
@@ -117,7 +117,7 @@ def parse_event_info() :
                         if special_tag != None :
                             event_info_model.set_event_context(special_tag.getText())
 
-                    if idx_td == DATE_IDX :
+                    elif idx_td == DATE_IDX :
                         date_limit_text = event_td.getText()
                         date_list = date_limit_text.split('~')
                         start_date = datetime.strptime(date_list[0],'%Y-%m-%d %H:%M:%S')
@@ -125,22 +125,21 @@ def parse_event_info() :
                         event_info_model.set_start_date(start_date)
                         event_info_model.set_end_date(end_date)
 
-                    if idx_td == ALBUM_CUT_IDX :
+                    elif idx_td == ALBUM_CUT_IDX :
                         album_cut_score = event_td.getText()
-                        event_info_model.set_album_cut_score(int(album_cut_score))
+                        event_info_model.set_album_cut_score(int(album_cut_score)) 
 
-                    special_char = '\(.*?\)'
-
-                    if idx_td == SKILL_CUT_IDX or idx_td == WAKE_UP_CUT_IDX :
+                    elif idx_td == SKILL_CUT_IDX or idx_td == WAKE_UP_CUT_IDX :
                         tmp_score = event_td.find(text=True)
                         cut_score = 0 if tmp_score == '-' else int(tmp_score.replace(',', '').replace('pt', ''))
+                        special_char = '\(.*?\)'
                         tmp_pivot_rank = re.findall(special_char, event_td.getText())
                         
                         if idx_td == SKILL_CUT_IDX :
                             event_info_model.set_skill_cut_score(cut_score)
                         elif idx_td == WAKE_UP_CUT_IDX :
                             event_info_model.set_wake_up_cut_score(cut_score)
-
+    
                         if len(tmp_pivot_rank) > 0 :
                             pivot_rank = re.findall('\d+', tmp_pivot_rank[0])[0]
                             
@@ -149,9 +148,10 @@ def parse_event_info() :
                             elif idx_td == WAKE_UP_CUT_IDX :
                                 event_info_model.set_wake_up_pivot_rank(int(pivot_rank))
 
-                    if idx_td == FIRST_CUT_IDX :
-                        cut_score = 0 if tmp_score == '불명' else int(tmp_score.replace(',', '').replace('pt', ''))
-                        event_info_model.set_first_cut_score(cut_score)
+                    elif idx_td == FIRST_CUT_IDX :
+                        first_score = event_td.find(text=True)
+                        first_score_number = 0 if first_score == '불명' else int(first_score.replace(',', '').replace('pt', ''))
+                        event_info_model.set_first_cut_score(first_score_number)
 
                 EventInfo(
                     region = 'KOR' if idx == 0 else 'JAP',
@@ -170,5 +170,7 @@ def parse_event_info() :
                 ).save()
 
 if __name__ == '__main__' :
+    if EventInfo.objects.count() > 0 :
+        EventInfo.objects.all().delete()
     parse_event_info()
         

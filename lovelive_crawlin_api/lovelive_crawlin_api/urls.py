@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from lovelive_api.views import CardInfoViewSet, CardDetailViewSet, CardLevelEffectViewSet, CardMessageViewSet, CardPairViewSet, CardIconViewSet, CardImageViewSet, CharacterMainInfoViewSet, SongInfoViewSet, SongDetailViewSet, SongCoverImageViewSet
+from lovelive_api.views import CardInfoViewSet, CardDetailViewSet, CardLevelEffectViewSet, CardMessageViewSet, CardPairViewSet, CardIconViewSet, CardImageViewSet, CharacterMainInfoViewSet, SongInfoViewSet, SongDetailViewSet, SongCoverImageViewSet, EventInfoViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -34,6 +34,7 @@ router.register('character_main_infos', CharacterMainInfoViewSet)
 router.register('song_infos', SongInfoViewSet)
 router.register('song_details', SongDetailViewSet)
 router.register('song_cover_images', SongCoverImageViewSet)
+router.register('event_infos', EventInfoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
