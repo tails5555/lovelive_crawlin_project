@@ -1,10 +1,17 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 import MainRootFlux from './app/fluxes/MainRootFlux';
+import configureStore from './app/store/configureStore';
+
+const store = configureStore();
+
 export default class App extends React.Component {
   render() {
     return (
-      <MainRootFlux />
+      <Provider store={store}>
+        <MainRootFlux />
+      </Provider>
     );
   }
 }
