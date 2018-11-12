@@ -1,6 +1,8 @@
 import React from 'react';
-import {Provider} from 'react-redux';
+import { NativeRouter } from 'react-router-native';
+import { Provider } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
+
 import MainRootFlux from './app/fluxes/MainRootFlux';
 import configureStore from './app/store/configureStore';
 
@@ -10,7 +12,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <MainRootFlux />
+        <NativeRouter>
+          <MainRootFlux />
+        </NativeRouter>
       </Provider>
     );
   }
