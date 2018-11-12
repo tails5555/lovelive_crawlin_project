@@ -7,7 +7,7 @@ import {
     fetchEventInfosByQuery, fetchEventInfosByQuerySuccess, fetchEventInfosByQueryFailure, resetFetchEventInfosByQuery
 } from '../action/action_event_info';
 
-import { EventTimeLineView, CardPagination } from '../component';
+import { EventTimeLineView, EventSearchForm, CardPagination } from '../component';
 
 import './style/background_view.css';
 
@@ -82,6 +82,9 @@ class EventPageListContainer extends React.Component {
             <div className="background_view" id="event_list">
                 <Container style={{ backgroundColor : 'rgba(255, 255, 255, 0.9)', borderRadius : '15px' }}>
                     <div id="container_top_margin" style={{ height : '10px' }} />
+                    <div id="event_search_form" style={{ marginTop : '10px', marginBottom : '10px' }}>
+                        <EventSearchForm />
+                    </div>
                     <div id="event_time_line_view" style={{ marginTop : '10px', marginBottom : '10px' }}>
                         <EventTimeLineView eventInfos={results} />
                     </div>

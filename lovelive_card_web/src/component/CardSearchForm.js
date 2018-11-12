@@ -29,7 +29,7 @@ function validate(values){
         if(values.property || (values.rank && values.rank.length > 0) || (values.skill && values.skill.length > 0) || (values.condition && values.condition.length > 0)) {
             hasErrors = false;
         } else {
-            errors.keyword = '캐릭터 이름이나 카드 제목을 입력 바랍니다. 혹은 해당 체크박스를 선택하시길 바랍니다.';
+            errors.keyword = '캐릭터 이름이나 카드 제목을 입력 바랍니다. 혹은 해당 체크박스나 라디오 버튼을 선택하시길 바랍니다.';
             hasErrors = true;
         }
     } 

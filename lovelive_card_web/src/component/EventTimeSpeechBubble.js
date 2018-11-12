@@ -98,7 +98,7 @@ class EventTimeSpeechBubble extends React.Component {
                 <h4 className="vertical-timeline-element-subtitle">최다 득점 {eventInfo && eventInfo.first_cut_score === 0 ? '미상' : <CountUp end={ eventInfo.first_cut_score } duration={2} suffix=" pt" />}</h4>
                 <hr/>
                 {
-                    eventInfo && eventInfo.event_context.trim() !== '' ? <p style={{ color : 'deeppink' }}><i className="fas fa-exclamation-circle"/> {eventInfo.event_context}</p> : null
+                    eventInfo && eventInfo.event_context.trim() !== '' ? <p style={{ marginTop : '10px', marginBottom : '10px', color : 'deeppink' }}><i className="fas fa-exclamation-circle"/> {eventInfo.event_context}</p> : null
                 }
                 <div className="d-flex justify-content-around">
                     <Button color="info"><i className="fas fa-id-card" /> 카드 정보 열람</Button>

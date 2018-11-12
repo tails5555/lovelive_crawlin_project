@@ -6,20 +6,16 @@ import { Form, Button } from 'reactstrap';
 
 import { RadioButtonFormRender, TextFormRender } from './form';
 
-const propertyChildren = [
-    { value : '스마일', label : '스마일' }, { value : '퓨어', label : '퓨어' }, { value : '쿨', label : '쿨' }
+const regionChildren = [
+    { value : 'KOR', label : '한국 서버' }, { value : 'JAP', label : '일본 서버' }
 ];
-
-const songTypeChildren = [        
-    { value : '일일곡', label : '일일한정곡' }, { value : '일반곡', label : '일반곡' }
-]
 
 function validate(values){
     let errors = {};
     let hasErrors = false;
 
     if(!values.keyword || values.keyword.trim() === ''){
-        if(values.property || values.type) {
+        if(values.region) {
             hasErrors = false;
         } else {
             errors.keyword = '노래 제목을 입력 바랍니다. 혹은 해당 라디오 버튼을 선택하시길 바랍니다.';
@@ -33,15 +29,14 @@ function validate(values){
 const validateAndSearch = (values, dispatch) => {
     const clientQueryModel = {
         st : values && values.keyword.trim() === '' ? undefined : values.keyword.trim(),
-        property : values && values.property === '' ? undefined : values.property,
-        type : values && values.type === '' ? undefined : values.type,
+        reg : values && values.region === '' ? undefined : values.region,
         pg : 1
     }
     const clientQS = queryString.stringify(clientQueryModel);
-    window.location.href = `/song/list?${clientQS}`
+    window.location.href = `/event/list?${clientQS}`
 }
 
-class SongSearchForm extends React.Component {
+class EventSearchForm extends React.Component {
     constructor(props){
         super(props);
         this.state = { isSearch : false };
@@ -52,8 +47,7 @@ class SongSearchForm extends React.Component {
         const clientQueryModel = queryString.parse(search);
         const formInitialValues = {
             keyword : clientQueryModel.st ? clientQueryModel.st : '',
-            property : clientQueryModel.property ? clientQueryModel.property : '',
-            type : clientQueryModel.type ? clientQueryModel.type : '',
+            region : clientQueryModel.reg ? clientQueryModel.reg : '',
             ordering : clientQueryModel.ordering ? clientQueryModel.ordering : ''
         };
         this.props.initialize(formInitialValues);
@@ -89,7 +83,7 @@ class SongSearchForm extends React.Component {
         this.setState({
             isSearch : false
         });
-        this.props.history.push('/song/list/_page?pg=1');
+        this.props.history.push('/event/list/_page?pg=1');
     }
 
     render(){
@@ -97,9 +91,8 @@ class SongSearchForm extends React.Component {
         const { handleSubmit } = this.props;
         return(
             <Form onSubmit={handleSubmit(validateAndSearch)}>
-                <Field type="text" name="keyword" component={TextFormRender} placeholder="노래 제목을 입력하세요." label="키워드 검색" />
-                <Field name="property" component={RadioButtonFormRender} label="특성" children={propertyChildren} />
-                <Field name="type" component={RadioButtonFormRender} label="종류" children={songTypeChildren} />
+                <Field type="text" name="keyword" component={TextFormRender} placeholder="이벤트 제목을 입력하세요." label="키워드 검색" />
+                <Field name="region" component={RadioButtonFormRender} label="서버 국가" children={regionChildren} />
                 <div className="text-center" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <Button color="primary" type="submit" style={{ marginLeft : '5px', marginRight : '5px' }}>
                         <i className="fas fa-search" /> 검색
@@ -117,8 +110,8 @@ class SongSearchForm extends React.Component {
 }
 
 export default reduxForm({
-    form : 'songSearchForm',
+    form : 'eventSearchForm',
     validate,
     enableReinitialize : true,
     keepDirtyOnReinitialize : true,
-})(withRouter(SongSearchForm))
+})(withRouter(EventSearchForm))

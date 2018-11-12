@@ -147,7 +147,8 @@ class SongCoverImageViewSet(viewsets.ModelViewSet) :
 class EventInfoViewSet(viewsets.ModelViewSet) :
     queryset = EventInfo.objects.all()
     serializer_class = EventInfoSerializer
-    filter_backends = (SearchFilter, OrderingFilter,)
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter,)
+    filter_fields = ('region',)
     search_fields = ('event_title',)
     ordering_fields = ('start_date',)
     ordering = ('-start_date',)

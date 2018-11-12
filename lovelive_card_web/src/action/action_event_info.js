@@ -17,7 +17,9 @@ export function fetchEventInfosByQuery(qs){
     const queryModel = queryString.parse(qs);
     const serverQuery = {
         page : queryModel && queryModel.pg,
-        search : queryModel && queryModel.st
+        search : queryModel && queryModel.st,
+        region : queryModel && queryModel.reg,
+        ordering : queryModel && queryModel.ordering
     };
 
     const serverQS = queryString.stringify(serverQuery);
