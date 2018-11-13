@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Header, Title, Content, Body } from 'native-base';
-import { StyleSheet, Text, View } from 'react-native';
+import queryString from 'query-string';
+import { Container, Header, Title, Content, Body, Button, Text } from 'native-base';
+import { View } from 'react-native';
 import { withRouter } from 'react-router-native';
 import { connect } from 'react-redux';
 
@@ -30,19 +31,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
-
 class CardListViewContainerScene extends React.Component {
     constructor(props){
         super(props);
-        this.state = { query : '' };
+        this.state = { query : '', page : 1 };
     }
 
     componentDidMount(){
@@ -51,15 +43,29 @@ class CardListViewContainerScene extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextState){
-        const { search } = nextProps.history.location;
+        const { search } = nextProps.location;
         if(search !== ''){
+            const queryModel = queryString.parse(search);
             this.setState({
-                query : search
+                query : search,
+                page : queryModel && (queryModel.pg * 1 || 1)
             });
         }
     }
 
+    componentWillUnmount(){
+        this.props.resetFetchCardList();
+    }
+
+    handlePressMovePage = (page) => {
+        const { history, location } = this.props;
+        let queryModel = queryString.parse(location.search);
+        queryModel['pg'] = page;
+        history.push(`/card/list/_page?${queryString.stringify(queryModel)}`);
+    }
+
     render(){
+        const { page } = this.state;
         const { results, count, error } = this.props.cardList;
         return (
             <Container>
@@ -69,7 +75,25 @@ class CardListViewContainerScene extends React.Component {
                     </Body>
                 </Header>
                 <Content>
+                    <View style={{ flexDirection : 'row', justifyContent : 'center' }}>
+                    {
+                        page !== 1 ?
+                            <Button info onPress={() => this.handlePressMovePage(page - 1)}>
+                                <Text>이전 페이지로</Text>
+                            </Button>
+                            : null
+                    }
+                    </View>
                     <CardListView cardResults={results} cardError={error} />
+                    <View style={{ flexDirection : 'row', justifyContent : 'center' }}>
+                    {
+                        page !== Math.ceil(count / 20) ?
+                            <Button info onPress={() => this.handlePressMovePage(page + 1)}>
+                                <Text>다음 페이지로</Text>
+                            </Button>
+                        : null
+                    }
+                    </View>
                 </Content>
             </Container>
         );

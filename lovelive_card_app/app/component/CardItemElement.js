@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import axios from 'axios';
 import { View } from 'react-native';
+import axios from 'axios';
+import queryString from 'query-string';
+import { withRouter } from 'react-router-native';
 import { ListItem, Thumbnail, Text, Left, Body, Right, Button, Badge, Separator, Icon } from 'native-base';
 
 const IMAGE_ICON_URL = 'http://10.0.2.2:8000/card_icons/';
@@ -18,7 +20,7 @@ const style = {
     }
 }
 
-export default class CardItemElement extends React.Component {
+class CardItemElement extends React.Component {
     constructor(props){
         super(props);
         this._isMounted = false;
@@ -75,6 +77,13 @@ export default class CardItemElement extends React.Component {
         this._isMounted = false;
     }
 
+    handleClickInfoPush = (id) => {
+        const { history, location } = this.props;
+        let queryModel = queryString.parse(location.search);
+        queryModel['id'] = id;
+        history.push(`/card/info?${queryString.stringify(queryModel)}`);
+    }
+
     render(){
         const { cardInfo, cardIcons } = this.state;
 
@@ -98,20 +107,14 @@ export default class CardItemElement extends React.Component {
                             <Text note>{ cardInfo && cardInfo.property } / { cardInfo && cardInfo.active_condition } / { cardInfo && cardInfo.active_skill }</Text>
                         </View>
                         <View style={ style.info_detail }>
-                            <Badge style={{ backgroundColor: 'deeppink' }}>
-                                <Text style={{ color: 'white' }}>{ cardInfo && cardInfo.smile }</Text>
-                            </Badge>
-                            <Badge style={{ backgroundColor: 'limegreen' }}>
-                                <Text style={{ color: 'white' }}>{ cardInfo && cardInfo.pure }</Text>
-                            </Badge>
-                            <Badge style={{ backgroundColor: 'slateblue' }}>
-                                <Text style={{ color: 'white' }}>{ cardInfo && cardInfo.cool }</Text>
-                            </Badge>
+                            <Text style={{ color: 'deeppink' }}>{ cardInfo && cardInfo.smile }</Text>
+                            <Text style={{ color: 'limegreen' }}>{ cardInfo && cardInfo.pure }</Text>
+                            <Text style={{ color: 'slateblue' }}>{ cardInfo && cardInfo.cool }</Text>
                         </View>
                     </Body>
                     <Right>
-                        <Button transparent>
-                            <Text>View</Text>
+                        <Button transparent onPress={() => this.handleClickInfoPush(cardInfo && cardInfo.no)}>
+                            <Icon type="FontAwesome" name="eye" /> 
                         </Button>
                     </Right>
                 </ListItem>
@@ -119,3 +122,5 @@ export default class CardItemElement extends React.Component {
         )
     }
 }
+
+export default withRouter(CardItemElement);
