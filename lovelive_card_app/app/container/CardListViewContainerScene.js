@@ -1,10 +1,12 @@
 import React from 'react';
-import { Container } from 'native-base';
+import { Container, Header, Title, Content, Body } from 'native-base';
 import { StyleSheet, Text, View } from 'react-native';
 import { withRouter } from 'react-router-native';
 import { connect } from 'react-redux';
 
 import { fetchCardInfosByQuery, fetchCardInfosByQuerySuccess, fetchCardInfosByQueryFailure, resetFetchCardInfosByQuery } from '../action/action_card_info';
+
+import { CardListView } from '../component';
 
 const mapStateToProps = (state) => {
     return {
@@ -40,15 +42,35 @@ const styles = StyleSheet.create({
 class CardListViewContainerScene extends React.Component {
     constructor(props){
         super(props);
+        this.state = { query : '' };
     }
+
     componentDidMount(){
-        console.log(this.props.history);
+        const { query } = this.state;
+        this.props.fetchCardList(query);
     }
+
+    componentWillReceiveProps(nextProps, nextState){
+        const { search } = nextProps.history.location;
+        if(search !== ''){
+            this.setState({
+                query : search
+            });
+        }
+    }
+
     render(){
+        const { results, count, error } = this.props.cardList;
         return (
             <Container>
-                <Text>WELCOME TO Card List</Text>
-                <Text>WELCOME TO Card List</Text>
+                <Header>
+                    <Body>
+                        <Title>Love Live Cards</Title>
+                    </Body>
+                </Header>
+                <Content>
+                    <CardListView cardResults={results} cardError={error} />
+                </Content>
             </Container>
         );
     }
