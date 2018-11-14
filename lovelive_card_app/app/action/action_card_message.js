@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { MAIN_ROOT_URL } from './server_url';
 
-const CARD_MESSAGE_URL = 'http://10.0.2.2:8000/card_messages';
+const CARD_MESSAGE_URL = `${MAIN_ROOT_URL}/card_messages`;
 
 export const FETCH_MESSAGES_BY_INFO = 'FETCH_MESSAGES_BY_INFO';
 export const FETCH_MESSAGES_BY_INFO_SUCCESS = 'FETCH_MESSAGES_BY_INFO_SUCCESS';

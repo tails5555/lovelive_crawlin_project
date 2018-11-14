@@ -1,7 +1,8 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { MAIN_ROOT_URL } from './server_url';
 
-const SONG_INFO_URL = 'http://10.0.2.2:8000/song_infos/';
+const SONG_INFO_URL = `${MAIN_ROOT_URL}/song_infos/`;
 
 export const FETCH_SONG_INFOS_BY_QUERY = 'FETCH_SONG_INFOS_BY_QUERY';
 export const FETCH_SONG_INFOS_BY_QUERY_SUCCESS = 'FETCH_SONG_INFOS_BY_QUERY_SUCCESS';

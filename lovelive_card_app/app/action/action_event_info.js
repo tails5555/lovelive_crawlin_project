@@ -1,7 +1,8 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { MAIN_ROOT_URL } from './server_url';
 
-const EVENT_INFO_URL = 'http://10.0.2.2:8000/event_infos/';
+const EVENT_INFO_URL = `${MAIN_ROOT_URL}/event_infos/`;
 
 export const FETCH_EVENT_INFOS_BY_QUERY = 'FETCH_EVENT_INFOS_BY_QUERY';
 export const FETCH_EVENT_INFOS_BY_QUERY_SUCCESS = 'FETCH_EVENT_INFOS_BY_QUERY_SUCCESS';

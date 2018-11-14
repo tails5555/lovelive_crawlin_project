@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { MAIN_ROOT_URL } from './server_url';
 
-const CARD_DETAIL_URL = 'http://10.0.2.2:8000/card_details/';
+const CARD_DETAIL_URL = `${MAIN_ROOT_URL}/card_details/`;
 
 export const FETCH_CARD_DETAIL_BY_INFO_NO = 'FETCH_CARD_DETAIL_BY_INFO_NO';
 export const FETCH_CARD_DETAIL_BY_INFO_NO_SUCCESS = 'FETCH_CARD_DETAIL_BY_INFO_NO_SUCCESS';

@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { MAIN_ROOT_URL } from './server_url';
 
-const CARD_EFFECT_URL = 'http://10.0.2.2:8000/card_level_effects';
+const CARD_EFFECT_URL = `${MAIN_ROOT_URL}/card_level_effects`;
 
 export const FETCH_CARD_EFFECTS_BY_INFO_NO = 'FETCH_CARD_EFFECTS_BY_INFO_NO';
 export const FETCH_CARD_EFFECTS_BY_INFO_NO_SUCCESS = 'FETCH_CARD_EFFECTS_BY_INFO_NO_SUCCESS';

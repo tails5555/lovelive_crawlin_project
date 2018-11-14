@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { MAIN_ROOT_URL } from './server_url';
 
-const ROOT_URL = 'http://10.0.2.2:8000/song_details/';
+const ROOT_URL = `${MAIN_ROOT_URL}/song_details/`;
 
 export const FETCH_SONG_DETAIL_BY_INFO_ID = 'FETCH_SONG_DETAIL_BY_INFO_ID';
 export const FETCH_SONG_DETAIL_BY_INFO_ID_SUCCESS = 'FETCH_SONG_DETAIL_BY_INFO_ID_SUCCESS';

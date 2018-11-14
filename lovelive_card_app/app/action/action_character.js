@@ -1,7 +1,8 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { MAIN_ROOT_URL } from './server_url';
 
-const CHARACTER_INFO_URL = 'http://10.0.2.2:8000/character_main_infos';
+const CHARACTER_INFO_URL = `${MAIN_ROOT_URL}/character_main_infos`;
 
 export const FETCH_CHARACTER_LIST_BY_QUERY = 'FETCH_CHARACTER_LIST_BY_QUERY';
 export const FETCH_CHARACTER_LIST_BY_QUERY_SUCCESS = 'FETCH_CHARACTER_LIST_BY_QUERY_SUCCESS';

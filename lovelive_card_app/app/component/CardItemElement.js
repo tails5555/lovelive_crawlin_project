@@ -3,9 +3,11 @@ import { View } from 'react-native';
 import axios from 'axios';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-native';
+
+import { MAIN_ROOT_URL } from '../action/server_url';
 import { ListItem, Thumbnail, Text, Left, Body, Right, Button, Badge, Separator, Icon } from 'native-base';
 
-const IMAGE_ICON_URL = 'http://10.0.2.2:8000/card_icons/';
+const IMAGE_ICON_URL = `${MAIN_ROOT_URL}/card_icons/`;
 
 const style = {
     info_detail : {
