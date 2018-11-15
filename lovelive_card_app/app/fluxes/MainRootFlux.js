@@ -7,6 +7,7 @@ import Expo from 'expo'
 import IndexViewContainerScene from '../container/IndexViewContainerScene';
 import CardListViewContainerScene from '../container/CardListViewContainerScene';
 import { BottomNavbarMenu } from '../component';
+import CardInfoViewContainerScene from '../container/CardInfoViewContainerScene';
 
 export default class MainRootFlux extends React.Component {
     constructor(props) {
@@ -33,6 +34,7 @@ export default class MainRootFlux extends React.Component {
                     <Route exact path="/" component={IndexViewContainerScene} />
                     <Route exact path="/card/list" component={CardListViewContainerScene} />
                     <Route exact path="/card/list/_page" render={({ location }) => <Redirect to={`/card/list${location.search}`} />} />
+                    <Route exact path="/card/info" component={CardInfoViewContainerScene} />
                 </Switch>
                 <BottomNavbarMenu />
             </Container>
