@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     fetchEventList : (query) => dispatch(fetchEventInfosByQuery(query)).then(response => {
         if(!response.error)
-                dispatch(fetchEventInfosByQuerySuccess(response.payload));
+            dispatch(fetchEventInfosByQuerySuccess(response.payload));
     }).catch(error => {
         if(error && error.response){
             const { status, data } = error.response;

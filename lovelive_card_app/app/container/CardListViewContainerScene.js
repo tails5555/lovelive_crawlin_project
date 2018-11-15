@@ -1,6 +1,6 @@
 import React from 'react';
 import queryString from 'query-string';
-import { Container, Header, Title, Content, Body, Button, Text } from 'native-base';
+import { Container, Header, Title, Content, Body, Button, Text, Item, Picker } from 'native-base';
 import { View } from 'react-native';
 import { withRouter } from 'react-router-native';
 import { connect } from 'react-redux';
@@ -92,6 +92,9 @@ class CardListViewContainerScene extends React.Component {
     render(){
         const { page } = this.state;
         const { results, count, error } = this.props.cardList;
+        const pageCount = count !== 0 ? Math.ceil(count / 20) : 1;
+        let pageNumbers = Array.from({length: pageCount}, (v, idx) => idx + 1);
+
         return (
             <Container>
                 <Header>
@@ -109,6 +112,21 @@ class CardListViewContainerScene extends React.Component {
                                 </Button>
                                 : null
                         }
+                        <Item picker>
+                            <Picker
+                                mode="dropdown"
+                                style={{ width : 150 }}
+                                placeholder="Page"
+                                placeholderStyle={{ color: "#bfc6ea" }}
+                                placeholderIconColor="#007aff"
+                                selectedValue={page}
+                                onValueChange={(value) => this.handleChangePage(value)}
+                            >
+                                {
+                                    pageNumbers.map(value => <Picker.Item label={`${value} 페이지`} value={value} />)
+                                }
+                            </Picker>
+                        </Item>
                         {
                             page !== Math.ceil(count / 20) ?
                                 <Button info onPress={() => this.handlePressMovePage(page + 1)}>

@@ -70,3 +70,11 @@
     -o-background-size: cover;
     background-size: cover;
 }
+
+#event_info {
+    background: url(../../resource/image/event_info_background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
