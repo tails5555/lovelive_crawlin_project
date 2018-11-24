@@ -5,39 +5,47 @@
 .badge[id="color_1"] {
     background: red;
     color: white;
+    border-radius : 5px;
 }
 
 .badge[id="color_2"] {
     background: orange;
     color: white;
+    border-radius : 5px;
 }
 
 .badge[id="color_3"] {
     background: yellow;
     color: black;
+    border-radius : 5px;
 }
 
 .badge[id="color_4"] {
     background: yellowgreen;
     color: black;
+    border-radius : 5px;
 }
 
 .badge[id="color_5"] {
     background: green;
     color: white;
+    border-radius : 5px;
 }
 
 .badge[id="color_6"] {
     background: blue;
     color: white;
+    border-radius : 5px;
 }
 
 .badge[id="color_7"] {
     background: indigo;
     color: white;
+    border-radius : 5px;
 }
 
 .badge[id="color_8"] {
     background: purple;
     color: white;
+    border-radius : 5px;
 }

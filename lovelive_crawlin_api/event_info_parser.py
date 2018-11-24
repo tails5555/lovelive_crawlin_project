@@ -172,5 +172,7 @@ def parse_event_info() :
 if __name__ == '__main__' :
     if EventInfo.objects.count() > 0 :
         EventInfo.objects.all().delete()
-    parse_event_info()
+
+    parse_event_info()  
+    
         

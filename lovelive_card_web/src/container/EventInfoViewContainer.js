@@ -81,7 +81,7 @@ class EventInfoViewContainer extends React.Component {
     render(){
         const { result, error } = this.props.eventInfo;
         return(
-            <div className="background_info" id="card_info">
+            <div className="background_info" id="card_info" style={{ padding : '30px' }}>
                 <div id="back_button" style={{ position : 'fixed', right : '20px', bottom : '20px', zIndex : '2' }}>
                     <Button className="shadow" color="warning" size="lg" style={{ borderRadius : '10px' }} onClick={() => this.handleClickPushToList()}><i className="fas fa-arrow-circle-left" /></Button>
                 </div>

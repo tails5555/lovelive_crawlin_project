@@ -120,7 +120,7 @@ class EventTimeSpeechBubble extends React.Component {
                 }
                 <div className="d-flex justify-content-around flex-wrap" style={{ marginTop : '10px', marginBottom : '10px' }}>
                     <Button color="info" onClick={() => this.handleClickViewEventInfo(eventInfo && eventInfo.id)} style={{ margin : '10px' }}>
-                        <i className="fas fa-chart-line" /> 이벤트 정보 열람
+                        <i className="fas fa-chart-line" /> 이벤트 점수 열람
                     </Button>
                     <Button color="success" onClick={() => this.handleClickViewCardInfo(eventInfo && eventInfo.card_info)} style={{ margin : '10px' }}>
                         <i className="fas fa-id-card" /> 카드 정보 열람
