@@ -116,7 +116,7 @@ class CharacterMainInfoViewSet(viewsets.ModelViewSet) :
     queryset = CharacterMainInfo.objects.all()
     serializer_class = CharacterMainInfoSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend,)
-    filter_fields = ('grade',)
+    filter_fields = ('grade', 'kor_name',)
     search_fields = ('kor_name',)
     pagination_class = CardPagination
 

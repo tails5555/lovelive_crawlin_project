@@ -10,8 +10,9 @@ const NotFoundInfo = () => (
         <hr className="my-2" />
         <p>아래 버튼을 클릭하면 홈으로 이동하실 수 있습니다.</p>
         <div id="button_list">
-            <Button color="primary" style={{ marginLeft : '5px', marginRight : '5px' }} tag={Link} to="/"><i className="fas fa-home"/> 홈으로</Button>
-            <Button color="secondary" style={{ marginLeft : '5px', marginRight : '5px' }}><i className="fas fa-headset" /> 오류 보고</Button>
+            <Button color="primary" style={{ margin : '5px' }} tag={Link} to="/"><i className="fas fa-home"/> 홈으로</Button>
+            <Button color="success" style={{ margin : '5px' }} onClick={() => { window.location.href = 'http://lovelive.inven.co.kr/' }}><i className="fas fa-home"/> Inven 럽라 커뮤니티로</Button>
+            <Button color="secondary" style={{ margin : '5px' }} onClick={() => { window.location.href = 'mailto:hogu9401@gmail.com' }}><i className="fas fa-headset" /> E-Mail 보고</Button>
         </div>
     </Jumbotron>    
 )

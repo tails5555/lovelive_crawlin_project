@@ -9,8 +9,8 @@ const ServiceCheckingInfo = () => (
         <hr className="my-2" />
         <p>오류 보고는 점검 시간 중에도 진행이 가능합니다.</p>
         <div id="button_list">
-            <Button color="primary" style={{ marginLeft : '5px', marginRight : '5px' }}><i className="fas fa-home"/> Inven 럽라 커뮤니티로</Button>
-            <Button color="secondary" style={{ marginLeft : '5px', marginRight : '5px' }}><i className="fas fa-headset" /> 오류 보고</Button>
+            <Button color="primary" style={{ marginLeft : '5px', marginRight : '5px' }} onClick={() => { window.location.href = 'http://lovelive.inven.co.kr/' }}><i className="fas fa-home"/> Inven 럽라 커뮤니티로</Button>
+            <Button color="secondary" style={{ marginLeft : '5px', marginRight : '5px' }} onClick={() => { window.location.href = 'mailto:hogu9401@gmail.com' }}><i className="fas fa-headset" /> E-Mail 보고</Button>
         </div>
     </Jumbotron>    
 )

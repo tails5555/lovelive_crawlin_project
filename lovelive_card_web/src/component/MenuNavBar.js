@@ -69,7 +69,7 @@ class MenuNavBar extends React.Component {
                             <NavLink style={ pathname.startsWith('/event') ? activeStyle : null } tag={Link} to="/event/list?pg=1"><i className="fas fa-calendar" /> 이벤트</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={ pathname === '/app/info' ? activeStyle : null } tag={Link} to="/app/info"><i className="fab fa-react" /> 개발 정보</NavLink>
+                            <NavLink style={ pathname === '/develop/info' ? activeStyle : null } tag={Link} to="/develop/info"><i className="fab fa-react" /> 개발 정보</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink href="http://lovelive.inven.co.kr/"><i className="fas fa-external-link-square-alt" /> Inven Lovelive 이동</NavLink>

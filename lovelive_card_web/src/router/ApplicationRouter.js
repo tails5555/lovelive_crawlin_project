@@ -1,18 +1,13 @@
 import React, { Fragment } from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import {MenuNavBar} from '../component';
-import CardPageListContainer from '../container/CardPageListContainer';
-import CharacterCardListContainer from '../container/CharacterCardListContainer';
-import CharacterInfoViewContainer from '../container/CharacterInfoViewContainer';
-import CardInfoViewContainer from '../container/CardInfoViewContainer';
-import NotFoundContainer from '../container/NotFoundContainer';
-import ServiceCheckingContainer from '../container/ServiceCheckingContainer';
-import IndexViewContainer from '../container/IndexViewContainer';
+import {
+    CardPageListContainer, CardInfoViewContainer, CharacterCardListContainer, CharacterInfoViewContainer,
+    NotFoundContainer, ServiceCheckingContainer, DevelopInfoViewContainer, IndexViewContainer,
+    SongCardListContainer, SongInfoViewContainer, EventPageListContainer, EventInfoViewContainer
+} from '../container';
+
 import SlideAnotherView from './SlideAnotherView';
-import SongCardListContainer from '../container/SongCardListContainer';
-import SongInfoViewContainer from '../container/SongInfoViewContainer';
-import EventPageListContainer from '../container/EventPageListContainer';
-import EventInfoListContainer from '../container/EventInfoViewContainer';
 
 class ApplicationRouter extends React.Component {
     constructor(props){
@@ -50,7 +45,8 @@ class ApplicationRouter extends React.Component {
                     <Route exact path="/song/info" component={SongInfoViewContainer} />
                     <Route exact path="/event/list" component={EventPageListContainer} />
                     <Route exact path="/event/list/_page" render={({ location }) => <Redirect to={`/event/list${location.search}`} />} />
-                    <Route exact path="/event/info" component={EventInfoListContainer} />
+                    <Route exact path="/event/info" component={EventInfoViewContainer} />
+                    <Route exact path="/develop/info" component={DevelopInfoViewContainer} />
                     <Route component={NotFoundContainer} />
                 </Switch>
             );
