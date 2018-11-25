@@ -2,15 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import { ListGroupItem, Media } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { PopupCardInfo } from './popup';
 
-const IMAGE_ICON_URL = `http://localhost:8000/card_icons/`
+const SONG_COVER_ICONS_URL = `http://localhost:8000/song_cover_images/`
 
-class RecentlyCardBriefInfo extends React.Component {
+class RecentlySongBriefInfo extends React.Component {
     constructor(props){
         super(props);
         this._isMounted = false;
-        this.state = { info : props.info, icons : [], mouseOn : false, mouseX : 0, mouseY : 0 };
+        this.state = { info : props.info, images : [], mouseOn : false };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -23,26 +22,24 @@ class RecentlyCardBriefInfo extends React.Component {
         return null;
     }
 
-    async getIconImages(infoNo) {
+    async getIconImages(infoId) {
         axios({
-            url : `${IMAGE_ICON_URL}?info=${infoNo}`,
+            url : `${SONG_COVER_ICONS_URL}?info=${infoId}`,
             method : 'get'
         }).then(response => {
             const { data } = response;
             const images = data.map(d => d.img_file);
             if(this._isMounted)
-                this.setState({
-                    icons : images
-                });
+                this.setState({ images });
         });
     }
 
     componentDidMount(){
         const { info } = this.state;
-        const infoNo = info && (info.no || 0);
+        const infoId = info && (info.id || 0);
         this._isMounted = true;
-        if(this._isMounted && infoNo !== 0)
-            this.getIconImages(infoNo);
+        if(this._isMounted && infoId !== 0)
+            this.getIconImages(infoId);
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -63,10 +60,6 @@ class RecentlyCardBriefInfo extends React.Component {
         this._isMounted = false;
     }
 
-    handleClickPushCardInfo = (infoNo) => {
-        this.props.history.push(`/card/info?pg=1&id=${infoNo}`)
-    }
-
     handleMouseEnter = () => { 
         this.setState({
             mouseOn : true
@@ -79,29 +72,22 @@ class RecentlyCardBriefInfo extends React.Component {
         });
     }
 
-    handleMouseMove = (event) => {
-        this.setState({ 
-            mouseX : event.clientX, 
-            mouseY : event.clientY 
-        });
+    handleClickPushSongInfo = (infoId) => {
+        this.props.history.push(`/song/info?pg=1&id=${infoId}`)
     }
 
     render(){
-        const { info, icons, mouseOn, mouseX, mouseY } = this.state;
-        let smallCardInfo = null;
-        if(mouseOn) {
-            smallCardInfo = <PopupCardInfo property={info && info.property} character={`${(info && info.character_name)} ${(info && info.japanese_name)}`} no={info && info.no} mouseX={mouseX} mouseY={mouseY} />;    
-        }
+        const { info, images, mouseOn } = this.state;
         return(
             <ListGroupItem>
-                <Media style={{ cursor : 'pointer' }} onClick={() => this.handleClickPushCardInfo(info.no)} onTouchStart={() => this.handleClickPushCardInfo(info.no)} onMouseEnter={() => this.handleMouseEnter()} onMouseLeave={() => this.handleMouseLeave()} onMouseMove={this.handleMouseMove.bind(this)}>
+                <Media style={{ cursor : 'pointer' }} onClick={() => this.handleClickPushSongInfo(info.id)} onTouchStart={() => this.handleClickPushSongInfo(info.id)} onMouseEnter={() => this.handleMouseEnter()} onMouseLeave={() => this.handleMouseLeave()} >
                     {
                         window.innerWidth > 1024 ?
                             <Media left>
-                                {icons.map((icon, idx) => <img src={icon} className="img-fluid" key={`recently_card_icon_${info && info.no}_${idx}`} alt={`recently_card_icon_${info && info.no}_${idx}`} /> )}
+                                {images.map((icon, idx) => <img src={icon} style={{ width : '64px', height : '64px' }} className="img-fluid" key={`recently_song_icon_${info && info.id}_${idx}`} alt={`recently_song_icon_${info && info.id}_${idx}`} /> )}
                             </Media> :
                             <Media body>
-                                {icons.map((icon, idx) => <img src={icon} className="img-fluid" key={`recently_card_icon_${info && info.no}_${idx}`} alt={`recently_card_icon_${info && info.no}_${idx}`} /> )}
+                                {images.map((icon, idx) => <img src={icon} style={{ width : '64px', height : '64px' }} className="img-fluid" key={`recently_song_icon_${info && info.id}_${idx}`} alt={`recently_song_icon_${info && info.id}_${idx}`} /> )}
                             </Media>
                     }
                     
@@ -110,17 +96,15 @@ class RecentlyCardBriefInfo extends React.Component {
                             null : 
                             <Media body style={mouseOn ? { textDecoration : 'underline' } : null}>
                                 <Media heading>
-                                { info && info.character_name }
+                                { info && info.kor_title }
                                 </Media>
-                                { info && info.card_title !== '' ? info.card_title : info && info.japanese_name }
+                                { info && info.jap_title }
                             </Media>
                     }
-
-                    { smallCardInfo }
                 </Media>       
             </ListGroupItem>
         )
     }
 }
 
-export default withRouter(RecentlyCardBriefInfo);
+export default withRouter(RecentlySongBriefInfo);

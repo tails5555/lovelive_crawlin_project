@@ -10,7 +10,7 @@ const DevelopProfileInfo = () => (
         </div>
         <hr className="my-2" />
         <div id="image_box" className="text-center" style={{ margin : '20px 20px', whiteSpace : 'unset' }}>
-            <img className="img-fluid rounded-circle" src={devStructure} style={{ width : window.innerWidth <= 768 ? '100%' : '70%' }} />
+            <img className="img-fluid rounded-circle" src={devStructure} style={{ width : window.innerWidth <= 768 ? '100%' : '70%' }} alt="develop_structure_view" />
         </div>
         <div id="develop_context_info" style={{ margin : '10px 10px' }}>
             <p className="lead">

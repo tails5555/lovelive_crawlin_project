@@ -21,6 +21,16 @@
         display: table;
     }
 
+    .background_view[id="recently_song_and_event_list"] {
+        background: url(../../resource/image/recently_song_and_event_background.png) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-width: 100%;
+        display: table;
+    }
+
     .parallax_box {
         width : 80%;
     }
@@ -40,6 +50,17 @@
 
     .background_view[id="recently_card_list_view"] {
         background: url(../../resource/image/recently_card_view_background.png) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 100%;
+        min-width: 100%;
+        display: table;
+    }
+
+    .background_view[id="recently_song_and_event_list"] {
+        background: url(../../resource/image/recently_song_and_event_background.png) no-repeat center center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
