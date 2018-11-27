@@ -31,21 +31,6 @@ class CardPairSetView extends React.Component {
         }
     }
 
-    
-    shouldComponentUpdate(nextProps, nextState){
-        for (let stateKey in this.state) {
-            if(this.state[stateKey] !== nextState[stateKey]){
-                return true;
-            }
-        }
-        for (let propsKey in this.props) {
-            if(this.props[propsKey] !== nextProps[propsKey]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     componentWillUnmount(){
         this._isMounted = false;
     }
@@ -81,7 +66,6 @@ class CardPairSetView extends React.Component {
                 );
                 return null;
             });
-        
     }
 
     render(){

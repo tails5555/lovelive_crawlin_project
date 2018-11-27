@@ -1,34 +1,56 @@
-# Love Live(ラブライブ) Inven Crawlin' App<br/><small>With  django REST Framework</small>
+# Love Live(ラブライブ) Inven Crawlin' Project
 
-Web Crawling 을 실질적으로 학습하기 위해 크롤링 서버의 데이터를 가져와 Native Application 과 Web Application 을 만들어 봅니다. 
+![project_structure](./screenshot/lovelive_crawlin_project_title_img.png)
 
-참고로 이번 REST API 는 Spring Boot 가 아닌 django 를 이용해서 구축하겠습니다.
+러브라이브 스쿨 아이돌 프로젝트 게임을 즐기는 유저들이 카드 정보에 대하여 더욱 시각화된 Web 으로 풍부한 정보를 제공 받기 위한 토이 프로젝트입니다.
+
+이전의 검색 기능을 Detail 하게 설정하였으며, 그래프와 숫자 애니메이션 등을 사용하여 Modern Web 에 더욱 가깝게 제작하였습니다.
+
+특히 이번 프로젝트에서는 시각화를 중점으로 하기 때문에 Responsive Ratio 를 맞추는 것을 집중했습니다.
+
+Inven 사이트에서 얻어온 Crawling 데이터를 RESTful API 서버로 구축하여 Web Application 과 Native App 에서 받아오는 프로젝트로 구상하였습니다.
 
 ## Issues
-- Python django 를 이용한 간단한 REST API를 구축합니다.
-- Python Beautiful Soup 를 이용해 한 웹 사이트의 HTML 문서를 파싱하여 데이터베이스에 구축합니다.
-- ~~React Native 를 이용하여 REST API 와 Redux 를 연동 시킵니다.~~ - 잠정 취소.
+
+- django 를 이용한 간단한 REST API를 구축합니다.
+
+- Beautiful Soup 를 이용해 한 웹 사이트의 HTML 문서를 파싱하여 데이터베이스에 구축합니다.
+
+- django REST Framework 와 Redux 를 연동 시키는 방법에 대해 생각합니다.
 
 ## Development Environments
 
-모든 개발의 IDE는 Visual Studio Code 를 이용하였습니다.
+- OS : Windows 10
 
-- Server - Python 3.7, django REST Framework 3.9, Beautiful Soup 4
-- Web - React.js v16.4, Redux, Axios
-- ~~App - React Native~~ - 잠정 취소.
+- Database : SQLite 3
 
-## About Native App
+- IDE : Visual Studio Code
 
-React Native 으로 구현 하는 작업을 2018년 11월 15일 이후로 잠정 중단하기로 했습니다.
+- Main Language : Python 3.7, Node.js 9.3.0
 
-현재 서버는 배포 되지 않은 상태여서 NGROK 를 이용하여 제작하고 있습니다.
+## Project Structure
 
-부득이하게도 NGROK 의 접속 양에 따른 부하가 존재하여 Native App 작동 확인 여부를 확인할 수 없는 상태입니다.
+![project_structure](./screenshot/lovelive_crawlin_project.png)
 
-그리고 Android Emulator 를 사용하여 구현하는 방법도 시도를 하였으나, RAM 의 용량을 너무 차지하여 결국에는 취소 하였습니다.
+이 토이 프로젝트에서 사용한 대표 Framework, Library 는 다음과 같습니다.
 
-React Native 를 이용한 App 구현 방법에 대해 더욱 공부 해 보고 난 후에 계속 진행하겠습니다.
+- Server
+    - Python 3.7
+    - django REST Framework 3.9
+    - Beautiful Soup 4
+  
+- Web
+    - JavaScript ES6
+    - React.js v16.4
+    - Redux, AJAX(Axios)
+    - Naver Papago 번역 Link
 
 ## Thanks To
+
 - [django REST API 구축 방법](http://jamanbbo.tistory.com/43)
+
 - [Lovelive 인벤](http://lovelive.inven.co.kr/)
+
+## Author
+
+- 강인성([tails5555](https://github.com/tails5555))

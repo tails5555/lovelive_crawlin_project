@@ -1,5 +1,0 @@
-node_modules/**/*
-.expo/*
-npm-debug.*
-package-lock.json
-app/action/server_url.js
